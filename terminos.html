@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Términos y Condiciones | Vida Activa - Tienda de Suplementos y Productos Naturales</title>
+    <meta name="description" content="Términos y condiciones de uso de VidaActiva.59. Conoce nuestras políticas de compra, envíos, devoluciones y privacidad.">
+    <link rel="shortcut icon" href="https://i.postimg.cc/pr5LzwP5/logo.png" type="image/x-icon">
+    <meta name="robots" content="noindex, nofollow">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#189364',
+                        secondary: '#a3c759',
+                        dark: '#1d1d1b',
+                        light: '#f4f7f6',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #f4f7f6; }
+        .hide-scroll::-webkit-scrollbar { display: none; }
+        .mobile-suggestions-container {
+            position: relative;
+        }
+        #mobile-search-suggestions {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: white;
+            margin-top: 0.5rem;
+            border-radius: 1rem;
+            box-shadow: 0 10px 25px -5px rgba(0,0,0,0.1), 0 8px 10px -6px rgba(0,0,0,0.02);
+            border: 1px solid #f3f4f6;
+            z-index: 60;
+            max-height: 320px;
+            overflow-y: auto;
+        }
+        #mobile-menu {
+            position: fixed;
+            inset: 0;
+            z-index: 100;
+            visibility: hidden;
+            opacity: 0;
+            transition: visibility 0.3s ease-in-out, opacity 0.3s ease-in-out;
+        }
+        #mobile-menu.active {
+            visibility: visible;
+            opacity: 1;
+        }
+        #mobile-menu .mobile-menu-overlay {
+            position: absolute;
+            inset: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            transition: opacity 0.3s ease-in-out;
+        }
+        #mobile-menu .mobile-menu-panel {
+            position: absolute;
+            right: 0;
+            top: 0;
+            height: 100%;
+            width: 18rem;
+            background-color: white;
+            padding: 2rem;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            transform: translateX(100%);
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        #mobile-menu.active .mobile-menu-panel {
+            transform: translateX(0);
+        }
+        .toast-container {
+            position: fixed;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            pointer-events: none;
+        }
+        .toast {
+            pointer-events: auto;
+            background: white;
+            border-radius: 1rem;
+            padding: 1rem 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            animation: slideUp 0.3s ease-out forwards;
+            max-width: 90vw;
+            min-width: 280px;
+        }
+        .toast-exit {
+            animation: slideDown 0.3s ease-in forwards;
+        }
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        @keyframes slideDown {
+            from {
+                opacity: 1;
+                transform: translateY(0);
+            }
+            to {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+        }
+        .toast-success {
+            border-left: 4px solid #189364;
+        }
+        .toast-error {
+            border-left: 4px solid #ef4444;
+        }
+        .toast-warning {
+            border-left: 4px solid #f59e0b;
+        }
+        .toast-info {
+            border-left: 4px solid #3b82f6;
+        }
+        
+        /* Estilos específicos para términos y condiciones */
+        .legal-content h2 {
+            font-size: 1.5rem;
+            font-weight: 800;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            color: #1d1d1b;
+        }
+        .legal-content h3 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-top: 1.5rem;
+            margin-bottom: 0.75rem;
+            color: #189364;
+        }
+        .legal-content p {
+            color: #4b5563;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+        .legal-content ul {
+            list-style-type: disc;
+            padding-left: 1.5rem;
+            margin-bottom: 1rem;
+            color: #4b5563;
+        }
+        .legal-content li {
+            margin-bottom: 0.5rem;
+            line-height: 1.5;
+        }
+        .legal-content .highlight {
+            background-color: #f4f7f6;
+            padding: 1.5rem;
+            border-radius: 1rem;
+            border-left: 4px solid #189364;
+            margin: 1.5rem 0;
+        }
+    </style>
+</head>
+<body class="text-dark">
+
+    <div id="toast-container" class="toast-container"></div>
+
+    <header class="sticky top-0 z-50 bg-white shadow-md">
+        <div class="container mx-auto px-4 h-20 flex items-center justify-between gap-4">
+            
+            <div class="flex-shrink-0">
+                <img src="https://i.postimg.cc/pr5LzwP5/logo.png" alt="NaturShop" class="h-12 md:h-16 cursor-pointer" onclick="location.href='index.html'">
+            </div>
+
+            <div class="hidden md:flex flex-1 justify-center max-w-xl relative">
+                <i data-lucide="search" class="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 w-5 h-5"></i>
+                <input type="text" id="main-search" placeholder="Buscar productos naturales..." 
+                    class="w-full pl-12 pr-4 py-2.5 rounded-full border-2 border-gray-100 focus:border-primary outline-none transition-all text-sm">
+                <div id="search-suggestions" class="absolute top-full left-0 right-0 bg-white mt-2 rounded-xl shadow-2xl border border-gray-100 hidden z-[60] max-h-80 overflow-y-auto"></div>
+            </div>
+
+            <div class="flex items-center gap-2 md:gap-6">
+                <nav class="hidden lg:block">
+                    <ul class="flex gap-6 font-bold text-sm">
+                        <li><a href="index.html" class="hover:text-primary transition-colors">Inicio</a></li>
+                        <li><a href="nosotros.html" class="hover:text-primary transition-colors">Nosotros</a></li>
+                        <li><a href="descargar-lista.html" onclick="downloadList()" class="hover:text-primary transition-colors">Descargar Lista</a></li>
+                    </ul>
+                </nav>
+
+                <div class="flex items-center gap-4">
+                    <button onclick="openCart()" class="relative p-2 hover:bg-light rounded-full transition-colors">
+                        <i data-lucide="shopping-cart" class="w-6 h-6"></i>
+                        <span id="cart-count" class="absolute -top-1 -right-1 bg-secondary text-dark text-[10px] font-bold px-1.5 py-0.5 rounded-full min-w-[18px] text-center">0</span>
+                    </button>
+                    <button onclick="toggleMenu()" class="lg:hidden p-2 hover:bg-light rounded-full transition-colors">
+                        <i data-lucide="menu" class="w-6 h-6"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="md:hidden px-4 pb-3 relative mobile-suggestions-container">
+            <i data-lucide="search" class="absolute right-8 top-1/2 -translate-y-1/2 text-gray-400 w-4 h-4"></i>
+            <input type="text" id="mobile-search" placeholder="Buscar productos naturales..." 
+                class="w-full pl-4 pr-10 py-2 rounded-full bg-light border-none outline-none text-sm">
+            <div id="mobile-search-suggestions" class="hidden"></div>
+        </div>
+    </header>
+
+    <div id="mobile-menu">
+        <div class="mobile-menu-overlay" onclick="toggleMenu()"></div>
+        <nav class="mobile-menu-panel">
+            <button onclick="toggleMenu()" class="absolute top-6 right-6 hover:rotate-90 transition-transform duration-200 p-2">
+                <i data-lucide="x" class="w-6 h-6 text-gray-600 hover:text-dark"></i>
+            </button>
+            <ul class="flex flex-col gap-6 mt-12 font-bold text-lg">
+                <li><a href="index.html" onclick="toggleMenu()" class="hover:text-primary transition-colors block py-2">Inicio</a></li>
+                <li><a href="nosotros.html" onclick="toggleMenu()" class="hover:text-primary transition-colors block py-2">Nosotros</a></li>
+                <li><a href="#" onclick="downloadList(); toggleMenu()" class="hover:text-primary transition-colors block py-2">Descargar Lista</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <main class="container mx-auto px-4 py-8 md:py-12">
+        <div class="max-w-4xl mx-auto">
+            
+            <!-- Breadcrumb -->
+            <div class="flex items-center gap-2 text-sm text-gray-500 mb-6">
+                <a href="index.html" class="hover:text-primary transition-colors">Inicio</a>
+                <i data-lucide="chevron-right" class="w-4 h-4"></i>
+                <span class="text-dark font-medium">Términos y Condiciones</span>
+            </div>
+            
+            <!-- Hero Section -->
+            <div class="bg-white rounded-[2rem] p-8 md:p-12 shadow-sm border border-gray-100 mb-8">
+                <div class="text-center mb-8">
+                    <div class="inline-flex items-center justify-center w-16 h-16 bg-primary/10 rounded-full mb-4">
+                        <i data-lucide="file-text" class="w-8 h-8 text-primary"></i>
+                    </div>
+                    <h1 class="text-3xl md:text-4xl font-black mb-4">Términos y Condiciones</h1>
+                    <p class="text-gray-500 max-w-2xl mx-auto">Última actualización: 26 de marzo de 2026</p>
+                </div>
+            </div>
+            
+            <!-- Contenido Legal -->
+            <div class="bg-white rounded-[2rem] p-8 md:p-12 shadow-sm border border-gray-100 legal-content">
+                
+                <div class="highlight">
+                    <p class="font-bold text-dark mb-2">📋 Información Importante</p>
+                    <p class="text-sm">Al realizar una compra en VidaActiva.59, aceptas todos los términos y condiciones aquí establecidos. Te recomendamos leer detenidamente cada sección antes de completar tu pedido.</p>
+                </div>
+                
+                <h2>1. Información General</h2>
+                <p><strong>VidaActiva.59</strong> es una marca registrada bajo la dirección de <strong>Zuleima Tua</strong>, dedicada a la comercialización de suplementos nutricionales y productos naturales de alta calidad. Nuestro objetivo es brindar bienestar integral a través de productos seleccionados bajo estrictos estándares de calidad.</p>
+                <p>Para cualquier consulta, puedes contactarnos a través de nuestro número de WhatsApp: <strong>+58 412 0698850</strong> o vía correo electrónico: <strong>info@vidactiva.com</strong></p>
+                
+                <h2>2. Proceso de Compra</h2>
+                <p>El proceso de compra en VidaActiva.59 es sencillo y seguro:</p>
+                <ul>
+                    <li><strong>Selección de productos:</strong> Navega por nuestro catálogo y agrega los productos deseados al carrito de compras.</li>
+                    <li><strong>Revisión del pedido:</strong> Verifica los productos seleccionados, cantidades y el total a pagar.</li>
+                    <li><strong>Completar datos:</strong> Proporciona tu información de contacto y dirección de envío correctamente.</li>
+                    <li><strong>Confirmación:</strong> Recibirás un mensaje de WhatsApp con el resumen de tu pedido para su confirmación final.</li>
+                </ul>
+                
+                <h2>3. Métodos de Pago</h2>
+                <p>Aceptamos los siguientes métodos de pago:</p>
+                <ul>
+                    <li><strong>Pago Móvil:</strong> A nombre de Zuleima Tua (Venezuela).</li>
+                    <li><strong>Transferencia Bancaria:</strong> Cuentas en Banesco, Mercantil y Provincial (disponibles bajo solicitud).</li>
+                    <li><strong>Zelle:</strong> Para clientes en el extranjero o con cuentas en dólares.</li>
+                    <li><strong>Efectivo:</strong> Solo para entregas personales en Cabimas, Zulia.</li>
+                </ul>
+                <p>Los precios están expresados en <strong>Dólares Americanos (USD)</strong>. Una vez confirmado el pedido, se te indicará el monto exacto y los datos bancarios para realizar el pago.</p>
+                
+                <h2>4. Envíos y Entregas</h2>
+                <p>Realizamos envíos a todo el territorio venezolano a través de:</p>
+                <ul>
+                    <li><strong>MRW:</strong> Tiempo de entrega de 2 a 5 días hábiles.</li>
+                    <li><strong>Zoom:</strong> Tiempo de entrega de 2 a 4 días hábiles.</li>
+                    <li><strong>Entregas personales:</strong> En Cabimas, Zulia (coordinación previa).</li>
+                </ul>
+                <p>Los costos de envío corren por cuenta del cliente y serán calculados según la ubicación y el peso del paquete. Una vez que el pedido sea despachado, se te proporcionará el número de guía para realizar el seguimiento.</p>
+                
+                <div class="highlight">
+                    <p class="font-bold text-dark mb-2">🚚 Tiempo de Procesamiento</p>
+                    <p class="text-sm">Los pedidos son procesados dentro de las 24-48 horas hábiles siguientes a la confirmación del pago. En temporada alta, este tiempo podría extenderse hasta 72 horas.</p>
+                </div>
+                
+                <h2>5. Política de Devoluciones y Cambios</h2>
+                <p>En VidaActiva.59 nos preocupamos por tu satisfacción. Nuestra política de devoluciones es la siguiente:</p>
+                <ul>
+                    <li><strong>Productos dañados o incorrectos:</strong> Si recibes un producto en mal estado o que no corresponde a tu pedido, contáctanos dentro de las <strong>24 horas</strong> posteriores a la recepción. Realizaremos el cambio sin costo adicional.</li>
+                    <li><strong>Productos por error del cliente:</strong> Si cambiaste de opinión o seleccionaste un producto por error, el cambio estará sujeto a disponibilidad y el cliente asumirá los costos de envío. Debe notificarse dentro de las <strong>48 horas</strong> posteriores a la recepción.</li>
+                    <li><strong>Productos abiertos o usados:</strong> No se aceptan devoluciones de productos que hayan sido abiertos, utilizados o cuyo sello de seguridad haya sido violado, por razones de higiene y seguridad.</li>
+                </ul>
+                <p>Para gestionar una devolución o cambio, debes comunicarte a nuestro WhatsApp <strong>+58 412 0698850</strong> con el número de tu pedido y la descripción del inconveniente.</p>
+                
+                <h2>6. Garantía de Productos</h2>
+                <p>Todos nuestros productos cuentan con garantía de calidad respaldada por los laboratorios proveedores. En caso de presentar alguna reacción adversa o inconveniente con el producto, te recomendamos suspender su uso de inmediato y contactarnos para recibir asesoría.</p>
+                <p><strong>Importante:</strong> Los suplementos y productos naturales no sustituyen una dieta balanceada ni un tratamiento médico prescrito por profesionales de la salud. Recomendamos consultar con tu médico antes de iniciar cualquier suplementación.</p>
+                
+                <h2>7. Privacidad y Protección de Datos</h2>
+                <p>En VidaActiva.59, protegemos tu información personal. Los datos que nos proporcionas al realizar tu pedido son utilizados exclusivamente para:</p>
+                <ul>
+                    <li>Procesar y gestionar tu pedido.</li>
+                    <li>Comunicarnos contigo sobre el estado de tu compra.</li>
+                    <li>Enviar promociones y novedades solo si has autorizado recibir comunicaciones comerciales.</li>
+                </ul>
+                <p>No compartimos tu información con terceros fuera de lo estrictamente necesario para la logística de envíos. Puedes solicitar la eliminación de tus datos en cualquier momento escribiéndonos a info@vidactiva.com.</p>
+                
+                <h2>8. Modificaciones de los Términos</h2>
+                <p>VidaActiva.59 se reserva el derecho de actualizar o modificar estos términos y condiciones en cualquier momento. Las modificaciones entrarán en vigor a partir de su publicación en este sitio web. Te recomendamos revisar esta página periódicamente para mantenerte informado.</p>
+                
+                <h2>9. Contacto</h2>
+                <p>Si tienes preguntas sobre estos términos y condiciones, puedes contactarnos a través de:</p>
+                <ul>
+                    <li><strong>WhatsApp:</strong> +58 412 0698850</li>
+                    <li><strong>Email:</strong> info@vidactiva.com</li>
+                    <li><strong>Instagram:</strong> <a href="https://instagram.com/vidaActiva.59" target="_blank" class="text-primary hover:underline">@vidaActiva.59</a></li>
+                </ul>
+                
+                <div class="border-t border-gray-200 mt-8 pt-8 text-center">
+                    <p class="text-xs text-gray-400">© 2026 VidaActiva.59 - Todos los derechos reservados.</p>
+                    <p class="text-xs text-gray-400 mt-2">CEO: Zuleima Tua | Cabimas, Zulia - Venezuela</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-dark text-white pt-16 pb-8">
+        <div class="container mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-12">
+            <div>
+                <img src="https://i.postimg.cc/pr5LzwP5/logo.png" alt="Logo" class="h-12 mb-6 brightness-0 invert">
+                <p class="text-gray-400 text-sm leading-relaxed">Salud natural para tu bienestar diario. Calidad garantizada en cada producto para el cuidado de tu familia.</p>
+            </div>
+            <div>
+                <h4 class="text-secondary font-bold mb-6">Empresa</h4>
+                <ul class="space-y-3 text-gray-400 text-sm">
+                    <li><a href="nosotros.html" class="hover:text-white transition-colors">Sobre Nosotros</a></li>
+                    <li><a href="terminos.html" class="text-white transition-colors">Términos y Condiciones</a></li>
+                    <li><a href="#" class="hover:text-white transition-colors">Política de Privacidad</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-secondary font-bold mb-6">Contacto</h4>
+                <ul class="space-y-4 text-gray-400 text-sm">
+                    <li class="flex items-center gap-3"><i data-lucide="phone" class="w-4 h-4"></i> +58 412 0698850</li>
+                    <li class="flex items-center gap-3"><i data-lucide="mail" class="w-4 h-4"></i> info@vidactiva.click</li>
+                    <li class="flex items-center gap-3"><i data-lucide="map-pin" class="w-4 h-4"></i> Cabimas, Zulia - Venezuela</li>
+                </ul>
+            </div>
+        </div>
+        <div class="container mx-auto px-4 mt-12 pt-8 border-t border-gray-800 text-center text-gray-500 text-xs">
+            &copy; 2026 VidaActiva.59. Todos los derechos reservados.
+        </div>
+    </footer>
+
+    <div id="cart-overlay" class="fixed inset-0 z-[200] bg-black/60 hidden items-center justify-center p-4">
+        <div class="bg-white w-full max-w-xl rounded-[2rem] p-6 md:p-8 max-h-[90vh] overflow-y-auto shadow-2xl relative">
+            <button onclick="closeCart()" class="absolute top-6 right-6 text-gray-400 hover:text-dark transition-colors"><i data-lucide="x"></i></button>
+            
+            <h2 class="text-2xl font-extrabold mb-6">Finalizar Pedido</h2>
+
+            <div class="space-y-4">
+                <div class="flex items-center gap-2 text-primary font-bold border-b-2 border-light pb-2">
+                    <i data-lucide="shopping-bag" class="w-5 h-5"></i>
+                    <h4>Resumen de Compra</h4>
+                </div>
+                
+                <div id="cart-items-list" class="space-y-2 max-h-40 overflow-y-auto pr-2"></div>
+                
+                <div class="flex justify-between items-center py-4 text-xl font-extrabold border-t border-light">
+                    <span>Total a Pagar:</span>
+                    <span id="cart-total" class="text-primary">$0.00</span>
+                </div>
+
+                <div class="flex items-center gap-2 text-primary font-bold border-b-2 border-light pb-2 mt-6">
+                    <i data-lucide="clipboard-list" class="w-5 h-5"></i>
+                    <h4>Datos del Pedido</h4>
+                </div>
+
+                <form id="checkout-form" class="grid grid-cols-2 gap-4">
+                    <input type="text" id="form-nombre" placeholder="Nombre" class="p-3 rounded-xl border border-gray-200 bg-light/30 outline-none focus:border-primary text-sm" required>
+                    <input type="text" id="form-apellido" placeholder="Apellido" class="p-3 rounded-xl border border-gray-200 bg-light/30 outline-none focus:border-primary text-sm" required>
+                    <input type="email" id="form-email" placeholder="Correo Electrónico" class="col-span-2 p-3 rounded-xl border border-gray-200 bg-light/30 outline-none focus:border-primary text-sm" required>
+                    <input type="tel" id="form-tel" placeholder="Teléfono" class="col-span-2 p-3 rounded-xl border border-gray-200 bg-light/30 outline-none focus:border-primary text-sm" required>
+                    
+                    <select id="form-estado" class="col-span-2 p-3 rounded-xl border border-gray-200 bg-light/30 outline-none focus:border-primary text-sm" required>
+                        <option value="">Seleccione Estado</option>
+                        <option value="Zulia">Zulia</option>
+                        <option value="Miranda">Miranda</option>
+                        <option value="Distrito Capital">Distrito Capital</option>
+                        <option value="Carabobo">Carabobo</option>
+                    </select>
+
+                    <input type="text" id="form-ciudad" placeholder="Ciudad" class="col-span-2 p-3 rounded-xl border border-gray-200 bg-light/30 outline-none focus:border-primary text-sm" required>
+                    <textarea id="form-direccion" placeholder="Dirección de Entrega" class="col-span-2 p-3 rounded-xl border border-gray-200 bg-light/30 outline-none focus:border-primary text-sm" rows="2" required></textarea>
+                    
+                    <button type="button" onclick="checkoutWhatsApp()" class="col-span-2 bg-[#25D366] text-white font-extrabold py-4 rounded-2xl flex items-center justify-center gap-3 hover:scale-[1.02] transition-transform mt-4 shadow-lg shadow-green-200">
+                        <i data-lucide="message-circle" class="w-6 h-6"></i> Confirmar y Enviar Pedido
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const CONFIG = { MARGIN: 1.40, BEFORE_MARGIN: 1.50, PER_PAGE: 12, DEFAULT_IMG: 'https://i.postimg.cc/fL2MdW0K/envase.jpg', IMG_PATH: 'img/productos/' };
+        let store = { all: [], current: [], cart: JSON.parse(localStorage.getItem('natur_cart')) || [], page: 1 };
+
+        function showToast(message, type = 'info', duration = 3000) {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            
+            let icon = '';
+            let bgColor = '';
+            
+            switch(type) {
+                case 'success':
+                    icon = '<i data-lucide="check-circle" class="w-5 h-5 text-[#189364]"></i>';
+                    bgColor = 'toast-success';
+                    break;
+                case 'error':
+                    icon = '<i data-lucide="alert-circle" class="w-5 h-5 text-red-500"></i>';
+                    bgColor = 'toast-error';
+                    break;
+                case 'warning':
+                    icon = '<i data-lucide="alert-triangle" class="w-5 h-5 text-amber-500"></i>';
+                    bgColor = 'toast-warning';
+                    break;
+                default:
+                    icon = '<i data-lucide="info" class="w-5 h-5 text-blue-500"></i>';
+                    bgColor = 'toast-info';
+            }
+            
+            toast.className = `toast ${bgColor}`;
+            toast.innerHTML = `
+                ${icon}
+                <span class="text-sm font-medium text-gray-800 flex-1">${message}</span>
+                <button onclick="this.closest('.toast').classList.add('toast-exit'); setTimeout(() => this.closest('.toast').remove(), 300)" class="text-gray-400 hover:text-gray-600 transition-colors">
+                    <i data-lucide="x" class="w-4 h-4"></i>
+                </button>
+            `;
+            
+            container.appendChild(toast);
+            lucide.createIcons();
+            
+            setTimeout(() => {
+                if(toast.parentNode) {
+                    toast.classList.add('toast-exit');
+                    setTimeout(() => toast.remove(), 300);
+                }
+            }, duration);
+        }
+
+        async function init() {
+            try {
+                const res = await fetch('products.json');
+                const text = await res.text();
+                const sanitized = `[${text.replace(/\},(\s*)\{/g, '},{')}]`;
+                const raw = JSON.parse(sanitized);
+                
+                store.all = raw.map(i => {
+                    const price = (parseFloat(i.price) * CONFIG.MARGIN).toFixed(2);
+                    return { ...i, price, priceBefore: (price * CONFIG.BEFORE_MARGIN).toFixed(2) };
+                });
+                
+                updateCartUI();
+            } catch (err) { 
+                console.error(err); 
+            }
+        }
+
+        window.toggleMenu = () => { 
+            const menu = document.getElementById('mobile-menu');
+            if(menu.classList.contains('active')) {
+                menu.classList.remove('active');
+                setTimeout(() => {
+                    document.body.style.overflow = '';
+                }, 400);
+            } else {
+                menu.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+        };
+        
+        window.openCart = () => { 
+            if(store.cart.length === 0) {
+                showToast('🛒 ¡Agrega productos al carrito primero!', 'warning', 3000);
+                return;
+            }
+            const o = document.getElementById('cart-overlay'); 
+            o.classList.remove('hidden'); 
+            o.classList.add('flex'); 
+            document.body.style.overflow = 'hidden';
+        };
+        
+        window.closeCart = () => { 
+            const o = document.getElementById('cart-overlay'); 
+            o.classList.add('hidden'); 
+            o.classList.remove('flex'); 
+            document.body.style.overflow = '';
+        };
+
+        window.addToCart = (id) => { 
+            const p = store.all.find(i => i.id === id); 
+            store.cart.push({ ...p, cartId: Date.now() }); 
+            localStorage.setItem('natur_cart', JSON.stringify(store.cart)); 
+            updateCartUI(); 
+            showToast(`✅ ${p.product_name} añadido al carrito`, 'success', 2500);
+        };
+
+        function updateCartUI() {
+            const cartCount = document.getElementById('cart-count');
+            if(cartCount) cartCount.textContent = store.cart.length;
+            const container = document.getElementById('cart-items-list');
+            if(!container) return;
+            let total = 0;
+            if(store.cart.length === 0) {
+                container.innerHTML = `<div class="text-center text-gray-400 py-4 text-sm">No hay productos en el carrito</div>`;
+            } else {
+                container.innerHTML = store.cart.map(i => { 
+                    total += parseFloat(i.price); 
+                    return `<div class="flex justify-between items-center py-2 border-b border-gray-50">
+                        <span class="text-xs font-medium w-3/4">${i.product_name}</span>
+                        <div class="flex items-center gap-3">
+                            <strong class="text-xs">$${i.price}</strong>
+                            <button onclick="removeItem(${i.cartId})" class="text-red-400 hover:text-red-600 transition-colors"><i data-lucide="trash-2" class="w-4 h-4"></i></button>
+                        </div>
+                    </div>`; 
+                }).join('');
+            }
+            const cartTotal = document.getElementById('cart-total');
+            if(cartTotal) cartTotal.textContent = `$${total.toFixed(2)}`;
+            lucide.createIcons();
+        }
+
+        window.removeItem = (id) => { 
+            store.cart = store.cart.filter(i => i.cartId !== id); 
+            localStorage.setItem('natur_cart', JSON.stringify(store.cart)); 
+            updateCartUI(); 
+            showToast('🗑️ Producto eliminado del carrito', 'info', 2000);
+        };
+
+        window.checkoutWhatsApp = () => {
+            if(store.cart.length === 0) {
+                showToast('🛒 ¡Agrega productos al carrito primero!', 'warning', 3000);
+                return;
+            }
+            
+            const nombre = document.getElementById('form-nombre').value;
+            const apellido = document.getElementById('form-apellido').value;
+            const telefono = document.getElementById('form-tel').value;
+            const ciudad = document.getElementById('form-ciudad').value;
+            const estado = document.getElementById('form-estado').value;
+            const direccion = document.getElementById('form-direccion').value;
+            
+            if(!nombre || !apellido || !telefono || !ciudad || !estado || !direccion) {
+                showToast('📝 Por favor completa todos los datos del pedido', 'warning', 3000);
+                return;
+            }
+            
+            let msg = `🛍️ *PEDIDO VIDAACTIVA.59*\n\n*Cliente:* ${nombre} ${apellido}\n*Teléfono:* ${telefono}\n*Ubicación:* ${ciudad}, ${estado}\n*Dirección:* ${direccion}\n\n*Productos:*\n`;
+            store.cart.forEach(i => msg += `• ${i.product_name} ($${i.price})\n`);
+            msg += `\n*TOTAL: $${store.cart.reduce((a, b) => a + parseFloat(b.price), 0).toFixed(2)}*`;
+            window.open(`https://wa.me/584120698850?text=${encodeURIComponent(msg)}`, '_blank');
+            showToast('📱 Redirigiendo a WhatsApp...', 'success', 2000);
+        };
+
+        window.downloadList = () => {
+            window.location.href = 'descargar-lista.html';
+        };
+        
+        document.addEventListener('DOMContentLoaded', init);
+    </script>
+      <!-- Click -->
+    <script src="noclick.js"></script>
+</body>
+</html>

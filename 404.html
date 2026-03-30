@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página no encontrada | Vida Activa</title>
+    <meta name="description" content="Lo sentimos, la página que buscas no existe. Regresa a nuestra tienda y continúa explorando nuestros productos naturales.">
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="shortcut icon" href="https://i.postimg.cc/pr5LzwP5/logo.png" type="image/x-icon">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#189364',
+                        secondary: '#a3c759',
+                        dark: '#1d1d1b',
+                        light: '#f4f7f6',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #f4f7f6; }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        .animate-float {
+            animation: float 3s ease-in-out infinite;
+        }
+    </style>
+</head>
+<body class="text-dark">
+
+    <div class="min-h-screen flex flex-col items-center justify-center px-4">
+        
+        <!-- Logo -->
+        <div class="mb-8">
+            <img src="https://i.postimg.cc/pr5LzwP5/logo.png" alt="Vida Activa" class="h-20 md:h-24 mx-auto cursor-pointer" onclick="location.href='index.html'">
+        </div>
+        
+        <!-- Contenido 404 -->
+        <div class="text-center max-w-2xl">
+            <div class="relative inline-block mb-8">
+                <div class="absolute inset-0 bg-primary/20 rounded-full blur-3xl"></div>
+                <div class="relative text-[120px] md:text-[180px] font-black leading-none tracking-tighter">
+                    <span class="text-primary">4</span>
+                    <span class="text-dark">0</span>
+                    <span class="text-primary">4</span>
+                </div>
+            </div>
+            
+            <h1 class="text-2xl md:text-3xl font-black mb-4">¡Ups! Página no encontrada</h1>
+            <p class="text-gray-500 text-lg mb-8 max-w-md mx-auto">
+                Lo sentimos, la página que estás buscando no existe o ha sido movida.
+            </p>
+            
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="index.html" class="inline-flex items-center justify-center gap-2 bg-primary text-white px-8 py-4 rounded-2xl font-bold text-lg hover:bg-secondary hover:text-dark transition-all hover:scale-105 shadow-lg">
+                    <i data-lucide="home" class="w-5 h-5"></i>
+                    Volver al Inicio
+                </a>
+                <a href="index.html" class="inline-flex items-center justify-center gap-2 bg-white border-2 border-primary text-primary px-8 py-4 rounded-2xl font-bold text-lg hover:bg-primary hover:text-white transition-all hover:scale-105">
+                    <i data-lucide="shopping-bag" class="w-5 h-5"></i>
+                    Ir a la Tienda
+                </a>
+            </div>
+            
+            <!-- Contacto rápido -->
+            <div class="mt-12 pt-8 border-t border-gray-200">
+                <p class="text-sm text-gray-400 mb-4">¿Necesitas ayuda?</p>
+                <a href="https://wa.me/584120698850?text=Hola%2C%20necesito%20ayuda%20con%20la%20página%20web" target="_blank" class="inline-flex items-center gap-2 text-primary hover:text-secondary transition-colors">
+                    <i data-lucide="message-circle" class="w-4 h-4"></i>
+                    Contáctanos por WhatsApp
+                </a>
+            </div>
+        </div>
+        
+        <!-- Footer simple -->
+        <div class="mt-16 text-center">
+            <p class="text-xs text-gray-400">&copy; 2026 VidaActiva.59 - Todos los derechos reservados.</p>
+        </div>
+    </div>
+
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>

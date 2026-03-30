@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Política de Privacidad | Vida Activa - Tienda de Suplementos y Productos Naturales</title>
+    <meta name="description" content="Política de privacidad de VidaActiva.59. Conoce cómo protegemos tus datos personales y tu información al realizar compras en nuestra tienda.">
+    <link rel="shortcut icon" href="https://i.postimg.cc/pr5LzwP5/logo.png" type="image/x-icon">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#189364',
+                        secondary: '#a3c759',
+                        dark: '#1d1d1b',
+                        light: '#f4f7f6',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #f4f7f6; }
+        .mobile-menu {
+            position: fixed;
+            inset: 0;
+            z-index: 100;
+            visibility: hidden;
+            opacity: 0;
+            transition: visibility 0.3s ease-in-out, opacity 0.3s ease-in-out;
+        }
+        .mobile-menu.active {
+            visibility: visible;
+            opacity: 1;
+        }
+        .mobile-menu-overlay {
+            position: absolute;
+            inset: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+        .mobile-menu-panel {
+            position: absolute;
+            right: 0;
+            top: 0;
+            height: 100%;
+            width: 18rem;
+            background-color: white;
+            padding: 2rem;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            transform: translateX(100%);
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .mobile-menu.active .mobile-menu-panel {
+            transform: translateX(0);
+        }
+        
+        /* Estilos específicos para políticas de privacidad */
+        .legal-content h2 {
+            font-size: 1.5rem;
+            font-weight: 800;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            color: #1d1d1b;
+        }
+        .legal-content h3 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-top: 1.5rem;
+            margin-bottom: 0.75rem;
+            color: #189364;
+        }
+        .legal-content p {
+            color: #4b5563;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+        .legal-content ul {
+            list-style-type: disc;
+            padding-left: 1.5rem;
+            margin-bottom: 1rem;
+            color: #4b5563;
+        }
+        .legal-content li {
+            margin-bottom: 0.5rem;
+            line-height: 1.5;
+        }
+        .legal-content .highlight {
+            background-color: #f4f7f6;
+            padding: 1.5rem;
+            border-radius: 1rem;
+            border-left: 4px solid #189364;
+            margin: 1.5rem 0;
+        }
+    </style>
+</head>
+<body class="text-dark">
+
+    <header class="sticky top-0 z-50 bg-white shadow-md">
+        <div class="container mx-auto px-4 h-20 flex items-center justify-between gap-4">
+            
+            <div class="flex-shrink-0">
+                <img src="https://i.postimg.cc/pr5LzwP5/logo.png" alt="Vida Activa" class="h-12 md:h-16 cursor-pointer" onclick="location.href='index.html'">
+            </div>
+
+            <div class="flex items-center gap-2 md:gap-6">
+                <nav class="hidden lg:block">
+                    <ul class="flex gap-6 font-bold text-sm">
+                        <li><a href="index.html" class="hover:text-primary transition-colors">Inicio</a></li>
+                        <li><a href="nosotros.html" class="hover:text-primary transition-colors">Nosotros</a></li>
+                        <li><a href="descargar-lista.html" class="hover:text-primary transition-colors">Descargar Lista</a></li>
+                    </ul>
+                </nav>
+
+                <div class="flex items-center gap-4">
+                    <button onclick="toggleMenu()" class="lg:hidden p-2 hover:bg-light rounded-full transition-colors">
+                        <i data-lucide="menu" class="w-6 h-6"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div id="mobile-menu" class="mobile-menu">
+        <div class="mobile-menu-overlay" onclick="toggleMenu()"></div>
+        <nav class="mobile-menu-panel">
+            <button onclick="toggleMenu()" class="absolute top-6 right-6 hover:rotate-90 transition-transform duration-200 p-2">
+                <i data-lucide="x" class="w-6 h-6 text-gray-600 hover:text-dark"></i>
+            </button>
+            <ul class="flex flex-col gap-6 mt-12 font-bold text-lg">
+                <li><a href="index.html" onclick="toggleMenu()" class="hover:text-primary transition-colors block py-2">Inicio</a></li>
+                <li><a href="nosotros.html" onclick="toggleMenu()" class="hover:text-primary transition-colors block py-2">Nosotros</a></li>
+                <li><a href="descargar-lista.html" onclick="toggleMenu()" class="hover:text-primary transition-colors block py-2">Descargar Lista</a></li>
+                <li><a href="terminos.html" onclick="toggleMenu()" class="hover:text-primary transition-colors block py-2">Términos y Condiciones</a></li>
+                <li><a href="politicas-privacidad.html" onclick="toggleMenu()" class="text-primary transition-colors block py-2">Política de Privacidad</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <main class="container mx-auto px-4 py-8 md:py-12">
+        <div class="max-w-4xl mx-auto">
+            
+            <!-- Breadcrumb -->
+            <div class="flex items-center gap-2 text-sm text-gray-500 mb-6">
+                <a href="index.html" class="hover:text-primary transition-colors">Inicio</a>
+                <i data-lucide="chevron-right" class="w-4 h-4"></i>
+                <span class="text-dark font-medium">Política de Privacidad</span>
+            </div>
+            
+            <!-- Hero Section -->
+            <div class="bg-white rounded-[2rem] p-8 md:p-12 shadow-sm border border-gray-100 mb-8">
+                <div class="text-center mb-8">
+                    <div class="inline-flex items-center justify-center w-16 h-16 bg-primary/10 rounded-full mb-4">
+                        <i data-lucide="shield" class="w-8 h-8 text-primary"></i>
+                    </div>
+                    <h1 class="text-3xl md:text-4xl font-black mb-4">Política de Privacidad</h1>
+                    <p class="text-gray-500 max-w-2xl mx-auto">Última actualización: 26 de marzo de 2026</p>
+                </div>
+            </div>
+            
+            <!-- Contenido Legal -->
+            <div class="bg-white rounded-[2rem] p-8 md:p-12 shadow-sm border border-gray-100 legal-content">
+                
+                <div class="highlight">
+                    <p class="font-bold text-dark mb-2">🔒 Compromiso con tu privacidad</p>
+                    <p class="text-sm">En VidaActiva.59, nos tomamos muy en serio la protección de tus datos personales. Esta política explica cómo recopilamos, utilizamos y protegemos tu información cuando interactúas con nuestra tienda.</p>
+                </div>
+                
+                <h2>1. Responsable del Tratamiento</h2>
+                <p>El responsable del tratamiento de tus datos personales es:</p>
+                <ul>
+                    <li><strong>Nombre:</strong> Zuleima Tua</li>
+                    <li><strong>Marca comercial:</strong> VidaActiva.59</li>
+                    <li><strong>Ubicación:</strong> Cabimas, Zulia - Venezuela</li>
+                    <li><strong>Contacto:</strong> WhatsApp +58 412 0698850 | Email: info@vidactiva.com</li>
+                </ul>
+                
+                <h2>2. Información que Recopilamos</h2>
+                <p>Para procesar tus pedidos y brindarte un servicio óptimo, recopilamos la siguiente información:</p>
+                <ul>
+                    <li><strong>Datos de identificación:</strong> Nombre, apellido, cédula de identidad (opcional).</li>
+                    <li><strong>Datos de contacto:</strong> Número de teléfono, correo electrónico, dirección de envío.</li>
+                    <li><strong>Datos de pago:</strong> Información de la transacción (no almacenamos datos de tarjetas bancarias).</li>
+                    <li><strong>Datos de navegación:</strong> Dirección IP, tipo de dispositivo, páginas visitadas (mediante cookies analíticas).</li>
+                </ul>
+                
+                <h2>3. Finalidad del Tratamiento</h2>
+                <p>Tus datos serán utilizados exclusivamente para:</p>
+                <ul>
+                    <li>Gestionar y procesar tus pedidos de compra.</li>
+                    <li>Comunicarnos contigo sobre el estado de tu pedido.</li>
+                    <li>Enviar facturas, comprobantes y confirmaciones de pago.</li>
+                    <li>Responder a tus consultas, quejas o reclamos.</li>
+                    <li>Mejorar nuestra experiencia de usuario y servicios.</li>
+                    <li>Enviar comunicaciones comerciales solo si has otorgado tu consentimiento expreso.</li>
+                </ul>
+                
+                <h2>4. Base Legal</h2>
+                <p>El tratamiento de tus datos personales se fundamenta en:</p>
+                <ul>
+                    <li>La ejecución del contrato de compraventa que estableces al realizar un pedido.</li>
+                    <li>Tu consentimiento expreso para recibir comunicaciones comerciales.</li>
+                    <li>El interés legítimo de mejorar nuestros servicios y prevenir fraudes.</li>
+                </ul>
+                
+                <h2>5. Compartición de Datos con Terceros</h2>
+                <p>No vendemos, alquilamos ni compartimos tus datos personales con terceros no relacionados. Excepcionalmente, compartimos información con:</p>
+                <ul>
+                    <li><strong>Empresas de mensajería y envíos:</strong> MRW, Zoom, para la logística de entrega.</li>
+                    <li><strong>Entidades financieras:</strong> Para procesar los pagos realizados.</li>
+                    <li><strong>Autoridades competentes:</strong> Cuando sea requerido por ley.</li>
+                </ul>
+                <p>En todos los casos, aseguramos que estas entidades cumplan con estándares adecuados de protección de datos.</p>
+                
+                <h2>6. Seguridad de la Información</h2>
+                <p>Implementamos medidas técnicas y organizativas para proteger tus datos contra acceso no autorizado, pérdida o alteración. Estas incluyen:</p>
+                <ul>
+                    <li>Almacenamiento seguro de información en sistemas protegidos.</li>
+                    <li>Acceso restringido a tus datos solo al personal autorizado.</li>
+                    <li>Uso de conexiones seguras para la transmisión de información.</li>
+                </ul>
+                
+                <div class="highlight">
+                    <p class="font-bold text-dark mb-2">📱 WhatsApp y Comunicaciones</p>
+                    <p class="text-sm">Todas las comunicaciones relacionadas con pedidos se realizan a través de WhatsApp. Al proporcionar tu número, aceptas recibir mensajes sobre el estado de tu compra. No compartimos tu número con fines publicitarios no autorizados.</p>
+                </div>
+                
+                <h2>7. Conservación de Datos</h2>
+                <p>Conservaremos tus datos personales durante el tiempo necesario para cumplir con las finalidades descritas en esta política y mientras existan obligaciones legales derivadas de las transacciones realizadas. Posteriormente, serán eliminados de manera segura.</p>
+                
+                <h2>8. Tus Derechos</h2>
+                <p>Como titular de datos personales, tienes derecho a:</p>
+                <ul>
+                    <li><strong>Acceder:</strong> Conocer qué datos tenemos sobre ti.</li>
+                    <li><strong>Rectificar:</strong> Corregir datos inexactos o incompletos.</li>
+                    <li><strong>Cancelar/Suprimir:</strong> Solicitar la eliminación de tus datos cuando ya no sean necesarios.</li>
+                    <li><strong>Oponerse:</strong> Negarte al tratamiento de tus datos para fines específicos.</li>
+                    <li><strong>Revocar consentimiento:</strong> Retirar tu autorización para recibir comunicaciones comerciales.</li>
+                </ul>
+                <p>Para ejercer cualquiera de estos derechos, contáctanos a través de nuestro WhatsApp <strong>+58 412 0698850</strong> o al correo <strong>info@vidactiva.com</strong>. Atenderemos tu solicitud en un plazo máximo de 15 días hábiles.</p>
+                
+                <h2>9. Uso de Cookies</h2>
+                <p>Nuestro sitio web utiliza cookies para mejorar la experiencia de navegación. Las cookies son pequeños archivos que se almacenan en tu dispositivo y nos ayudan a:</p>
+                <ul>
+                    <li>Recordar productos en el carrito de compras.</li>
+                    <li>Analizar el tráfico y comportamiento en el sitio.</li>
+                    <li>Personalizar la experiencia según tus preferencias.</li>
+                </ul>
+                <p>Puedes configurar tu navegador para rechazar las cookies, aunque esto podría afectar algunas funcionalidades de la tienda.</p>
+                
+                <h2>10. Cambios en la Política de Privacidad</h2>
+                <p>Nos reservamos el derecho de actualizar esta política de privacidad para reflejar cambios en nuestras prácticas o en la legislación aplicable. Te notificaremos sobre modificaciones significativas a través de nuestro sitio web o por los medios de contacto que hayas proporcionado. Te recomendamos revisar esta página periódicamente.</p>
+                
+                <h2>11. Contacto</h2>
+                <p>Si tienes preguntas, inquietudes o deseas ejercer tus derechos sobre datos personales, contáctanos:</p>
+                <ul>
+                    <li><strong>WhatsApp:</strong> <a href="https://wa.me/584120698850" target="_blank" class="text-primary hover:underline">+58 412 0698850</a></li>
+                    <li><strong>Email:</strong> <a href="mailto:info@vidactiva.com" class="text-primary hover:underline">info@vidactiva.com</a></li>
+                    <li><strong>Instagram:</strong> <a href="https://instagram.com/vidaActiva.59" target="_blank" class="text-primary hover:underline">@vidaActiva.59</a></li>
+                </ul>
+                
+                <div class="border-t border-gray-200 mt-8 pt-8 text-center">
+                    <p class="text-xs text-gray-400">© 2026 VidaActiva.59 - Todos los derechos reservados.</p>
+                    <p class="text-xs text-gray-400 mt-2">CEO: Zuleima Tua | Cabimas, Zulia - Venezuela</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-dark text-white pt-16 pb-8">
+        <div class="container mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-12">
+            <div>
+                <img src="https://i.postimg.cc/pr5LzwP5/logo.png" alt="Logo" class="h-12 mb-6 brightness-0 invert">
+                <p class="text-gray-400 text-sm leading-relaxed">Salud natural para tu bienestar diario. Calidad garantizada en cada producto para el cuidado de tu familia.</p>
+            </div>
+            <div>
+                <h4 class="text-secondary font-bold mb-6">Empresa</h4>
+                <ul class="space-y-3 text-gray-400 text-sm">
+                    <li><a href="nosotros.html" class="hover:text-white transition-colors">Sobre Nosotros</a></li>
+                    <li><a href="terminos.html" class="hover:text-white transition-colors">Términos y Condiciones</a></li>
+                    <li><a href="politicas-privacidad.html" class="text-white transition-colors">Política de Privacidad</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-secondary font-bold mb-6">Contacto</h4>
+                <ul class="space-y-4 text-gray-400 text-sm">
+                    <li class="flex items-center gap-3"><i data-lucide="phone" class="w-4 h-4"></i> +58 412 0698850</li>
+                    <li class="flex items-center gap-3"><i data-lucide="mail" class="w-4 h-4"></i> info@vidactiva.click</li>
+                    <li class="flex items-center gap-3"><i data-lucide="map-pin" class="w-4 h-4"></i> Cabimas, Zulia - Venezuela</li>
+                </ul>
+            </div>
+        </div>
+        <div class="container mx-auto px-4 mt-12 pt-8 border-t border-gray-800 text-center text-gray-500 text-xs">
+            &copy; 2026 VidaActiva.59. Todos los derechos reservados.
+        </div>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+
+        function toggleMenu() {
+            const menu = document.getElementById('mobile-menu');
+            if (menu.classList.contains('active')) {
+                menu.classList.remove('active');
+                setTimeout(() => {
+                    document.body.style.overflow = '';
+                }, 400);
+            } else {
+                menu.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+        }
+    </script>
+      <!-- Click -->
+    <script src="noclick.js"></script>
+</body>
+</html>
