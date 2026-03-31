@@ -153,6 +153,24 @@
         .toast-info {
             border-left: 4px solid #3b82f6;
         }
+        
+        /* Estilos para el input de cantidad */
+        .quantity-input {
+            width: 100%;
+            padding: 0.5rem;
+            border: 1px solid #e5e7eb;
+            border-radius: 0.75rem;
+            text-align: center;
+            font-size: 0.875rem;
+            font-weight: 500;
+            background-color: #f9fafb;
+            transition: all 0.2s;
+        }
+        .quantity-input:focus {
+            outline: none;
+            border-color: #189364;
+            ring: 2px solid #189364;
+        }
     </style>
 </head>
 <body class="text-dark">
@@ -476,8 +494,12 @@
                     <div class="mt-4">
                         <span class="text-xs text-gray-600 line-through font-bold">$${p.priceBefore} Antes</span>
                         <div class="text-lg font-black text-primary">$${p.price}</div>
+                        <!-- Campo de cantidad -->
+                        <div class="mt-3">
+                            <input type="number" id="qty-${p.id}" min="1" value="1" class="quantity-input" onchange="updateQuantityLabel('${p.id}')">
+                        </div>
                         <button onclick="addToCart('${p.id}')" class="w-full mt-3 bg-primary text-white py-2.5 rounded-xl text-sm font-bold flex items-center justify-center gap-2 hover:bg-secondary hover:text-dark transition-all active:scale-95">
-                            <i data-lucide="plus-circle" class="w-4 h-4"></i> Añadir
+                            <i data-lucide="plus-circle" class="w-4 h-4"></i> Añadir al Carrito
                         </button>
                     </div>
                 </div>`;
@@ -487,6 +509,11 @@
             lucide.createIcons();
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
+        
+        // Función auxiliar para actualizar el label de cantidad (opcional)
+        window.updateQuantityLabel = (id) => {
+            // Solo para mantener consistencia, no es necesario hacer nada adicional
+        };
 
         function renderPagination() {
             const total = Math.ceil(store.current.length / CONFIG.PER_PAGE);
@@ -597,12 +624,34 @@
             setupSearchClickOutside();
         }
 
+        // Modificar addToCart para incluir la cantidad
         window.addToCart = (id) => { 
-            const p = store.all.find(i => i.id === id); 
-            store.cart.push({ ...p, cartId: Date.now() }); 
+            const p = store.all.find(i => i.id === id);
+            const quantityInput = document.getElementById(`qty-${id}`);
+            const quantity = quantityInput ? parseInt(quantityInput.value) : 1;
+            
+            // Verificar que la cantidad sea válida
+            if(isNaN(quantity) || quantity < 1) {
+                showToast('⚠️ Cantidad no válida', 'warning', 2000);
+                return;
+            }
+            
+            // Crear un objeto con el producto y la cantidad
+            const cartItem = { 
+                ...p, 
+                cartId: Date.now(),
+                quantity: quantity,
+                subtotal: parseFloat(p.price) * quantity
+            };
+            
+            store.cart.push(cartItem); 
             localStorage.setItem('natur_cart', JSON.stringify(store.cart)); 
             updateCartUI(); 
-            showToast(`✅ ${p.product_name} añadido al carrito`, 'success', 2500);
+            
+            // Resetear el input de cantidad a 1 después de agregar
+            if(quantityInput) quantityInput.value = 1;
+            
+            showToast(`✅ ${quantity}x ${p.product_name} añadido al carrito`, 'success', 2500);
         };
 
         function updateCartUI() {
@@ -613,11 +662,15 @@
                 container.innerHTML = `<div class="text-center text-gray-400 py-4 text-sm">No hay productos en el carrito</div>`;
             } else {
                 container.innerHTML = store.cart.map(i => { 
-                    total += parseFloat(i.price); 
+                    const itemTotal = parseFloat(i.price) * i.quantity;
+                    total += itemTotal; 
                     return `<div class="flex justify-between items-center py-2 border-b border-gray-50">
-                        <span class="text-xs font-medium w-3/4">${i.product_name}</span>
+                        <div class="flex flex-col w-3/4">
+                            <span class="text-xs font-medium">${i.product_name}</span>
+                            <span class="text-[10px] text-gray-400">Cantidad: ${i.quantity}</span>
+                        </div>
                         <div class="flex items-center gap-3">
-                            <strong class="text-xs">$${i.price}</strong>
+                            <strong class="text-xs">$${itemTotal.toFixed(2)}</strong>
                             <button onclick="removeItem(${i.cartId})" class="text-red-400 hover:text-red-600 transition-colors"><i data-lucide="trash-2" class="w-4 h-4"></i></button>
                         </div>
                     </div>`; 
@@ -634,6 +687,7 @@
             showToast('🗑️ Producto eliminado del carrito', 'info', 2000);
         };
 
+        // Modificar checkoutWhatsApp para limpiar formulario y carrito
         window.checkoutWhatsApp = () => {
             if(store.cart.length === 0) {
                 showToast('🛒 ¡Agrega productos al carrito primero!', 'warning', 3000);
@@ -652,11 +706,37 @@
                 return;
             }
             
-            let msg = `🛍️ *PEDIDO NATURSHOP*\n\n*Cliente:* ${nombre} ${apellido}\n*Teléfono:* ${telefono}\n*Ubicación:* ${ciudad}, ${estado}\n*Dirección:* ${direccion}\n\n*Productos:*\n`;
-            store.cart.forEach(i => msg += `• ${i.product_name} ($${i.price})\n`);
-            msg += `\n*TOTAL: $${store.cart.reduce((a, b) => a + parseFloat(b.price), 0).toFixed(2)}*`;
+            // Construir mensaje con cantidades
+            let msg = `🛍️ *PEDIDO VIDAACTIVA.59*\n\n*Cliente:* ${nombre} ${apellido}\n*Teléfono:* ${telefono}\n*Ubicación:* ${ciudad}, ${estado}\n*Dirección:* ${direccion}\n\n*Productos:*\n`;
+            let total = 0;
+            store.cart.forEach(i => {
+                const itemTotal = parseFloat(i.price) * i.quantity;
+                total += itemTotal;
+                msg += `• ${i.product_name} x${i.quantity} ($${i.price} c/u) = $${itemTotal.toFixed(2)}\n`;
+            });
+            msg += `\n*TOTAL: $${total.toFixed(2)}*`;
+            
+            // Abrir WhatsApp
             window.open(`https://wa.me/584120698850?text=${encodeURIComponent(msg)}`, '_blank');
-            showToast('📱 Redirigiendo a WhatsApp...', 'success', 2000);
+            
+            // Limpiar el formulario
+            document.getElementById('form-nombre').value = '';
+            document.getElementById('form-apellido').value = '';
+            document.getElementById('form-email').value = '';
+            document.getElementById('form-tel').value = '';
+            document.getElementById('form-estado').value = '';
+            document.getElementById('form-ciudad').value = '';
+            document.getElementById('form-direccion').value = '';
+            
+            // Vaciar el carrito
+            store.cart = [];
+            localStorage.setItem('natur_cart', JSON.stringify(store.cart));
+            updateCartUI();
+            
+            // Cerrar el modal del carrito
+            closeCart();
+            
+            showToast('✅ ¡Pedido enviado con éxito! El carrito ha sido vaciado', 'success', 4000);
         };
 
         window.selectProductById = (id) => { 
