@@ -1,0 +1,15 @@
+===================================================
+Archivo robots.txt para https://vidaactiva.click
+===================================================
+User-agent: *
+
+Directorios que los crawlers no deben indexar para evitar contenido duplicado o sensible.
+
+Disallow: /admin/
+Disallow: /js/
+
+Permitir el acceso al resto del sitio.
+Allow: /
+
+Ubicación del Sitemap del sitio.
+Sitemap: https://vidaactiva.click/sitemap.xml
