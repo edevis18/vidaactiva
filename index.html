@@ -207,8 +207,8 @@
             </button>
             <ul class="flex flex-col gap-6 mt-12 font-bold text-lg">
                 <li><a href="index.html" onclick="toggleMenu()" class="hover:text-primary transition-colors block py-2">Inicio</a></li>
-                <li><a href="#" onclick="toggleMenu()" class="hover:text-primary transition-colors block py-2">Nosotros</a></li>
-                <li><a href="#" onclick="downloadList(); toggleMenu()" class="hover:text-primary transition-colors block py-2">Descargar Lista</a></li>
+                <li><a href="nosotros.html" onclick="toggleMenu()" class="hover:text-primary transition-colors block py-2">Nosotros</a></li>
+                <li><a href="descargar-lista.html" onclick="downloadList(); toggleMenu()" class="hover:text-primary transition-colors block py-2">Descargar Lista</a></li>
             </ul>
         </nav>
     </div>
@@ -254,13 +254,13 @@
                 <h4 class="text-secondary font-bold mb-6">Contacto</h4>
                 <ul class="space-y-4 text-gray-400 text-sm">
                     <li class="flex items-center gap-3"><i data-lucide="phone" class="w-4 h-4"></i> +58 412 0698850</li>
-                    <li class="flex items-center gap-3"><i data-lucide="mail" class="w-4 h-4"></i> info@vidaactiva.click</li>
+                    <li class="flex items-center gap-3"><i data-lucide="mail" class="w-4 h-4"></i> vidaactiva1959@gmail.com</li>
                     <li class="flex items-center gap-3"><i data-lucide="map-pin" class="w-4 h-4"></i> Cabimas, Zulia - Venezuela</li>
                 </ul>
             </div>
         </div>
         <div class="container mx-auto px-4 mt-12 pt-8 border-t border-gray-800 text-center text-gray-500 text-xs">
-            &copy; 2026 NaturShop. Todos los derechos reservados.
+            &copy; 2026 VidaActiva.59. Todos los derechos reservados. Desarrollado por <b><a href="https://edevis18.github.io/edevisraga" target="_blank" style="color:orange;">EdevisR</a></b>
         </div>
     </footer>
 
@@ -596,7 +596,7 @@
             let msg = `🛍️ *PEDIDO NATURSHOP*\n\n*Cliente:* ${nombre} ${apellido}\n*Teléfono:* ${telefono}\n*Ubicación:* ${ciudad}, ${estado}\n*Dirección:* ${direccion}\n\n*Productos:*\n`;
             store.cart.forEach(i => msg += `• ${i.product_name} ($${i.price})\n`);
             msg += `\n*TOTAL: $${store.cart.reduce((a, b) => a + parseFloat(b.price), 0).toFixed(2)}*`;
-            window.open(`https://wa.me/584120000000?text=${encodeURIComponent(msg)}`, '_blank');
+            window.open(`https://wa.me/584120698850?text=${encodeURIComponent(msg)}`, '_blank');
             showToast('📱 Redirigiendo a WhatsApp...', 'success', 2000);
         };
 
@@ -616,7 +616,7 @@
         };
 
         window.downloadList = () => {
-            showToast('📋 Generando lista de productos... próximamente disponible en PDF', 'info', 3000);
+            showToast('📋 Generando lista de productos...', 'info', 3000);
         };
         
         document.addEventListener('DOMContentLoaded', init);
