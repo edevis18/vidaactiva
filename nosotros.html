@@ -7,14 +7,14 @@
     <meta name="description" content="Conoce la historia, misión y visión de VidaActiva.59, tu aliado en bienestar natural. Calidad garantizada en suplementos y productos naturales.">
     <link rel="shortcut icon" href="https://i.postimg.cc/pr5LzwP5/logo.png" type="image/x-icon">
 
- <!-- Open Graph Meta Tags (para redes sociales) -->
+    <!-- Open Graph Meta Tags (para redes sociales) -->
     <meta property='og:type' content='website'>
     <meta property='og:title' content='Vida Activa | Nosotros'>
     <meta property='og:image' content='https://i.postimg.cc/MTZmLsw7/portada.jpg'>
     <meta property='og:description' content='Encuentra los mejores suplementos y productos naturales en VidaActiva.59, Calidad garantizada. ¡Mejora tu bienestar hoy!'>
-    <meta property='og:url' content='https://vidaactiva.click/nosotros.html'> <!-- URL final de tu sitio web -->
+    <meta property='og:url' content='https://vidaactiva.click/nosotros.html'>
 
-         <!-- Font Awesome for Icons -->
+    <!-- Font Awesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
     <script src="https://cdn.tailwindcss.com"></script>
@@ -146,6 +146,71 @@
         .toast-info {
             border-left: 4px solid #3b82f6;
         }
+        
+        /* Estilos para el control de cantidad con botones + y - */
+        .quantity-selector {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background-color: #f9fafb;
+            border: 1px solid #e5e7eb;
+            border-radius: 0.75rem;
+            overflow: hidden;
+            transition: all 0.2s;
+        }
+        .quantity-selector:hover {
+            border-color: #189364;
+        }
+        .quantity-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 28px;
+            height: 32px;
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            color: #189364;
+            transition: all 0.2s;
+        }
+        .quantity-btn:hover {
+            background-color: #e5e7eb;
+            color: #0f5e4a;
+        }
+        .quantity-btn:active {
+            transform: scale(0.95);
+        }
+        .quantity-value {
+            width: 32px;
+            text-align: center;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: #1f2937;
+            background: transparent;
+            border: none;
+            outline: none;
+        }
+        .quantity-value:focus {
+            outline: none;
+        }
+        .quantity-value::-webkit-inner-spin-button,
+        .quantity-value::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+        .quantity-value[type=number] {
+            -moz-appearance: textfield;
+        }
+        
+        /* Estilos para productos destacados - versión compacta */
+        .featured-product-card {
+            transition: all 0.3s ease;
+        }
+        .featured-product-card:hover {
+            transform: translateY(-5px);
+        }
     </style>
 </head>
 <body class="text-dark">
@@ -156,7 +221,7 @@
         <div class="container mx-auto px-4 h-20 flex items-center justify-between gap-4">
             
             <div class="flex-shrink-0">
-                <img src="https://i.postimg.cc/pr5LzwP5/logo.png" alt="NaturShop" class="h-12 md:h-16 cursor-pointer" onclick="location.href='index.html'">
+                <img src="https://i.postimg.cc/pr5LzwP5/logo.png" alt="VidaActiva" class="h-12 md:h-16 cursor-pointer" onclick="location.href='index.html'">
             </div>
 
             <div class="hidden md:flex flex-1 justify-center max-w-xl relative">
@@ -294,6 +359,33 @@
                 </p>
             </div>
         </section>
+        
+        <!-- Sección: Productos Destacados - Versión Compacta (6 productos aleatorios) -->
+        <section class="mb-12">
+            <div class="text-center mb-10">
+                <div class="inline-flex items-center justify-center w-12 h-12 bg-primary/10 rounded-full mb-4">
+                    <i data-lucide="sparkles" class="w-6 h-6 text-primary"></i>
+                </div>
+                <h2 class="text-2xl md:text-3xl font-black mb-2">Productos Destacados</h2>
+                <p class="text-gray-500 max-w-md mx-auto">Descubre algunos de nuestros productos más populares para tu bienestar</p>
+                <div class="w-20 h-1 bg-primary mx-auto mt-4 rounded-full"></div>
+            </div>
+            
+            <div id="featured-products-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+                <!-- Productos destacados se cargarán dinámicamente -->
+                <div class="col-span-full text-center py-12">
+                    <div class="loader border-4 border-gray-200 border-t-primary rounded-full w-12 h-12 animate-spin mx-auto mb-4"></div>
+                    <p class="text-gray-400">Cargando productos destacados...</p>
+                </div>
+            </div>
+            
+            <div class="text-center mt-10">
+                <a href="index.html" class="inline-flex items-center gap-2 text-primary font-bold hover:text-secondary transition-colors group">
+                    Ver todos los productos 
+                    <i data-lucide="arrow-right" class="w-4 h-4 group-hover:translate-x-1 transition-transform"></i>
+                </a>
+            </div>
+        </section>
     </main>
 
     <footer class="bg-dark text-white pt-16 pb-8">
@@ -314,9 +406,9 @@
                 <h4 class="text-secondary font-bold mb-6">Contacto</h4>
                 <ul class="space-y-4 text-gray-400 text-sm">
                     <li class="flex items-center gap-3"><i data-lucide="phone" class="w-4 h-4"></i> +58 412 0698850</li>
-                    <li class="flex items-center gap-3"><i data-lucide="mail" class="w-4 h-4"></i> vidaactiva1959@gmail.comk</li>
+                    <li class="flex items-center gap-3"><i data-lucide="mail" class="w-4 h-4"></i> vidaactiva1959@gmail.com</li>
                     <li class="flex items-center gap-3"><i data-lucide="map-pin" class="w-4 h-4"></i> Cabimas, Zulia - Venezuela</li>
-                    <li class="flex items-center gap-3"><i class="fa-brands fa-instagram w-4 h-4"></i></i><a href="https://instagram.com/vidaactiva.59" target="_blank">vidaactiva.59</a></li>
+                    <li class="flex items-center gap-3"><i class="fa-brands fa-instagram w-4 h-4"></i><a href="https://instagram.com/vidaactiva.59" target="_blank">vidaactiva.59</a></li>
                 </ul>
             </div>
         </div>
@@ -375,8 +467,8 @@
     </div>
 
     <script>
-        const CONFIG = { MARGIN: 1.40, BEFORE_MARGIN: 1.50, PER_PAGE: 12, DEFAULT_IMG: 'https://i.postimg.cc/fL2MdW0K/envase.jpg', IMG_PATH: 'img/productos/' };
-        let store = { all: [], current: [], cart: JSON.parse(localStorage.getItem('natur_cart')) || [], page: 1 };
+        const CONFIG = { MARGIN: 1.40, BEFORE_MARGIN: 1.50, DEFAULT_IMG: 'https://i.postimg.cc/fL2MdW0K/envase.jpg', IMG_PATH: 'img/productos/' };
+        let store = { all: [], cart: JSON.parse(localStorage.getItem('natur_cart')) || [] };
 
         function showToast(message, type = 'info', duration = 3000) {
             const container = document.getElementById('toast-container');
@@ -430,6 +522,78 @@
             return CONFIG.DEFAULT_IMG;
         }
 
+        // Función para incrementar cantidad
+        window.incrementQuantity = (id) => {
+            const input = document.getElementById(`qty-${id}`);
+            if(input) {
+                let value = parseInt(input.value);
+                if(isNaN(value)) value = 1;
+                input.value = value + 1;
+            }
+        };
+
+        // Función para decrementar cantidad
+        window.decrementQuantity = (id) => {
+            const input = document.getElementById(`qty-${id}`);
+            if(input) {
+                let value = parseInt(input.value);
+                if(isNaN(value)) value = 1;
+                if(value > 1) {
+                    input.value = value - 1;
+                }
+            }
+        };
+
+        function renderFeaturedProducts() {
+            const container = document.getElementById('featured-products-container');
+            if(!container) return;
+            
+            // Tomar 6 productos aleatorios
+            const shuffled = [...store.all];
+            for(let i = shuffled.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+            }
+            const featured = shuffled.slice(0, 6);
+            
+            container.innerHTML = featured.map(p => {
+                const imgUrl = getProductImageUrl(p);
+                return `
+                <div class="featured-product-card bg-white p-3 rounded-2xl border border-gray-100 hover:shadow-lg hover:border-primary/30 transition-all group">
+                    <div class="flex gap-3">
+                        <div class="w-20 h-20 flex-shrink-0 bg-gray-50 rounded-xl flex items-center justify-center overflow-hidden">
+                            <img src="${imgUrl}" alt="${p.product_name}" class="w-full h-full object-contain p-2 group-hover:scale-110 transition-transform duration-300" loading="lazy" onerror="this.src='${CONFIG.DEFAULT_IMG}'">
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <small class="text-[9px] font-bold text-gray-400 uppercase tracking-wider">${p.category.split(' ').slice(0,2).join(' ')}</small>
+                            <h4 class="text-xs font-bold mt-0.5 line-clamp-2 leading-tight">${p.product_name}</h4>
+                            <p class="text-[10px] text-primary font-medium mt-1 truncate">${p.presentation_lab || 'Natural'}</p>
+                            <div class="flex items-center justify-between mt-2">
+                                <div>
+                                    <span class="text-[9px] text-gray-400 line-through">$${p.priceBefore}</span>
+                                    <div class="text-sm font-black text-primary">$${p.price}</div>
+                                </div>
+                                <div class="quantity-selector" style="width: auto;">
+                                    <button type="button" class="quantity-btn" onclick="decrementQuantity('${p.id}')" style="width: 24px; height: 28px;">
+                                        <i data-lucide="minus" class="w-3 h-3"></i>
+                                    </button>
+                                    <input type="number" id="qty-${p.id}" value="1" min="1" class="quantity-value" style="width: 28px; font-size: 0.7rem;" readonly>
+                                    <button type="button" class="quantity-btn" onclick="incrementQuantity('${p.id}')" style="width: 24px; height: 28px;">
+                                        <i data-lucide="plus" class="w-3 h-3"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <button onclick="addToCart('${p.id}')" class="w-full mt-2 bg-primary text-white py-1.5 rounded-lg text-[11px] font-bold flex items-center justify-center gap-1 hover:bg-secondary hover:text-dark transition-all">
+                                <i data-lucide="plus-circle" class="w-3 h-3"></i> Añadir
+                            </button>
+                        </div>
+                    </div>
+                </div>`;
+            }).join('');
+            
+            lucide.createIcons();
+        }
+
         async function init() {
             try {
                 const res = await fetch('products.json');
@@ -441,74 +605,38 @@
                     const price = (parseFloat(i.price) * CONFIG.MARGIN).toFixed(2);
                     return { ...i, price, priceBefore: (price * CONFIG.BEFORE_MARGIN).toFixed(2) };
                 });
-
-                store.all.sort(() => Math.random() - 0.5);
-                store.categories = [...new Set(store.all.map(p => p.category))].sort();
-                store.current = [...store.all];
                 
-                setupUI();
+                renderFeaturedProducts();
                 updateCartUI();
+                
+                // Configurar búsqueda (funcionalidad básica)
+                const desktopSearch = document.getElementById('main-search');
+                if(desktopSearch) {
+                    desktopSearch.addEventListener('keypress', (e) => {
+                        if(e.key === 'Enter' && desktopSearch.value.trim()) {
+                            window.location.href = `index.html?search=${encodeURIComponent(desktopSearch.value.trim())}`;
+                        }
+                    });
+                }
+                
+                const mobileSearch = document.getElementById('mobile-search');
+                if(mobileSearch) {
+                    mobileSearch.addEventListener('keypress', (e) => {
+                        if(e.key === 'Enter' && mobileSearch.value.trim()) {
+                            window.location.href = `index.html?search=${encodeURIComponent(mobileSearch.value.trim())}`;
+                        }
+                    });
+                }
+                
             } catch (err) { 
                 console.error(err); 
-                showToast('Error al cargar los productos', 'error', 3000);
+                const container = document.getElementById('featured-products-container');
+                if(container) {
+                    container.innerHTML = `<div class="col-span-full text-center py-12 text-red-500">Error al cargar productos</div>`;
+                }
             }
         }
 
-        function renderGrid() {
-            const container = document.getElementById('products-container');
-            if(!container) return;
-            const start = (store.page - 1) * CONFIG.PER_PAGE;
-            const pageItems = store.current.slice(start, start + CONFIG.PER_PAGE);
-
-            container.innerHTML = pageItems.map(p => {
-                const imgUrl = getProductImageUrl(p);
-                return `
-                <div class="bg-white p-4 rounded-3xl border border-gray-100 hover:shadow-xl hover:border-secondary transition-all group flex flex-col h-full relative">
-                    <div class="absolute top-3 right-3 bg-[#d6ca11] text-dark text-[9px] font-black px-2 py-1 rounded-full italic shadow-md z-10">
-                        ¡Oferta!
-                    </div>
-                    <div class="aspect-square mb-4 flex items-center justify-center p-2 bg-gray-50 rounded-2xl">
-                        <img src="${imgUrl}" alt="${p.product_name}" class="max-h-full max-w-full object-contain rounded-2xl group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.src='${CONFIG.DEFAULT_IMG}'">
-                    </div>
-                    <div class="flex-grow">
-                        <small class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">${p.category}</small>
-                        <h4 class="text-sm font-bold mt-1 line-clamp-2 leading-snug h-10">${p.product_name}</h4>
-                        <p class="text-xs text-primary font-medium mt-2">${p.presentation_lab}</p>
-                    </div>
-                    <div class="mt-4">
-                        <span class="text-xs text-gray-600 line-through font-bold">$${p.priceBefore} Antes</span>
-                        <div class="text-lg font-black text-primary">$${p.price}</div>
-                        <button onclick="addToCart('${p.id}')" class="w-full mt-3 bg-primary text-white py-2.5 rounded-xl text-sm font-bold flex items-center justify-center gap-2 hover:bg-secondary hover:text-dark transition-all active:scale-95">
-                            <i data-lucide="plus-circle" class="w-4 h-4"></i> Añadir
-                        </button>
-                    </div>
-                </div>`;
-            }).join('');
-            
-            renderPagination();
-            lucide.createIcons();
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-
-        function renderPagination() {
-            const container = document.getElementById('pagination');
-            if(!container) return;
-            const total = Math.ceil(store.current.length / CONFIG.PER_PAGE);
-            if(total <= 1) { container.innerHTML = ''; return; }
-            let html = '';
-            for(let i=1; i<=total; i++) {
-                if(i > 3 && i < total) { if(i === 4) html += `<span class="px-2 text-gray-300">...</span>`; continue; }
-                html += `<button class="w-10 h-10 rounded-xl font-bold text-sm transition-all ${i === store.page ? 'bg-primary text-white shadow-lg' : 'bg-white text-dark hover:bg-light border border-gray-100'}" onclick="goToPage(${i})">${i}</button>`;
-            }
-            if (store.page < total) {
-                html += `<button class="px-4 h-10 bg-white border border-gray-100 rounded-xl font-bold text-sm hover:bg-light flex items-center gap-2 transition-all" onclick="goToPage(${store.page + 1})">Siguiente <i data-lucide="chevron-right" class="w-4 h-4"></i></button>`;
-            }
-            container.innerHTML = html;
-            lucide.createIcons();
-        }
-
-        window.goToPage = (n) => { store.page = n; renderGrid(); };
-        
         window.toggleMenu = () => { 
             const menu = document.getElementById('mobile-menu');
             if(menu.classList.contains('active')) {
@@ -540,74 +668,30 @@
             document.body.style.overflow = '';
         };
 
-        function performSearch(searchTerm, suggestionsContainerId) {
-            const v = searchTerm.toLowerCase().trim();
-            const box = document.getElementById(suggestionsContainerId);
+        window.addToCart = (id) => { 
+            const p = store.all.find(i => i.id === id);
+            const quantityInput = document.getElementById(`qty-${id}`);
+            const quantity = quantityInput ? parseInt(quantityInput.value) : 1;
             
-            if(v.length < 2) { 
-                if(box) box.classList.add('hidden'); 
-                return; 
-            }
-            
-            const matches = store.all.filter(p => p.product_name.toLowerCase().includes(v)).slice(0,6);
-            
-            if(matches.length === 0) {
-                box.innerHTML = `<div class="p-4 text-gray-500 text-sm text-center">No se encontraron productos</div>`;
-                box.classList.remove('hidden');
+            if(isNaN(quantity) || quantity < 1) {
+                showToast('⚠️ Cantidad no válida', 'warning', 2000);
                 return;
             }
             
-            box.innerHTML = matches.map(p => `
-                <div class="p-4 hover:bg-light cursor-pointer flex justify-between items-center border-b border-gray-50 transition-colors" onclick="selectProductById('${p.id}')">
-                    <span class="text-sm font-medium line-clamp-2 flex-1">${p.product_name}</span>
-                    <strong class="text-primary text-sm ml-2">$${p.price}</strong>
-                </div>
-            `).join('');
-            box.classList.remove('hidden');
-        }
-
-        function setupSearchClickOutside() {
-            document.addEventListener('click', function(e) {
-                const desktopSearch = document.getElementById('main-search');
-                const desktopSuggestions = document.getElementById('search-suggestions');
-                const mobileSearch = document.getElementById('mobile-search');
-                const mobileSuggestions = document.getElementById('mobile-search-suggestions');
-                
-                if(desktopSearch && desktopSuggestions && !desktopSearch.contains(e.target) && !desktopSuggestions.contains(e.target)) {
-                    desktopSuggestions.classList.add('hidden');
-                }
-                
-                if(mobileSearch && mobileSuggestions && !mobileSearch.contains(e.target) && !mobileSuggestions.contains(e.target)) {
-                    mobileSuggestions.classList.add('hidden');
-                }
-            });
-        }
-
-        function setupUI() {
-            const sel = document.getElementById('category-filter');
-            if(sel) {
-                store.categories.forEach(c => { const o = document.createElement('option'); o.value = c; o.textContent = c; sel.appendChild(o); });
-                sel.onchange = (e) => { store.current = e.target.value === 'all' ? [...store.all] : store.all.filter(p => p.category === e.target.value); store.page = 1; renderGrid(); };
-            }
+            const cartItem = { 
+                ...p, 
+                cartId: Date.now(),
+                quantity: quantity,
+                subtotal: parseFloat(p.price) * quantity
+            };
             
-            const desktopSearch = document.getElementById('main-search');
-            if(desktopSearch) desktopSearch.oninput = (e) => performSearch(e.target.value, 'search-suggestions');
-            
-            const mobileSearch = document.getElementById('mobile-search');
-            if(mobileSearch) mobileSearch.oninput = (e) => performSearch(e.target.value, 'mobile-search-suggestions');
-            
-            if(document.getElementById('products-container')) {
-                renderGrid();
-            }
-            setupSearchClickOutside();
-        }
-
-        window.addToCart = (id) => { 
-            const p = store.all.find(i => i.id === id); 
-            store.cart.push({ ...p, cartId: Date.now() }); 
+            store.cart.push(cartItem); 
             localStorage.setItem('natur_cart', JSON.stringify(store.cart)); 
             updateCartUI(); 
-            showToast(`✅ ${p.product_name} añadido al carrito`, 'success', 2500);
+            
+            if(quantityInput) quantityInput.value = 1;
+            
+            showToast(`✅ ${quantity}x ${p.product_name} añadido al carrito`, 'success', 2500);
         };
 
         function updateCartUI() {
@@ -620,11 +704,15 @@
                 container.innerHTML = `<div class="text-center text-gray-400 py-4 text-sm">No hay productos en el carrito</div>`;
             } else {
                 container.innerHTML = store.cart.map(i => { 
-                    total += parseFloat(i.price); 
+                    const itemTotal = parseFloat(i.price) * i.quantity;
+                    total += itemTotal; 
                     return `<div class="flex justify-between items-center py-2 border-b border-gray-50">
-                        <span class="text-xs font-medium w-3/4">${i.product_name}</span>
+                        <div class="flex flex-col w-3/4">
+                            <span class="text-xs font-medium">${i.product_name}</span>
+                            <span class="text-[10px] text-gray-400">Cantidad: ${i.quantity}</span>
+                        </div>
                         <div class="flex items-center gap-3">
-                            <strong class="text-xs">$${i.price}</strong>
+                            <strong class="text-xs">$${itemTotal.toFixed(2)}</strong>
                             <button onclick="removeItem(${i.cartId})" class="text-red-400 hover:text-red-600 transition-colors"><i data-lucide="trash-2" class="w-4 h-4"></i></button>
                         </div>
                     </div>`; 
@@ -660,35 +748,40 @@
                 return;
             }
             
-            let msg = `🛍️ *PEDIDO NATURSHOP*\n\n*Cliente:* ${nombre} ${apellido}\n*Teléfono:* ${telefono}\n*Ubicación:* ${ciudad}, ${estado}\n*Dirección:* ${direccion}\n\n*Productos:*\n`;
-            store.cart.forEach(i => msg += `• ${i.product_name} ($${i.price})\n`);
-            msg += `\n*TOTAL: $${store.cart.reduce((a, b) => a + parseFloat(b.price), 0).toFixed(2)}*`;
+            let msg = `🛍️ *PEDIDO VIDAACTIVA.59*\n\n*Cliente:* ${nombre} ${apellido}\n*Teléfono:* ${telefono}\n*Ubicación:* ${ciudad}, ${estado}\n*Dirección:* ${direccion}\n\n*Productos:*\n`;
+            let total = 0;
+            store.cart.forEach(i => {
+                const itemTotal = parseFloat(i.price) * i.quantity;
+                total += itemTotal;
+                msg += `• ${i.product_name} x${i.quantity} ($${i.price} c/u) = $${itemTotal.toFixed(2)}\n`;
+            });
+            msg += `\n*TOTAL: $${total.toFixed(2)}*`;
+            
             window.open(`https://wa.me/584120698850?text=${encodeURIComponent(msg)}`, '_blank');
-            showToast('📱 Redirigiendo a WhatsApp...', 'success', 2000);
-        };
-
-        window.selectProductById = (id) => { 
-            store.current = store.all.filter(p => p.id === id); 
-            store.page = 1; 
-            renderGrid(); 
-            const desktopSuggestions = document.getElementById('search-suggestions');
-            const mobileSuggestions = document.getElementById('mobile-search-suggestions');
-            if(desktopSuggestions) desktopSuggestions.classList.add('hidden');
-            if(mobileSuggestions) mobileSuggestions.classList.add('hidden');
-            const desktopSearch = document.getElementById('main-search');
-            const mobileSearch = document.getElementById('mobile-search');
-            if(desktopSearch) desktopSearch.value = '';
-            if(mobileSearch) mobileSearch.value = '';
-            showToast('🔍 Mostrando resultados de búsqueda', 'info', 2000);
+            
+            document.getElementById('form-nombre').value = '';
+            document.getElementById('form-apellido').value = '';
+            document.getElementById('form-email').value = '';
+            document.getElementById('form-tel').value = '';
+            document.getElementById('form-estado').value = '';
+            document.getElementById('form-ciudad').value = '';
+            document.getElementById('form-direccion').value = '';
+            
+            store.cart = [];
+            localStorage.setItem('natur_cart', JSON.stringify(store.cart));
+            updateCartUI();
+            closeCart();
+            
+            showToast('✅ ¡Pedido enviado con éxito! El carrito ha sido vaciado', 'success', 4000);
         };
 
         window.downloadList = () => {
-            showToast('📋 Generando lista de productos...', 'info', 3000);
+            window.location.href = 'descargar-lista.html';
         };
         
         document.addEventListener('DOMContentLoaded', init);
     </script>
-      <!-- Click -->
+    
     <script src="noclick.js"></script>
 </body>
 </html>
