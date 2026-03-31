@@ -712,7 +712,7 @@
             store.cart.forEach(i => {
                 const itemTotal = parseFloat(i.price) * i.quantity;
                 total += itemTotal;
-                msg += `• ${i.product_name} x${i.quantity} ($${i.price} c/u) = $${itemTotal.toFixed(2)}\n`;
+                msg += `• ${i.product_name}, Cantidad:${i.quantity} ($${i.price} c/u) = $${itemTotal.toFixed(2)}\n`;
             });
             msg += `\n*TOTAL: $${total.toFixed(2)}*`;
             
