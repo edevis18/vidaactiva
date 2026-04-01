@@ -222,7 +222,7 @@
         <div class="container mx-auto px-4 h-20 flex items-center justify-between gap-4">
             
             <div class="flex-shrink-0">
-                <img src="https://i.postimg.cc/pr5LzwP5/logo.png" alt="VidaActiva" class="h-12 md:h-16 cursor-pointer" onclick="location.href='index.html'">
+                <img src="img/logo.png" alt="VidaActiva" class="h-12 md:h-16 cursor-pointer" onclick="location.href='./'">
             </div>
 
             <div class="hidden md:flex flex-1 justify-center max-w-xl relative">
@@ -392,7 +392,7 @@
     <footer class="bg-dark text-white pt-16 pb-8">
         <div class="container mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-12">
             <div>
-                <img src="https://i.postimg.cc/pr5LzwP5/logo.png" alt="Logo" class="h-12 mb-6 brightness-0 invert">
+                <img src="img/logo.png" alt="Logo" class="h-12 mb-6 brightness-0 invert">
                 <p class="text-gray-400 text-sm leading-relaxed">Salud natural para tu bienestar diario. Calidad garantizada en cada producto para el cuidado de tu familia.</p>
             </div>
             <div>
@@ -468,7 +468,7 @@
     </div>
 
     <script>
-        const CONFIG = { MARGIN: 1.40, BEFORE_MARGIN: 1.50, DEFAULT_IMG: 'https://i.postimg.cc/fL2MdW0K/envase.jpg', IMG_PATH: 'img/productos/' };
+        const CONFIG = { MARGIN: 1.40, BEFORE_MARGIN: 1.50, DEFAULT_IMG: 'img/envase.jpg', IMG_PATH: 'img/productos/' };
         let store = { all: [], cart: JSON.parse(localStorage.getItem('natur_cart')) || [] };
 
         function showToast(message, type = 'info', duration = 3000) {
