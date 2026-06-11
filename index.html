@@ -8,14 +8,14 @@
     <link rel="canonical" href="https://vidaactiva.click/">
     <link rel="shortcut icon" href="https://i.postimg.cc/pr5LzwP5/logo.png" type="image/x-icon">
 
- <!-- Open Graph Meta Tags (para redes sociales) -->
+    <!-- Open Graph Meta Tags (para redes sociales) -->
     <meta property='og:type' content='website'>
     <meta property='og:title' content='Vida Activa | Tienda Online de Suplementos y Productos Naturales'>
     <meta property='og:image' content='https://i.postimg.cc/MTZmLsw7/portada.jpg'>
     <meta property='og:description' content='Encuentra los mejores suplementos y productos naturales en VidaActiva.59, Calidad garantizada. ¡Mejora tu bienestar hoy!'>
-    <meta property='og:url' content='https://vidaactiva.click'> <!-- URL final de tu sitio web -->
+    <meta property='og:url' content='https://vidaactiva.click'>
 
-     <!-- Font Awesome for Icons -->
+    <!-- Font Awesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
     <script src="https://cdn.tailwindcss.com"></script>
@@ -40,9 +40,15 @@
         .product-card-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); }
         @media (max-width: 640px) { 
             .product-card-grid { 
-                grid-template-columns: 1fr; 
-                gap: 1rem;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 0.625rem;
             }
+        }
+        /* Ajustes de card en mobile para 2 columnas */
+        @media (max-width: 480px) {
+            .product-card-grid .product-card-inner { padding: 0.625rem; }
+            .product-card-grid .product-title { font-size: 0.7rem; height: 2.4rem; }
+            .product-card-grid .product-price { font-size: 0.95rem; }
         }
         .hide-scroll::-webkit-scrollbar { display: none; }
         .mobile-suggestions-container {
@@ -222,6 +228,45 @@
                 font-size: 1rem;
             }
         }
+
+        /* Estilos para el modal de detalle de producto */
+        #product-detail-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 300;
+            visibility: hidden;
+            opacity: 0;
+            transition: visibility 0.3s ease-in-out, opacity 0.3s ease-in-out;
+        }
+        #product-detail-overlay.active {
+            visibility: visible;
+            opacity: 1;
+        }
+        #product-detail-overlay .modal-overlay {
+            position: absolute;
+            inset: 0;
+            background-color: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(4px);
+        }
+        #product-detail-overlay .modal-container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 90%;
+            max-width: 1000px;
+            max-height: 85vh;
+            overflow-y: auto;
+            background-color: white;
+            border-radius: 2rem;
+            padding: 1.5rem;
+        }
+        @media (max-width: 768px) {
+            #product-detail-overlay .modal-container {
+                width: 95%;
+                padding: 1rem;
+            }
+        }
     </style>
 </head>
 <body class="text-dark">
@@ -270,6 +315,94 @@
             <div id="mobile-search-suggestions" class="hidden"></div>
         </div>
     </header>
+
+    <!-- Sección de Slideshow / Banner -->
+<section class="container mx-auto px-4 mt-4 mb-2">
+    <div class="relative rounded-xl overflow-hidden shadow-lg" x-data="{ currentSlide: 0 }">
+        <!-- Slides -->
+        <div class="relative overflow-hidden rounded-xl" id="banner-slideshow">
+            <div class="flex transition-transform duration-500 ease-out" id="banner-track">
+                <!-- Slide 1 - Banner principal -->
+                <div class="w-full flex-shrink-0">
+                    <img src="img/banner.jpg" alt="Banner Vida Activa - 10% Descuento" 
+                         class="w-full h-auto object-cover rounded-xl"
+                         onerror="this.src='https://via.placeholder.com/1200x400?text=VidaActiva+Banner'">
+                </div>
+                <!-- Puedes agregar más slides aquí -->
+                <!-- Slide 1 - Banner principal -->
+                <div class="w-full flex-shrink-0">
+                    <img src="img/banner2.jpg" alt="Banner Vida Activa - 10% Descuento" 
+                         class="w-full h-auto object-cover rounded-xl"
+                         onerror="this.src='https://via.placeholder.com/1200x400?text=VidaActiva+Banner'">
+                </div>
+            </div>
+            
+            <!-- Botón anterior (solo desktop) -->
+            <button id="banner-prev" 
+                    class="absolute left-2 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white rounded-full p-2 transition-all duration-200 opacity-0 group-hover:opacity-100 md:opacity-100"
+                    style="display: none;">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                </svg>
+            </button>
+            
+            <!-- Botón siguiente (solo desktop) -->
+            <button id="banner-next" 
+                    class="absolute right-2 top-1/2 -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white rounded-full p-2 transition-all duration-200 opacity-0 group-hover:opacity-100 md:opacity-100"
+                    style="display: none;">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                </svg>
+            </button>
+            
+            <!-- Indicadores de página (dots) -->
+            <div class="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-2" id="banner-dots">
+                <button class="w-2 h-2 rounded-full bg-white/50 hover:bg-white transition-all dot-active:bg-white dot-active:w-4"></button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    /* Estilos para el slideshow */
+    #banner-slideshow {
+        position: relative;
+        border-radius: 0.75rem;
+        overflow: hidden;
+    }
+    
+    #banner-track {
+        display: flex;
+        transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    /* Dots activos */
+    .dot-active {
+        background-color: white !important;
+        width: 1rem !important;
+    }
+    
+    /* Efecto hover para mostrar botones en desktop */
+    @media (min-width: 768px) {
+        #banner-slideshow:hover .absolute {
+            opacity: 1;
+        }
+        .group-hover\:opacity-100 {
+            opacity: 1;
+        }
+    }
+    
+    /* Touch-friendly: botones más grandes en móvil si se muestran */
+    @media (max-width: 767px) {
+        #banner-prev, #banner-next {
+            padding: 0.5rem;
+        }
+        #banner-prev svg, #banner-next svg {
+            width: 1.25rem;
+            height: 1.25rem;
+        }
+    }
+</style>
 
     <div id="mobile-menu">
         <div class="mobile-menu-overlay" onclick="toggleMenu()"></div>
@@ -337,6 +470,7 @@
         </div>
     </footer>
 
+    <!-- Modal del carrito -->
     <div id="cart-overlay" class="fixed inset-0 z-[200] bg-black/60 hidden items-center justify-center p-4">
         <div class="bg-white w-full max-w-xl rounded-[2rem] p-6 md:p-8 max-h-[90vh] overflow-y-auto shadow-2xl relative">
             <button onclick="closeCart()" class="absolute top-6 right-6 text-gray-400 hover:text-dark transition-colors"><i data-lucide="x"></i></button>
@@ -351,10 +485,42 @@
                 
                 <div id="cart-items-list" class="space-y-2 max-h-40 overflow-y-auto pr-2"></div>
                 
+                <!-- Sección de cupón de descuento -->
+                <div class="border-t border-light pt-4 mt-2">
+                    <div class="flex gap-2 items-center">
+                        <input type="text" id="coupon-code" placeholder="Código de cupón" class="flex-1 p-3 rounded-xl border border-gray-200 bg-light/30 outline-none focus:border-primary text-sm">
+                        <button onclick="applyCoupon()" class="bg-primary text-white px-6 py-3 rounded-xl text-sm font-bold hover:bg-secondary hover:text-dark transition-all active:scale-95">
+                            Aplicar Cupón
+                        </button>
+                    </div>
+                    <div id="coupon-message" class="text-xs mt-2 hidden"></div>
+                </div>
+                
                 <div class="flex justify-between items-center py-4 text-xl font-extrabold border-t border-light">
                     <span>Total a Pagar:</span>
                     <span id="cart-total" class="text-primary">$0.00</span>
                 </div>
+                <div id="discount-info" class="text-xs text-green-600 hidden"></div>
+
+                <!-- Badge informativo - Envío gratis -->
+<div class="container mx-auto px-4 mb-6">
+    <div class="bg-gradient-to-r from-primary/10 via-secondary/10 to-primary/10 rounded-xl border border-primary/20 py-3 px-4 shadow-sm">
+        <div class="flex items-center justify-center gap-3 flex-wrap">
+            <div class="flex items-center gap-2">
+                <div class="bg-primary/20 p-1.5 rounded-full">
+                    <i data-lucide="truck" class="w-5 h-5 text-primary"></i>
+                </div>
+                <span class="font-bold text-dark text-sm md:text-base">Envío <span class="text-primary">Cobro a Destino</span></span>
+            </div>
+            <div class="w-px h-5 bg-primary/30 hidden sm:block"></div>
+            <span class="text-gray-600 text-sm md:text-base"><b>¡Envío Gratis!</b> a partir de <span class="font-semibold text-dark">4 suplementos</span></span>
+            <div class="flex items-center gap-1">
+                <i data-lucide="triangle-alert" class="w-4 h-4 text-secondary"></i>
+                <span class="text-xs text-gray-500" style="background: yellow; padding: 10px; border-radius: 10px;" >Solo Zonas cercanas en Cabimas.</span>
+            </div>
+        </div>
+    </div>
+</div>
 
                 <div class="flex items-center gap-2 text-primary font-bold border-b-2 border-light pb-2 mt-6">
                     <i data-lucide="clipboard-list" class="w-5 h-5"></i>
@@ -365,23 +531,39 @@
                     <input type="text" id="form-nombre" placeholder="Nombre" class="p-3 rounded-xl border border-gray-200 bg-light/30 outline-none focus:border-primary text-sm" required>
                     <input type="text" id="form-apellido" placeholder="Apellido" class="p-3 rounded-xl border border-gray-200 bg-light/30 outline-none focus:border-primary text-sm" required>
                     <input type="email" id="form-email" placeholder="Correo Electrónico" class="col-span-2 p-3 rounded-xl border border-gray-200 bg-light/30 outline-none focus:border-primary text-sm" required>
-                    <input type="tel" id="form-tel" placeholder="Teléfono" class="col-span-2 p-3 rounded-xl border border-gray-200 bg-light/30 outline-none focus:border-primary text-sm" required>
+                    <input type="tel" id="form-tel" placeholder="Teléfono 0412-0000000" class="col-span-2 p-3 rounded-xl border border-gray-200 bg-light/30 outline-none focus:border-primary text-sm" required>
                     
                     <select id="form-estado" class="col-span-2 p-3 rounded-xl border border-gray-200 bg-light/30 outline-none focus:border-primary text-sm" required>
                         <option value="">Seleccione Estado</option>
                         <option value="Zulia">Zulia</option>
-                        <option value="Miranda">Miranda</option>
-                        <option value="Distrito Capital">Distrito Capital</option>
-                        <option value="Carabobo">Carabobo</option>
                     </select>
 
-                    <input type="text" id="form-ciudad" placeholder="Ciudad" class="col-span-2 p-3 rounded-xl border border-gray-200 bg-light/30 outline-none focus:border-primary text-sm" required>
-                    <textarea id="form-direccion" placeholder="Dirección de Entrega" class="col-span-2 p-3 rounded-xl border border-gray-200 bg-light/30 outline-none focus:border-primary text-sm" rows="2" required></textarea>
+                    <select id="form-ciudad" class="col-span-2 p-3 rounded-xl border border-gray-200 bg-light/30 outline-none focus:border-primary text-sm" required>
+                        <option value="">Seleccione Ciudad</option>
+                        <option value="Cabimas">Cabimas</option>
+                        <option value="Ciudad Ojeda">Ciudad Ojeda</option>
+                        <option value="Maracaibo">Maracaibo</option>
+                        <option value="Santa Rita">Santa Rita</option>
+                    </select>
+                    <textarea id="form-direccion" placeholder="Dirección de envío" class="col-span-2 p-3 rounded-xl border border-gray-200 bg-light/30 outline-none focus:border-primary text-sm" rows="2" required></textarea>
                     
                     <button type="button" onclick="checkoutWhatsApp()" class="col-span-2 bg-[#25D366] text-white font-extrabold py-4 rounded-2xl flex items-center justify-center gap-3 hover:scale-[1.02] transition-transform mt-4 shadow-lg shadow-green-200">
                         <i data-lucide="message-circle" class="w-6 h-6"></i> Confirmar y Enviar Pedido
                     </button>
                 </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de detalle de producto -->
+    <div id="product-detail-overlay">
+        <div class="modal-overlay" onclick="closeProductDetail()"></div>
+        <div class="modal-container">
+            <button onclick="closeProductDetail()" class="absolute top-4 right-4 text-gray-400 hover:text-dark transition-colors z-10">
+                <i data-lucide="x" class="w-6 h-6"></i>
+            </button>
+            <div id="product-detail-content" class="flex flex-col md:flex-row gap-6">
+                <!-- Contenido dinámico -->
             </div>
         </div>
     </div>
@@ -441,9 +623,40 @@
         </button>
     </div>
 
-    <script>
-        const CONFIG = { MARGIN: 2.00, BEFORE_MARGIN: 2.20, PER_PAGE: 12, DEFAULT_IMG: 'img/envase.jpg', IMG_PATH: 'img/productos/' };
-        let store = { all: [], current: [], cart: JSON.parse(localStorage.getItem('natur_cart')) || [], page: 1 };
+    <script> 
+        const CONFIG = { MARGIN: 2.0, BEFORE_MARGIN: 2.20, PER_PAGE: 12, DEFAULT_IMG: 'img/envase.jpg', IMG_PATH: 'img/productos/' };
+        let store = { all: [], current: [], cart: JSON.parse(localStorage.getItem('natur_cart')) || [], page: 1, discount: 0, couponApplied: false, currentCoupon: null };
+        
+        // Cupones válidos con fechas de expiración
+// Formato de fecha: 'YYYY-MM-DD' (año-mes-día)
+const VALID_COUPONS = {
+    'ACTIVATE2026': { discount: 0.10, expires: '2026-07-31' },  // Válido hasta 31 Dic 2026
+    'INACTIVO': { discount: 0.10, expires: '2026-04-15' }
+    // Para desactivar un cupón: cambiar la fecha a una pasada (ej: '2025-01-01')
+    // Para agregar un cupón nuevo: añadir la línea con su descuento y fecha
+};
+
+// Función para verificar si un cupón es válido (existe y no ha expirado)
+function isCouponValid(couponCode) {
+    const coupon = VALID_COUPONS[couponCode];
+    if (!coupon) return false;
+    
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    const expiryDate = new Date(coupon.expires);
+    expiryDate.setHours(0, 0, 0, 0);
+    
+    return today <= expiryDate;
+}
+
+// Función para obtener el descuento de un cupón válido
+function getCouponDiscount(couponCode) {
+    const coupon = VALID_COUPONS[couponCode];
+    if (coupon && isCouponValid(couponCode)) {
+        return coupon.discount;
+    }
+    return 0;
+}
 
         function showToast(message, type = 'info', duration = 3000) {
             const container = document.getElementById('toast-container');
@@ -497,6 +710,106 @@
             return CONFIG.DEFAULT_IMG;
         }
 
+        // Función para abrir detalle del producto
+       window.openProductDetail = (id) => {
+    const product = store.all.find(p => p.id === id);
+    if (!product) return;
+    
+    const imgUrl = getProductImageUrl(product);
+    const modal = document.getElementById('product-detail-overlay');
+    const content = document.getElementById('product-detail-content');
+    
+    content.innerHTML = `
+        <div class="md:w-1/2 flex justify-center items-center p-4 bg-gray-50 rounded-2xl">
+            <img src="${imgUrl}" alt="${product.product_name}" class="max-w-full max-h-64 object-contain rounded-xl" onerror="this.src='${CONFIG.DEFAULT_IMG}'">
+        </div>
+        <div class="md:w-1/2 flex flex-col">
+            <small class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">${product.category}</small>
+            <h3 class="text-2xl font-bold mt-2 mb-3">${product.product_name}</h3>
+            <p class="text-sm text-primary font-medium mb-2">${product.presentation_lab}</p>
+            <p class="text-sm text-gray-600 leading-relaxed mb-4">${product.description || 'Producto natural de alta calidad para tu bienestar.'}</p>
+            <div class="mb-4">
+                <span class="text-sm text-gray-600 line-through font-bold">$${product.priceBefore} Antes</span>
+                <div class="text-2xl font-black text-primary">$${product.price}</div>
+            </div>
+            
+            <div class="mt-2">
+                <label class="text-sm font-semibold text-gray-700 mb-2 block">Cantidad:</label>
+                <div class="quantity-selector w-36">
+                    <button type="button" class="quantity-btn" onclick="decrementDetailQuantity('${product.id}')">
+                        <i data-lucide="minus" class="w-4 h-4"></i>
+                    </button>
+                    <input type="number" id="detail-qty-${product.id}" value="1" min="1" class="quantity-value" readonly>
+                    <button type="button" class="quantity-btn" onclick="incrementDetailQuantity('${product.id}')">
+                        <i data-lucide="plus" class="w-4 h-4"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <button onclick="addToCartFromDetail('${product.id}')" class="w-full mt-6 bg-primary text-white py-3 rounded-xl text-base font-bold flex items-center justify-center gap-2 hover:bg-secondary hover:text-dark transition-all active:scale-95">
+                <i data-lucide="plus-circle" class="w-5 h-5"></i> Añadir al Carrito
+            </button>
+        </div>
+    `;
+    
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+    lucide.createIcons();
+};
+        
+        window.closeProductDetail = () => {
+            const modal = document.getElementById('product-detail-overlay');
+            modal.classList.remove('active');
+            document.body.style.overflow = '';
+        };
+        
+        window.incrementDetailQuantity = (id) => {
+            const input = document.getElementById(`detail-qty-${id}`);
+            if(input) {
+                let value = parseInt(input.value);
+                if(isNaN(value)) value = 1;
+                input.value = value + 1;
+            }
+        };
+        
+        window.decrementDetailQuantity = (id) => {
+            const input = document.getElementById(`detail-qty-${id}`);
+            if(input) {
+                let value = parseInt(input.value);
+                if(isNaN(value)) value = 1;
+                if(value > 1) {
+                    input.value = value - 1;
+                }
+            }
+        };
+        
+        window.addToCartFromDetail = (id) => {
+            const p = store.all.find(i => i.id === id);
+            const quantityInput = document.getElementById(`detail-qty-${id}`);
+            const quantity = quantityInput ? parseInt(quantityInput.value) : 1;
+            
+            if(isNaN(quantity) || quantity < 1) {
+                showToast('⚠️ Cantidad no válida', 'warning', 2000);
+                return;
+            }
+            
+            const cartItem = { 
+                ...p, 
+                cartId: Date.now(),
+                quantity: quantity,
+                subtotal: parseFloat(p.price) * quantity
+            };
+            
+            store.cart.push(cartItem); 
+            localStorage.setItem('natur_cart', JSON.stringify(store.cart)); 
+            updateCartUI(); 
+            
+            if(quantityInput) quantityInput.value = 1;
+            
+            showToast(`✅ ${quantity}x ${p.product_name} añadido al carrito`, 'success', 2500);
+            closeProductDetail();
+        };
+
         async function init() {
             try {
                 const res = await fetch('products.json');
@@ -522,7 +835,6 @@
             }
         }
 
-        // Función para incrementar cantidad
         window.incrementQuantity = (id) => {
             const input = document.getElementById(`qty-${id}`);
             if(input) {
@@ -532,7 +844,6 @@
             }
         };
 
-        // Función para decrementar cantidad
         window.decrementQuantity = (id) => {
             const input = document.getElementById(`qty-${id}`);
             if(input) {
@@ -552,23 +863,22 @@
             container.innerHTML = pageItems.map(p => {
                 const imgUrl = getProductImageUrl(p);
                 return `
-                <div class="bg-white p-4 rounded-3xl border border-gray-100 hover:shadow-xl hover:border-secondary transition-all group flex flex-col h-full relative">
+                <div class="bg-white p-3 rounded-3xl border border-gray-100 hover:shadow-xl hover:border-secondary transition-all group flex flex-col h-full relative">
                     <div class="absolute top-3 right-3 bg-[#d6ca11] text-dark text-[9px] font-black px-2 py-1 rounded-full italic shadow-md z-10">
                         ¡Oferta!
                     </div>
-                    <div class="aspect-square mb-4 flex items-center justify-center p-2 bg-gray-50 rounded-2xl">
-                        <img src="${imgUrl}" alt="${p.product_name}" class="max-h-full max-w-full object-contain rounded-2xl group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.src='${CONFIG.DEFAULT_IMG}'">
+                    <div class="relative w-full aspect-square mb-3 bg-white rounded-2xl overflow-hidden cursor-pointer border border-gray-100 flex-shrink-0" onclick="openProductDetail('${p.id}')">
+                        <img src="${imgUrl}" alt="${p.product_name}" class="absolute inset-0 w-full h-full object-contain p-2 group-hover:scale-105 transition-transform duration-300" loading="lazy" onerror="this.src='${CONFIG.DEFAULT_IMG}'">
                     </div>
                     <div class="flex-grow">
                         <small class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">${p.category}</small>
-                        <h4 class="text-sm font-bold mt-1 line-clamp-2 leading-snug h-10">${p.product_name}</h4>
+                        <h4 class="product-title text-sm font-bold mt-1 line-clamp-2 leading-snug h-10 cursor-pointer hover:text-primary transition-colors" onclick="openProductDetail('${p.id}')">${p.product_name}</h4>
                         <p class="text-xs text-primary font-medium mt-2">${p.presentation_lab}</p>
                     </div>
-                    <div class="mt-4">
+                    <div class="mt-3">
                         <span class="text-xs text-gray-600 line-through font-bold">$${p.priceBefore} Antes</span>
-                        <div class="text-lg font-black text-primary">$${p.price}</div>
+                        <div class="product-price text-lg font-black text-primary">$${p.price}</div>
                         
-                        <!-- Control de cantidad con botones + y - -->
                         <div class="mt-3">
                             <div class="quantity-selector">
                                 <button type="button" class="quantity-btn" onclick="decrementQuantity('${p.id}')">
@@ -583,6 +893,10 @@
                         
                         <button onclick="addToCart('${p.id}')" class="w-full mt-3 bg-primary text-white py-2.5 rounded-xl text-sm font-bold flex items-center justify-center gap-2 hover:bg-secondary hover:text-dark transition-all active:scale-95">
                             <i data-lucide="plus-circle" class="w-4 h-4"></i> Añadir al Carrito
+                        </button>
+                        
+                        <button onclick="openProductDetail('${p.id}')" class="w-full mt-2 bg-gray-100 text-gray-700 py-2 rounded-xl text-sm font-bold flex items-center justify-center gap-2 hover:bg-primary hover:text-white transition-all active:scale-95">
+                            <i data-lucide="eye" class="w-4 h-4"></i> Detalle del Producto
                         </button>
                     </div>
                 </div>`;
@@ -659,12 +973,17 @@
                 return;
             }
             
-            box.innerHTML = matches.map(p => `
-                <div class="p-4 hover:bg-light cursor-pointer flex justify-between items-center border-b border-gray-50 transition-colors" onclick="selectProductById('${p.id}')">
-                    <span class="text-sm font-medium line-clamp-2 flex-1">${p.product_name}</span>
-                    <strong class="text-primary text-sm ml-2">$${p.price}</strong>
+            box.innerHTML = matches.map(p => {
+                const imgUrl = getProductImageUrl(p);
+                return `
+                <div class="p-3 hover:bg-light cursor-pointer flex items-center gap-3 border-b border-gray-50 transition-colors" onclick="selectProductById('${p.id}')">
+                    <img src="${imgUrl}" alt="${p.product_name}" class="w-10 h-10 object-contain rounded-lg bg-gray-50" onerror="this.src='${CONFIG.DEFAULT_IMG}'">
+                    <div class="flex-1">
+                        <div class="text-sm font-medium line-clamp-2">${p.product_name}</div>
+                        <div class="text-primary font-bold text-sm mt-1">$${p.price}</div>
+                    </div>
                 </div>
-            `).join('');
+            `}).join('');
             box.classList.remove('hidden');
         }
 
@@ -688,7 +1007,11 @@
         function setupUI() {
             const sel = document.getElementById('category-filter');
             store.categories.forEach(c => { const o = document.createElement('option'); o.value = c; o.textContent = c; sel.appendChild(o); });
-            sel.onchange = (e) => { store.current = e.target.value === 'all' ? [...store.all] : store.all.filter(p => p.category === e.target.value); store.page = 1; renderGrid(); };
+            sel.onchange = (e) => { 
+                store.current = e.target.value === 'all' ? [...store.all] : store.all.filter(p => p.category === e.target.value); 
+                store.page = 1; 
+                renderGrid(); 
+            };
             
             const desktopSearch = document.getElementById('main-search');
             desktopSearch.oninput = (e) => performSearch(e.target.value, 'search-suggestions');
@@ -726,6 +1049,14 @@
             showToast(`✅ ${quantity}x ${p.product_name} añadido al carrito`, 'success', 2500);
         };
 
+        function getCartTotalWithDiscount() {
+            let total = store.cart.reduce((sum, item) => sum + (parseFloat(item.price) * item.quantity), 0);
+            if (store.couponApplied && store.discount > 0) {
+                total = total * (1 - store.discount);
+            }
+            return total;
+        }
+
         function updateCartUI() {
             document.getElementById('cart-count').textContent = store.cart.length;
             const container = document.getElementById('cart-items-list');
@@ -735,26 +1066,97 @@
             } else {
                 container.innerHTML = store.cart.map(i => { 
                     const itemTotal = parseFloat(i.price) * i.quantity;
-                    total += itemTotal; 
-                    return `<div class="flex justify-between items-center py-2 border-b border-gray-50">
-                        <div class="flex flex-col w-3/4">
-                            <span class="text-xs font-medium">${i.product_name}</span>
-                            <span class="text-[10px] text-gray-400">Cantidad: ${i.quantity}</span>
+                    total += itemTotal;
+                    const imgUrl = getProductImageUrl(i);
+                    return `<div class="flex justify-between items-center py-2 border-b border-gray-50 gap-2">
+                        <div class="flex items-center gap-2 flex-1 min-w-0">
+                            <img src="${imgUrl}" alt="${i.product_name}" class="w-11 h-11 object-contain rounded-xl bg-gray-50 border border-gray-100 flex-shrink-0 p-0.5" onerror="this.src='${CONFIG.DEFAULT_IMG}'">
+                            <div class="flex flex-col min-w-0">
+                                <span class="text-xs font-semibold line-clamp-2 leading-tight">${i.product_name}</span>
+                                <span class="text-[10px] text-gray-400 mt-0.5">Cant: ${i.quantity} · $${parseFloat(i.price).toFixed(2)} c/u</span>
+                            </div>
                         </div>
-                        <div class="flex items-center gap-3">
-                            <strong class="text-xs">$${itemTotal.toFixed(2)}</strong>
-                            <button onclick="removeItem(${i.cartId})" class="text-red-400 hover:text-red-600 transition-colors"><i data-lucide="trash-2" class="w-4 h-4"></i></button>
+                        <div class="flex items-center gap-2 flex-shrink-0">
+                            <strong class="text-xs text-primary">$${itemTotal.toFixed(2)}</strong>
+                            <button onclick="removeItem(${i.cartId})" class="text-red-400 hover:text-red-600 transition-colors p-1"><i data-lucide="trash-2" class="w-4 h-4"></i></button>
                         </div>
                     </div>`; 
                 }).join('');
             }
-            document.getElementById('cart-total').textContent = `$${total.toFixed(2)}`;
+            
+            const finalTotal = store.couponApplied ? total * (1 - store.discount) : total;
+            document.getElementById('cart-total').textContent = `$${finalTotal.toFixed(2)}`;
+            
+            if (store.couponApplied && store.discount > 0) {
+                const discountInfo = document.getElementById('discount-info');
+                discountInfo.innerHTML = `🎉 Cupón aplicado: ${(store.discount * 100)}% de descuento (Ahorro: $${(total - finalTotal).toFixed(2)})`;
+                discountInfo.classList.remove('hidden');
+            } else {
+                document.getElementById('discount-info').classList.add('hidden');
+            }
+            
             lucide.createIcons();
         }
+
+        window.applyCoupon = () => {
+    const couponInput = document.getElementById('coupon-code');
+    const couponCode = couponInput.value.trim().toUpperCase();
+    const messageDiv = document.getElementById('coupon-message');
+    
+    if (!couponCode) {
+        showToast('📝 Ingresa un código de cupón', 'warning', 3000);
+        return;
+    }
+    
+    // Verificar si el cupón existe y no ha expirado
+    if (VALID_COUPONS[couponCode] && isCouponValid(couponCode)) {
+        const discount = VALID_COUPONS[couponCode].discount;
+        const expiryDate = VALID_COUPONS[couponCode].expires;
+        
+        store.discount = discount;
+        store.couponApplied = true;
+        store.currentCoupon = couponCode;
+        updateCartUI();
+        
+        messageDiv.innerHTML = `<span class="text-green-600">✅ ¡Cupón Aplicado! ${discount * 100}% de descuento (válido hasta ${expiryDate})</span>`;
+        messageDiv.classList.remove('hidden');
+        showToast(`🎉 Cupón ${couponCode} aplicado! ${discount * 100}% de descuento`, 'success', 3000);
+        couponInput.value = '';
+        setTimeout(() => {
+            messageDiv.classList.add('hidden');
+        }, 5000);
+    } else {
+        store.discount = 0;
+        store.couponApplied = false;
+        store.currentCoupon = null;
+        updateCartUI();
+        
+        // Mensaje específico según si el cupón existe pero expiró
+        if (VALID_COUPONS[couponCode] && !isCouponValid(couponCode)) {
+            messageDiv.innerHTML = `<span class="text-red-600">❌ Cupón ${couponCode} ha expirado</span>`;
+            showToast(`❌ Cupón ${couponCode} ha expirado`, 'error', 3000);
+        } else {
+            messageDiv.innerHTML = `<span class="text-red-600">❌ Cupón no existe o ha expirado</span>`;
+            showToast('❌ Cupón no existe o ha expirado', 'error', 3000);
+        }
+        
+        messageDiv.classList.remove('hidden');
+        setTimeout(() => {
+            messageDiv.classList.add('hidden');
+        }, 3000);
+    }
+};
 
         window.removeItem = (id) => { 
             store.cart = store.cart.filter(i => i.cartId !== id); 
             localStorage.setItem('natur_cart', JSON.stringify(store.cart)); 
+            if (store.cart.length === 0) {
+                store.discount = 0;
+                store.couponApplied = false;
+                store.currentCoupon = null;
+                document.getElementById('coupon-code').value = '';
+                document.getElementById('coupon-message').classList.add('hidden');
+            }
             updateCartUI(); 
             showToast('🗑️ Producto eliminado del carrito', 'info', 2000);
         };
@@ -777,16 +1179,23 @@
                 return;
             }
             
-            let msg = `🛍️ *PEDIDO VIDAACTIVA.59*\n\n*Cliente:* ${nombre} ${apellido}\n*Teléfono:* ${telefono}\n*Ubicación:* ${ciudad}, ${estado}\n*Dirección:* ${direccion}\n\n*Productos:*\n`;
+            let msg = `🛍️ *PEDIDO VIDAACTIVA.CLICK*\n\n*Cliente:* ${nombre} ${apellido}\n*Teléfono:* ${telefono}\n*Ubicación:* ${ciudad}, ${estado}\n*Dirección:* ${direccion}\n\n*Productos:*\n`;
             let total = 0;
             store.cart.forEach(i => {
                 const itemTotal = parseFloat(i.price) * i.quantity;
                 total += itemTotal;
                 msg += `• ${i.product_name} x${i.quantity} ($${i.price} c/u) = $${itemTotal.toFixed(2)}\n`;
             });
-            msg += `\n*TOTAL: $${total.toFixed(2)}*`;
             
-            window.open(`https://wa.me/584120698850?text=${encodeURIComponent(msg)}`, '_blank');
+            let finalTotal = total;
+            if (store.couponApplied && store.discount > 0) {
+                finalTotal = total * (1 - store.discount);
+                msg += `\n*Subtotal: $${total.toFixed(2)}*`;
+                msg += `\n*Descuento (${store.discount * 100}%): -$${(total - finalTotal).toFixed(2)}*`;
+            }
+            msg += `\n\n*TOTAL A PAGAR: $${finalTotal.toFixed(2)}*`;
+            
+            window.open(`https://wa.me/5804143688401?text=${encodeURIComponent(msg)}`, '_blank');
             
             document.getElementById('form-nombre').value = '';
             document.getElementById('form-apellido').value = '';
@@ -795,8 +1204,12 @@
             document.getElementById('form-estado').value = '';
             document.getElementById('form-ciudad').value = '';
             document.getElementById('form-direccion').value = '';
+            document.getElementById('coupon-code').value = '';
             
             store.cart = [];
+            store.discount = 0;
+            store.couponApplied = false;
+            store.currentCoupon = null;
             localStorage.setItem('natur_cart', JSON.stringify(store.cart));
             updateCartUI();
             closeCart();
@@ -826,14 +1239,13 @@
         document.addEventListener('DOMContentLoaded', init);
     </script>
 
-
-     <script>
+    <script>
         (function() {
             "use strict";
 
             const CONFIG = {
-                phoneNumber: "5804120698850",
-                message: "Hola, me gustaría recibir más información.",
+                phoneNumber: "5804143688401",
+                message: "Hola, me gustaría recibir más información de los productos.",
                 elements: {
                     toggleBtn: document.getElementById('waToggleBtn'),
                     chatWindow: document.getElementById('waChatWindow'),
@@ -885,8 +1297,140 @@
         })();
     </script>
 
-    <!-- Click -->
-    <script src="noclick.js"></script>
+    <script>
+    (function() {
+        // Inicializar slideshow (soporte para múltiples banners)
+        let currentIndex = 0;
+        let slides = [];
+        let track = document.getElementById('banner-track');
+        let prevBtn = document.getElementById('banner-prev');
+        let nextBtn = document.getElementById('banner-next');
+        let dotsContainer = document.getElementById('banner-dots');
+        let startX = 0;
+        let isDragging = false;
+        
+        function initSlideshow() {
+            if (!track) return;
+            
+            // Obtener todos los slides
+            slides = Array.from(track.children);
+            if (slides.length <= 1) {
+                // Si solo hay un slide, ocultar botones y dots
+                if (prevBtn) prevBtn.style.display = 'none';
+                if (nextBtn) nextBtn.style.display = 'none';
+                if (dotsContainer) dotsContainer.style.display = 'none';
+                return;
+            }
+            
+            // Mostrar botones
+            if (prevBtn) prevBtn.style.display = 'flex';
+            if (nextBtn) nextBtn.style.display = 'flex';
+            
+            // Crear dots
+            if (dotsContainer) {
+                dotsContainer.innerHTML = '';
+                slides.forEach((_, idx) => {
+                    const dot = document.createElement('button');
+                    dot.className = `w-2 h-2 rounded-full bg-white/50 hover:bg-white transition-all ${idx === 0 ? 'dot-active' : ''}`;
+                    dot.addEventListener('click', () => goToSlide(idx));
+                    dotsContainer.appendChild(dot);
+                });
+            }
+            
+            // Eventos de botones
+            if (prevBtn) prevBtn.addEventListener('click', () => goToSlide(currentIndex - 1));
+            if (nextBtn) nextBtn.addEventListener('click', () => goToSlide(currentIndex + 1));
+            
+            // Touch events para móvil
+            track.addEventListener('touchstart', handleTouchStart, { passive: true });
+            track.addEventListener('touchmove', handleTouchMove, { passive: false });
+            track.addEventListener('touchend', handleTouchEnd);
+            
+            // Auto-play cada 5 segundos
+            startAutoPlay();
+            
+            // Pausar auto-play al hover (opcional)
+            const container = document.getElementById('banner-slideshow');
+            if (container) {
+                container.addEventListener('mouseenter', stopAutoPlay);
+                container.addEventListener('mouseleave', startAutoPlay);
+            }
+        }
+        
+        let autoPlayInterval;
+        
+        function startAutoPlay() {
+            if (slides.length <= 1) return;
+            stopAutoPlay();
+            autoPlayInterval = setInterval(() => {
+                goToSlide(currentIndex + 1);
+            }, 5000);
+        }
+        
+        function stopAutoPlay() {
+            if (autoPlayInterval) {
+                clearInterval(autoPlayInterval);
+                autoPlayInterval = null;
+            }
+        }
+        
+        function goToSlide(index) {
+            if (slides.length === 0) return;
+            if (index < 0) index = slides.length - 1;
+            if (index >= slides.length) index = 0;
+            
+            currentIndex = index;
+            const offset = -currentIndex * 100;
+            track.style.transform = `translateX(${offset}%)`;
+            
+            // Actualizar dots
+            const dots = document.querySelectorAll('#banner-dots button');
+            dots.forEach((dot, idx) => {
+                if (idx === currentIndex) {
+                    dot.classList.add('dot-active');
+                } else {
+                    dot.classList.remove('dot-active');
+                }
+            });
+        }
+        
+        function handleTouchStart(e) {
+            startX = e.touches[0].clientX;
+            isDragging = true;
+            stopAutoPlay();
+        }
+        
+        function handleTouchMove(e) {
+            if (!isDragging) return;
+            const moveX = e.touches[0].clientX;
+            const diff = startX - moveX;
+            if (Math.abs(diff) > 50) {
+                if (diff > 0) {
+                    goToSlide(currentIndex + 1);
+                } else {
+                    goToSlide(currentIndex - 1);
+                }
+                isDragging = false;
+                startAutoPlay();
+            }
+        }
+        
+        function handleTouchEnd() {
+            isDragging = false;
+            startAutoPlay();
+        }
+        
+        // Inicializar cuando el DOM esté listo
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initSlideshow);
+        } else {
+            initSlideshow();
+        }
+    })();
+</script>
+
+    <!-- Click 
+    <script src="noclick.js"></script> -->
 
 </body>
 </html>
