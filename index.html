@@ -40,15 +40,9 @@
         .product-card-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); }
         @media (max-width: 640px) { 
             .product-card-grid { 
-                grid-template-columns: repeat(2, 1fr);
-                gap: 0.625rem;
+                grid-template-columns: 1fr; 
+                gap: 1rem;
             }
-        }
-        /* Ajustes de card en mobile para 2 columnas */
-        @media (max-width: 480px) {
-            .product-card-grid .product-card-inner { padding: 0.625rem; }
-            .product-card-grid .product-title { font-size: 0.7rem; height: 2.4rem; }
-            .product-card-grid .product-price { font-size: 0.95rem; }
         }
         .hide-scroll::-webkit-scrollbar { display: none; }
         .mobile-suggestions-container {
