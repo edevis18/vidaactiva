@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vida Activa | Tienda Online de Suplementos y Productos Naturales</title>
-    <meta name="description" content="Encuentra los mejores suplementos y productos naturales en VidaActiva, Calidad garantizada. ¡Mejora tu bienestar hoy!">
+    <meta name="description" content="Encuentra los mejores suplementos y productos naturales en VidaActiva.59, Calidad garantizada. ¡Mejora tu bienestar hoy!">
     <link rel="canonical" href="https://vidaactiva.click/">
     <link rel="shortcut icon" href="https://i.postimg.cc/pr5LzwP5/logo.png" type="image/x-icon">
 
@@ -12,7 +12,7 @@
     <meta property='og:type' content='website'>
     <meta property='og:title' content='Vida Activa | Tienda Online de Suplementos y Productos Naturales'>
     <meta property='og:image' content='https://i.postimg.cc/MTZmLsw7/portada.jpg'>
-    <meta property='og:description' content='Encuentra los mejores suplementos y productos naturales en VidaActiva, Calidad garantizada. ¡Mejora tu bienestar hoy!'>
+    <meta property='og:description' content='Encuentra los mejores suplementos y productos naturales en VidaActiva.59, Calidad garantizada. ¡Mejora tu bienestar hoy!'>
     <meta property='og:url' content='https://vidaactiva.click'>
 
     <!-- Font Awesome for Icons -->
@@ -460,7 +460,7 @@
             </div>
         </div>
         <div class="container mx-auto px-4 mt-12 pt-8 border-t border-gray-800 text-center text-gray-500 text-xs">
-            &copy; 2026 VidaActiva. Todos los derechos reservados. Desarrollado por <b><a href="https://edevisraga.com" target="_blank" style="color:orange;">Edevis Raga</a></b>
+            &copy; 2026 VidaActiva.59. Todos los derechos reservados. Desarrollado por <b><a href="https://edevisraga.com" target="_blank" style="color:orange;">Edevis Raga</a></b>
         </div>
     </footer>
 
@@ -617,11 +617,9 @@
         </button>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.49.1/dist/umd/supabase.min.js"></script>
     <script> 
         const CONFIG = { MARGIN: 2.0, BEFORE_MARGIN: 2.20, PER_PAGE: 12, DEFAULT_IMG: 'img/envase.jpg', IMG_PATH: 'img/productos/' };
-        const sbClient = window.supabase.createClient('https://kyuexpenylndneekcsaj.supabase.co', 'sb_publishable_aGi8VYxdOSje8wBNjHf2UQ_pC9m1DO9');
-        let store = { all: [], current: [], cart: JSON.parse(localStorage.getItem('natur_cart')) || [], page: 1, discount: 0, couponApplied: false, currentCoupon: null, pendingOrderKey: localStorage.getItem('vida_pending_order_key') || null };
+        let store = { all: [], current: [], cart: JSON.parse(localStorage.getItem('natur_cart')) || [], page: 1, discount: 0, couponApplied: false, currentCoupon: null };
         
         // Cupones válidos con fechas de expiración
 // Formato de fecha: 'YYYY-MM-DD' (año-mes-día)
@@ -723,7 +721,6 @@ function getCouponDiscount(couponCode) {
             <small class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">${product.category}</small>
             <h3 class="text-2xl font-bold mt-2 mb-3">${product.product_name}</h3>
             <p class="text-sm text-primary font-medium mb-2">${product.presentation_lab}</p>
-            <p class="text-sm font-bold">${product.stock > 0 ? "Disponible: " + product.stock + " unidades" : "Agotado"}</p>
             <p class="text-sm text-gray-600 leading-relaxed mb-4">${product.description || 'Producto natural de alta calidad para tu bienestar.'}</p>
             <div class="mb-4">
                 <span class="text-sm text-gray-600 line-through font-bold">$${product.priceBefore} Antes</span>
@@ -736,14 +733,14 @@ function getCouponDiscount(couponCode) {
                     <button type="button" class="quantity-btn" onclick="decrementDetailQuantity('${product.id}')">
                         <i data-lucide="minus" class="w-4 h-4"></i>
                     </button>
-                    <input type="number" id="detail-qty-${product.id}" value="1" min="1" max="${product.stock}" class="quantity-value" readonly ${product.stock <= 0 ? "disabled" : ""}>
+                    <input type="number" id="detail-qty-${product.id}" value="1" min="1" class="quantity-value" readonly>
                     <button type="button" class="quantity-btn" onclick="incrementDetailQuantity('${product.id}')">
                         <i data-lucide="plus" class="w-4 h-4"></i>
                     </button>
                 </div>
             </div>
             
-            <button onclick="addToCartFromDetail('${product.id}')" ${product.stock <= 0 ? "disabled" : ""} class="w-full mt-6 bg-primary text-white py-3 rounded-xl text-base font-bold flex items-center justify-center gap-2 hover:bg-secondary hover:text-dark transition-all active:scale-95">
+            <button onclick="addToCartFromDetail('${product.id}')" class="w-full mt-6 bg-primary text-white py-3 rounded-xl text-base font-bold flex items-center justify-center gap-2 hover:bg-secondary hover:text-dark transition-all active:scale-95">
                 <i data-lucide="plus-circle" class="w-5 h-5"></i> Añadir al Carrito
             </button>
         </div>
@@ -765,7 +762,7 @@ function getCouponDiscount(couponCode) {
             if(input) {
                 let value = parseInt(input.value);
                 if(isNaN(value)) value = 1;
-                input.value = Math.min(value + 1, Number(input.max) || value + 1);
+                input.value = value + 1;
             }
         };
         
@@ -790,8 +787,6 @@ function getCouponDiscount(couponCode) {
                 return;
             }
             
-            const inCart = store.cart.filter(i => i.id === p.id).reduce((sum, i) => sum + Number(i.quantity), 0);
-            if (!p || p.stock <= 0 || inCart + quantity > p.stock) { showToast('No hay unidades suficientes en inventario', 'warning', 3000); return; }
             const cartItem = { 
                 ...p, 
                 cartId: Date.now(),
@@ -811,22 +806,26 @@ function getCouponDiscount(couponCode) {
 
         async function init() {
             try {
-                const { data, error } = await sbClient.from('products')
-                    .select('id,category,product_name,presentation_lab,base_price,description,image_file,slug,stock,active')
-                    .eq('active', true).order('product_name');
-                if (error) throw error;
-                store.all = (data || []).map(i => {
-                    const price = (Number(i.base_price) * CONFIG.MARGIN).toFixed(2);
-                    return { ...i, id: String(i.id), img_product: i.image_file, price, priceBefore: (Number(price) * CONFIG.BEFORE_MARGIN).toFixed(2) };
+                const res = await fetch('products.json');
+                const text = await res.text();
+                const sanitized = `[${text.replace(/\},(\s*)\{/g, '},{')}]`;
+                const raw = JSON.parse(sanitized);
+                
+                store.all = raw.map(i => {
+                    const price = (parseFloat(i.price) * CONFIG.MARGIN).toFixed(2);
+                    return { ...i, price, priceBefore: (price * CONFIG.BEFORE_MARGIN).toFixed(2) };
                 });
+
+                store.all.sort(() => Math.random() - 0.5);
                 store.categories = [...new Set(store.all.map(p => p.category))].sort();
                 store.current = [...store.all];
+                
                 setupUI();
                 updateCartUI();
-                showToast('✨ Tienda conectada. Inventario actualizado', 'success', 2500);
-            } catch (err) {
-                console.error(err);
-                showToast('No se pudo conectar con el inventario. Intenta recargar.', 'error', 4500);
+                showToast('✨ Tienda lista! Explora nuestros productos', 'success', 2500);
+            } catch (err) { 
+                console.error(err); 
+                showToast('Error al cargar los productos', 'error', 3000);
             }
         }
 
@@ -867,9 +866,8 @@ function getCouponDiscount(couponCode) {
                     </div>
                     <div class="flex-grow">
                         <small class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">${p.category}</small>
-                        <h4 class="product-title text-sm font-bold mt-1 line-clamp-2 leading-snug h-10 hover:text-primary transition-colors"><a href="/producto/${p.slug}/">${p.product_name}</a></h4>
+                        <h4 class="product-title text-sm font-bold mt-1 line-clamp-2 leading-snug h-10 cursor-pointer hover:text-primary transition-colors" onclick="openProductDetail('${p.id}')">${p.product_name}</h4>
                         <p class="text-xs text-primary font-medium mt-2">${p.presentation_lab}</p>
-                        <p class="mt-2 text-xs font-bold">${p.stock > 0 ? "Disponible: " + p.stock + " unidades" : "Agotado"}</p>
                     </div>
                     <div class="mt-3">
                         <span class="text-xs text-gray-600 line-through font-bold">$${p.priceBefore} Antes</span>
@@ -880,14 +878,14 @@ function getCouponDiscount(couponCode) {
                                 <button type="button" class="quantity-btn" onclick="decrementQuantity('${p.id}')">
                                     <i data-lucide="minus" class="w-4 h-4"></i>
                                 </button>
-                                <input type="number" id="qty-${p.id}" value="1" min="1" max="${p.stock}" class="quantity-value" readonly ${p.stock <= 0 ? "disabled" : ""}>
+                                <input type="number" id="qty-${p.id}" value="1" min="1" class="quantity-value" readonly>
                                 <button type="button" class="quantity-btn" onclick="incrementQuantity('${p.id}')">
                                     <i data-lucide="plus" class="w-4 h-4"></i>
                                 </button>
                             </div>
                         </div>
                         
-                        <button onclick="addToCart('${p.id}')" ${p.stock <= 0 ? "disabled" : ""} class="w-full mt-3 bg-primary text-white py-2.5 rounded-xl text-sm font-bold flex items-center justify-center gap-2 hover:bg-secondary hover:text-dark transition-all active:scale-95">
+                        <button onclick="addToCart('${p.id}')" class="w-full mt-3 bg-primary text-white py-2.5 rounded-xl text-sm font-bold flex items-center justify-center gap-2 hover:bg-secondary hover:text-dark transition-all active:scale-95">
                             <i data-lucide="plus-circle" class="w-4 h-4"></i> Añadir al Carrito
                         </button>
                         
@@ -1029,8 +1027,6 @@ function getCouponDiscount(couponCode) {
                 return;
             }
             
-            const inCart = store.cart.filter(i => i.id === p.id).reduce((sum, i) => sum + Number(i.quantity), 0);
-            if (!p || p.stock <= 0 || inCart + quantity > p.stock) { showToast('No hay unidades suficientes en inventario', 'warning', 3000); return; }
             const cartItem = { 
                 ...p, 
                 cartId: Date.now(),
@@ -1159,299 +1155,60 @@ function getCouponDiscount(couponCode) {
             showToast('🗑️ Producto eliminado del carrito', 'info', 2000);
         };
 
-        window.checkoutWhatsApp = async () => {
-            if (!store.cart.length) { showToast('🛒 ¡Agrega productos al carrito primero!', 'warning', 3000); return; }
-            const nombre = document.getElementById('form-nombre').value.trim();
-            const apellido = document.getElementById('form-apellido').value.trim();
-            const telefono = document.getElementById('form-tel').value.trim();
-            const email = document.getElementById('form-email').value.trim();
-            const ciudad = document.getElementById('form-ciudad').value.trim();
-            const estado = document.getElementById('form-estado').value.trim();
-            const direccion = document.getElementById('form-direccion').value.trim();
-            if (!nombre || !apellido || !telefono || !ciudad || !estado || !direccion) {
-                showToast('📝 Por favor completa todos los datos del pedido', 'warning', 3000); return;
-            }
-            const waTab = window.open('about:blank', '_blank');
-            const idempotencyKey = store.pendingOrderKey || crypto.randomUUID();
-            store.pendingOrderKey = idempotencyKey;
-            localStorage.setItem('vida_pending_order_key', idempotencyKey);
-            const grouped = {};
-            store.cart.forEach(item => {
-                if (!grouped[item.id]) grouped[item.id] = { product_id: String(item.id), quantity: 0 };
-                grouped[item.id].quantity += Number(item.quantity);
-            });
-            try {
-                const { data, error } = await sbClient.functions.invoke('create-order', { body: {
-                    customer_name: nombre + ' ' + apellido,
-                    customer_phone: telefono,
-                    customer_email: email || null,
-                    customer_address: direccion + ' | ' + ciudad + ', ' + estado,
-                    notes: 'Pedido creado desde vidaactiva.click',
-                    items: Object.values(grouped),
-                    idempotency_key: idempotencyKey
-                } });
-                if (error) throw error;
-                const order = data || {};
-                const orderNo = order.order_number || order.order_id;
-                const amount = Number(order.total || getCartTotalWithDiscount()).toFixed(2);
-                const msg = 'Hola, registré un pedido en VidaActiva.\nPedido: #' + orderNo +
-                    '\nCliente: ' + nombre + ' ' + apellido + '\nTeléfono: ' + telefono +
-                    '\nTotal: $' + amount + '\nEstado: pendiente de pago.\nComprobante: https://vidaactiva.click/pago.html?pedido=' + order.order_id +
-                    '\nEl pedido se confirmará cuando el pago sea verificado.';
-                const waUrl = 'https://wa.me/5804143688401?text=' + encodeURIComponent(msg);
-                if (waTab) waTab.location.href = waUrl; else window.location.href = waUrl;
-                store.cart = [];
-                store.discount = 0;
-                store.couponApplied = false;
-                store.currentCoupon = null;
-                store.pendingOrderKey = null;
-                localStorage.removeItem('vida_pending_order_key');
-                localStorage.setItem('natur_cart', JSON.stringify(store.cart));
-                updateCartUI();
-                closeCart();
-                showToast('✅ Pedido #' + orderNo + ' registrado. Falta confirmar el pago.', 'success', 5000);
-            } catch (err) {
-                if (waTab) waTab.close();
-                console.error(err);
-                showToast(err.message || 'No se pudo registrar el pedido. Revisa las existencias.', 'error', 5000);
-            }
-        };
-
-        window.selectProductById = (id) => { 
-            store.current = store.all.filter(p => p.id === id); 
-            store.page = 1; 
-            renderGrid(); 
-            const desktopSuggestions = document.getElementById('search-suggestions');
-            const mobileSuggestions = document.getElementById('mobile-search-suggestions');
-            if(desktopSuggestions) desktopSuggestions.classList.add('hidden');
-            if(mobileSuggestions) mobileSuggestions.classList.add('hidden');
-            const desktopSearch = document.getElementById('main-search');
-            const mobileSearch = document.getElementById('mobile-search');
-            if(desktopSearch) desktopSearch.value = '';
-            if(mobileSearch) mobileSearch.value = '';
-            showToast('🔍 Mostrando resultados de búsqueda', 'info', 2000);
-        };
-
-        window.downloadList = () => {
-            showToast('📋 Generando lista de productos...', 'info', 3000);
-        };
-        
-        document.addEventListener('DOMContentLoaded', init);
-    </script>
-
-    <script>
-        (function() {
-            "use strict";
-
-            const CONFIG = {
-                phoneNumber: "5804143688401",
-                message: "Hola, me gustaría recibir más información de los productos.",
-                elements: {
-                    toggleBtn: document.getElementById('waToggleBtn'),
-                    chatWindow: document.getElementById('waChatWindow'),
-                    actionLink: document.getElementById('waActionLink'),
-                    timeLabel: document.getElementById('waCurrentTime')
-                }
-            };
-
-            function initWidget() {
-                const encodedMsg = encodeURIComponent(CONFIG.message);
-                CONFIG.elements.actionLink.href = `https://wa.me/${CONFIG.phoneNumber}?text=${encodedMsg}`;
-
-                const now = new Date();
-                CONFIG.elements.timeLabel.textContent = `${now.getHours()}:${now.getMinutes().toString().padStart(2, '0')}`;
-
-                CONFIG.elements.toggleBtn.addEventListener('click', toggleChat);
-                
-                document.addEventListener('click', (e) => {
-                    if (!CONFIG.elements.chatWindow.contains(e.target) && 
-                        !CONFIG.elements.toggleBtn.contains(e.target) && 
-                        !CONFIG.elements.chatWindow.classList.contains('hidden')) {
-                        toggleChat();
-                    }
-                });
-            }
-
-            function toggleChat() {
-                const win = CONFIG.elements.chatWindow;
-                const isHidden = win.classList.contains('hidden');
-                
-                if (isHidden) {
-                    win.classList.remove('hidden');
-                    win.classList.add('flex');
-                    setTimeout(() => {
-                        win.classList.remove('opacity-0', 'translate-y-5');
-                        win.classList.add('opacity-100', 'translate-y-0');
-                    }, 10);
-                } else {
-                    win.classList.remove('opacity-100', 'translate-y-0');
-                    win.classList.add('opacity-0', 'translate-y-5');
-                    setTimeout(() => {
-                        win.classList.add('hidden');
-                        win.classList.remove('flex');
-                    }, 300);
-                }
-            }
-
-            window.addEventListener('DOMContentLoaded', initWidget);
-        })();
-    </script>
-
-    <script>
-    (function() {
-        // Inicializar slideshow (soporte para múltiples banners)
-        let currentIndex = 0;
-        let slides = [];
-        let track = document.getElementById('banner-track');
-        let prevBtn = document.getElementById('banner-prev');
-        let nextBtn = document.getElementById('banner-next');
-        let dotsContainer = document.getElementById('banner-dots');
-        let startX = 0;
-        let isDragging = false;
-        
-        function initSlideshow() {
-            if (!track) return;
-            
-            // Obtener todos los slides
-            slides = Array.from(track.children);
-            if (slides.length <= 1) {
-                // Si solo hay un slide, ocultar botones y dots
-                if (prevBtn) prevBtn.style.display = 'none';
-                if (nextBtn) nextBtn.style.display = 'none';
-                if (dotsContainer) dotsContainer.style.display = 'none';
+        window.checkoutWhatsApp = () => {
+            if(store.cart.length === 0) {
+                showToast('🛒 ¡Agrega productos al carrito primero!', 'warning', 3000);
                 return;
             }
             
-            // Mostrar botones
-            if (prevBtn) prevBtn.style.display = 'flex';
-            if (nextBtn) nextBtn.style.display = 'flex';
+            const nombre = document.getElementById('form-nombre').value;
+            const apellido = document.getElementById('form-apellido').value;
+            const telefono = document.getElementById('form-tel').value;
+            const ciudad = document.getElementById('form-ciudad').value;
+            const estado = document.getElementById('form-estado').value;
+            const direccion = document.getElementById('form-direccion').value;
             
-            // Crear dots
-            if (dotsContainer) {
-                dotsContainer.innerHTML = '';
-                slides.forEach((_, idx) => {
-                    const dot = document.createElement('button');
-                    dot.className = `w-2 h-2 rounded-full bg-white/50 hover:bg-white transition-all ${idx === 0 ? 'dot-active' : ''}`;
-                    dot.addEventListener('click', () => goToSlide(idx));
-                    dotsContainer.appendChild(dot);
-                });
+            if(!nombre || !apellido || !telefono || !ciudad || !estado || !direccion) {
+                showToast('📝 Por favor completa todos los datos del pedido', 'warning', 3000);
+                return;
             }
             
-            // Eventos de botones
-            if (prevBtn) prevBtn.addEventListener('click', () => goToSlide(currentIndex - 1));
-            if (nextBtn) nextBtn.addEventListener('click', () => goToSlide(currentIndex + 1));
-            
-            // Touch events para móvil
-            track.addEventListener('touchstart', handleTouchStart, { passive: true });
-            track.addEventListener('touchmove', handleTouchMove, { passive: false });
-            track.addEventListener('touchend', handleTouchEnd);
-            
-            // Auto-play cada 5 segundos
-            startAutoPlay();
-            
-            // Pausar auto-play al hover (opcional)
-            const container = document.getElementById('banner-slideshow');
-            if (container) {
-                container.addEventListener('mouseenter', stopAutoPlay);
-                container.addEventListener('mouseleave', startAutoPlay);
-            }
-        }
-        
-        let autoPlayInterval;
-        
-        function startAutoPlay() {
-            if (slides.length <= 1) return;
-            stopAutoPlay();
-            autoPlayInterval = setInterval(() => {
-                goToSlide(currentIndex + 1);
-            }, 5000);
-        }
-        
-        function stopAutoPlay() {
-            if (autoPlayInterval) {
-                clearInterval(autoPlayInterval);
-                autoPlayInterval = null;
-            }
-        }
-        
-        function goToSlide(index) {
-            if (slides.length === 0) return;
-            if (index < 0) index = slides.length - 1;
-            if (index >= slides.length) index = 0;
-            
-            currentIndex = index;
-            const offset = -currentIndex * 100;
-            track.style.transform = `translateX(${offset}%)`;
-            
-            // Actualizar dots
-            const dots = document.querySelectorAll('#banner-dots button');
-            dots.forEach((dot, idx) => {
-                if (idx === currentIndex) {
-                    dot.classList.add('dot-active');
-                } else {
-                    dot.classList.remove('dot-active');
-                }
+            let msg = `🛍️ *PEDIDO VIDAACTIVA.CLICK*\n\n*Cliente:* ${nombre} ${apellido}\n*Teléfono:* ${telefono}\n*Ubicación:* ${ciudad}, ${estado}\n*Dirección:* ${direccion}\n\n*Productos:*\n`;
+            let total = 0;
+            store.cart.forEach(i => {
+                const itemTotal = parseFloat(i.price) * i.quantity;
+                total += itemTotal;
+                msg += `• ${i.product_name} x${i.quantity} ($${i.price} c/u) = $${itemTotal.toFixed(2)}\n`;
             });
-        }
-        
-        function handleTouchStart(e) {
-            startX = e.touches[0].clientX;
-            isDragging = true;
-            stopAutoPlay();
-        }
-        
-        function handleTouchMove(e) {
-            if (!isDragging) return;
-            const moveX = e.touches[0].clientX;
-            const diff = startX - moveX;
-            if (Math.abs(diff) > 50) {
-                if (diff > 0) {
-                    goToSlide(currentIndex + 1);
-                } else {
-                    goToSlide(currentIndex - 1);
-                }
-                isDragging = false;
-                startAutoPlay();
+            
+            let finalTotal = total;
+            if (store.couponApplied && store.discount > 0) {
+                finalTotal = total * (1 - store.discount);
+                msg += `\n*Subtotal: $${total.toFixed(2)}*`;
+                msg += `\n*Descuento (${store.discount * 100}%): -$${(total - finalTotal).toFixed(2)}*`;
             }
-        }
-        
-        function handleTouchEnd() {
-            isDragging = false;
-            startAutoPlay();
-        }
-        
-        // Inicializar cuando el DOM esté listo
-        if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', initSlideshow);
-        } else {
-            initSlideshow();
-        }
-    })();
-</script>
-
-    <!-- Click  -->
-    <script src="noclick.js"></script>
-
-</body>
-</html>
- + amount + '\nEstado: pendiente de pago.\nComprobante: https://vidaactiva.click/pago.html?pedido=' + order.order_id + '\nQuiero continuar con las instrucciones de pago.';
-                const waUrl = 'https://wa.me/5804143688401?text=' + encodeURIComponent(msg);
-                if (waTab) waTab.location.href = waUrl; else window.location.href = waUrl;
-                store.cart = [];
-                store.discount = 0;
-                store.couponApplied = false;
-                store.currentCoupon = null;
-                store.pendingOrderKey = null;
-                localStorage.removeItem('vida_pending_order_key');
-                localStorage.setItem('natur_cart', JSON.stringify(store.cart));
-                updateCartUI();
-                closeCart();
-                showToast('✅ Pedido #' + orderNo + ' registrado. Falta confirmar el pago.', 'success', 5000);
-            } catch (err) {
-                if (waTab) waTab.close();
-                console.error(err);
-                showToast(err.message || 'No se pudo registrar el pedido. Revisa las existencias.', 'error', 5000);
-            }
+            msg += `\n\n*TOTAL A PAGAR: $${finalTotal.toFixed(2)}*`;
+            
+            window.open(`https://wa.me/5804143688401?text=${encodeURIComponent(msg)}`, '_blank');
+            
+            document.getElementById('form-nombre').value = '';
+            document.getElementById('form-apellido').value = '';
+            document.getElementById('form-email').value = '';
+            document.getElementById('form-tel').value = '';
+            document.getElementById('form-estado').value = '';
+            document.getElementById('form-ciudad').value = '';
+            document.getElementById('form-direccion').value = '';
+            document.getElementById('coupon-code').value = '';
+            
+            store.cart = [];
+            store.discount = 0;
+            store.couponApplied = false;
+            store.currentCoupon = null;
+            localStorage.setItem('natur_cart', JSON.stringify(store.cart));
+            updateCartUI();
+            closeCart();
+            
+            showToast('✅ ¡Pedido enviado con éxito! El carrito ha sido vaciado', 'success', 4000);
         };
 
         window.selectProductById = (id) => { 
