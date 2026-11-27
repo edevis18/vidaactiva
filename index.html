@@ -867,7 +867,7 @@ function getCouponDiscount(couponCode) {
                     </div>
                     <div class="flex-grow">
                         <small class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">${p.category}</small>
-                        <h4 class="product-title text-sm font-bold mt-1 line-clamp-2 leading-snug h-10 cursor-pointer hover:text-primary transition-colors" onclick="openProductDetail('${p.id}')">${p.product_name}</h4>
+                        <h4 class="product-title text-sm font-bold mt-1 line-clamp-2 leading-snug h-10 hover:text-primary transition-colors"><a href="/producto/${p.slug}/">${p.product_name}</a></h4>
                         <p class="text-xs text-primary font-medium mt-2">${p.presentation_lab}</p>
                         <p class="mt-2 text-xs font-bold">${p.stock > 0 ? "Disponible: " + p.stock + " unidades" : "Agotado"}</p>
                     </div>
@@ -1196,7 +1196,244 @@ function getCouponDiscount(couponCode) {
                 const amount = Number(order.total || getCartTotalWithDiscount()).toFixed(2);
                 const msg = 'Hola, registré un pedido en VidaActiva.\nPedido: #' + orderNo +
                     '\nCliente: ' + nombre + ' ' + apellido + '\nTeléfono: ' + telefono +
-                    '\nTotal: $' + amount + '\nEstado: pendiente de pago.\nQuiero continuar con las instrucciones de pago.';
+                    '\nTotal: 
+                const waUrl = 'https://wa.me/5804143688401?text=' + encodeURIComponent(msg);
+                if (waTab) waTab.location.href = waUrl; else window.location.href = waUrl;
+                store.cart = [];
+                store.discount = 0;
+                store.couponApplied = false;
+                store.currentCoupon = null;
+                store.pendingOrderKey = null;
+                localStorage.removeItem('vida_pending_order_key');
+                localStorage.setItem('natur_cart', JSON.stringify(store.cart));
+                updateCartUI();
+                closeCart();
+                showToast('✅ Pedido #' + orderNo + ' registrado. Falta confirmar el pago.', 'success', 5000);
+            } catch (err) {
+                if (waTab) waTab.close();
+                console.error(err);
+                showToast(err.message || 'No se pudo registrar el pedido. Revisa las existencias.', 'error', 5000);
+            }
+        };
+
+        window.selectProductById = (id) => { 
+            store.current = store.all.filter(p => p.id === id); 
+            store.page = 1; 
+            renderGrid(); 
+            const desktopSuggestions = document.getElementById('search-suggestions');
+            const mobileSuggestions = document.getElementById('mobile-search-suggestions');
+            if(desktopSuggestions) desktopSuggestions.classList.add('hidden');
+            if(mobileSuggestions) mobileSuggestions.classList.add('hidden');
+            const desktopSearch = document.getElementById('main-search');
+            const mobileSearch = document.getElementById('mobile-search');
+            if(desktopSearch) desktopSearch.value = '';
+            if(mobileSearch) mobileSearch.value = '';
+            showToast('🔍 Mostrando resultados de búsqueda', 'info', 2000);
+        };
+
+        window.downloadList = () => {
+            showToast('📋 Generando lista de productos...', 'info', 3000);
+        };
+        
+        document.addEventListener('DOMContentLoaded', init);
+    </script>
+
+    <script>
+        (function() {
+            "use strict";
+
+            const CONFIG = {
+                phoneNumber: "5804143688401",
+                message: "Hola, me gustaría recibir más información de los productos.",
+                elements: {
+                    toggleBtn: document.getElementById('waToggleBtn'),
+                    chatWindow: document.getElementById('waChatWindow'),
+                    actionLink: document.getElementById('waActionLink'),
+                    timeLabel: document.getElementById('waCurrentTime')
+                }
+            };
+
+            function initWidget() {
+                const encodedMsg = encodeURIComponent(CONFIG.message);
+                CONFIG.elements.actionLink.href = `https://wa.me/${CONFIG.phoneNumber}?text=${encodedMsg}`;
+
+                const now = new Date();
+                CONFIG.elements.timeLabel.textContent = `${now.getHours()}:${now.getMinutes().toString().padStart(2, '0')}`;
+
+                CONFIG.elements.toggleBtn.addEventListener('click', toggleChat);
+                
+                document.addEventListener('click', (e) => {
+                    if (!CONFIG.elements.chatWindow.contains(e.target) && 
+                        !CONFIG.elements.toggleBtn.contains(e.target) && 
+                        !CONFIG.elements.chatWindow.classList.contains('hidden')) {
+                        toggleChat();
+                    }
+                });
+            }
+
+            function toggleChat() {
+                const win = CONFIG.elements.chatWindow;
+                const isHidden = win.classList.contains('hidden');
+                
+                if (isHidden) {
+                    win.classList.remove('hidden');
+                    win.classList.add('flex');
+                    setTimeout(() => {
+                        win.classList.remove('opacity-0', 'translate-y-5');
+                        win.classList.add('opacity-100', 'translate-y-0');
+                    }, 10);
+                } else {
+                    win.classList.remove('opacity-100', 'translate-y-0');
+                    win.classList.add('opacity-0', 'translate-y-5');
+                    setTimeout(() => {
+                        win.classList.add('hidden');
+                        win.classList.remove('flex');
+                    }, 300);
+                }
+            }
+
+            window.addEventListener('DOMContentLoaded', initWidget);
+        })();
+    </script>
+
+    <script>
+    (function() {
+        // Inicializar slideshow (soporte para múltiples banners)
+        let currentIndex = 0;
+        let slides = [];
+        let track = document.getElementById('banner-track');
+        let prevBtn = document.getElementById('banner-prev');
+        let nextBtn = document.getElementById('banner-next');
+        let dotsContainer = document.getElementById('banner-dots');
+        let startX = 0;
+        let isDragging = false;
+        
+        function initSlideshow() {
+            if (!track) return;
+            
+            // Obtener todos los slides
+            slides = Array.from(track.children);
+            if (slides.length <= 1) {
+                // Si solo hay un slide, ocultar botones y dots
+                if (prevBtn) prevBtn.style.display = 'none';
+                if (nextBtn) nextBtn.style.display = 'none';
+                if (dotsContainer) dotsContainer.style.display = 'none';
+                return;
+            }
+            
+            // Mostrar botones
+            if (prevBtn) prevBtn.style.display = 'flex';
+            if (nextBtn) nextBtn.style.display = 'flex';
+            
+            // Crear dots
+            if (dotsContainer) {
+                dotsContainer.innerHTML = '';
+                slides.forEach((_, idx) => {
+                    const dot = document.createElement('button');
+                    dot.className = `w-2 h-2 rounded-full bg-white/50 hover:bg-white transition-all ${idx === 0 ? 'dot-active' : ''}`;
+                    dot.addEventListener('click', () => goToSlide(idx));
+                    dotsContainer.appendChild(dot);
+                });
+            }
+            
+            // Eventos de botones
+            if (prevBtn) prevBtn.addEventListener('click', () => goToSlide(currentIndex - 1));
+            if (nextBtn) nextBtn.addEventListener('click', () => goToSlide(currentIndex + 1));
+            
+            // Touch events para móvil
+            track.addEventListener('touchstart', handleTouchStart, { passive: true });
+            track.addEventListener('touchmove', handleTouchMove, { passive: false });
+            track.addEventListener('touchend', handleTouchEnd);
+            
+            // Auto-play cada 5 segundos
+            startAutoPlay();
+            
+            // Pausar auto-play al hover (opcional)
+            const container = document.getElementById('banner-slideshow');
+            if (container) {
+                container.addEventListener('mouseenter', stopAutoPlay);
+                container.addEventListener('mouseleave', startAutoPlay);
+            }
+        }
+        
+        let autoPlayInterval;
+        
+        function startAutoPlay() {
+            if (slides.length <= 1) return;
+            stopAutoPlay();
+            autoPlayInterval = setInterval(() => {
+                goToSlide(currentIndex + 1);
+            }, 5000);
+        }
+        
+        function stopAutoPlay() {
+            if (autoPlayInterval) {
+                clearInterval(autoPlayInterval);
+                autoPlayInterval = null;
+            }
+        }
+        
+        function goToSlide(index) {
+            if (slides.length === 0) return;
+            if (index < 0) index = slides.length - 1;
+            if (index >= slides.length) index = 0;
+            
+            currentIndex = index;
+            const offset = -currentIndex * 100;
+            track.style.transform = `translateX(${offset}%)`;
+            
+            // Actualizar dots
+            const dots = document.querySelectorAll('#banner-dots button');
+            dots.forEach((dot, idx) => {
+                if (idx === currentIndex) {
+                    dot.classList.add('dot-active');
+                } else {
+                    dot.classList.remove('dot-active');
+                }
+            });
+        }
+        
+        function handleTouchStart(e) {
+            startX = e.touches[0].clientX;
+            isDragging = true;
+            stopAutoPlay();
+        }
+        
+        function handleTouchMove(e) {
+            if (!isDragging) return;
+            const moveX = e.touches[0].clientX;
+            const diff = startX - moveX;
+            if (Math.abs(diff) > 50) {
+                if (diff > 0) {
+                    goToSlide(currentIndex + 1);
+                } else {
+                    goToSlide(currentIndex - 1);
+                }
+                isDragging = false;
+                startAutoPlay();
+            }
+        }
+        
+        function handleTouchEnd() {
+            isDragging = false;
+            startAutoPlay();
+        }
+        
+        // Inicializar cuando el DOM esté listo
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initSlideshow);
+        } else {
+            initSlideshow();
+        }
+    })();
+</script>
+
+    <!-- Click  -->
+    <script src="noclick.js"></script>
+
+</body>
+</html>
+ + amount + '\nEstado: pendiente de pago.\nComprobante: https://vidaactiva.click/pago.html?pedido=' + order.order_id + '\nQuiero continuar con las instrucciones de pago.';
                 const waUrl = 'https://wa.me/5804143688401?text=' + encodeURIComponent(msg);
                 if (waTab) waTab.location.href = waUrl; else window.location.href = waUrl;
                 store.cart = [];
