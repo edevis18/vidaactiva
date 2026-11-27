@@ -1,0 +1,45 @@
+name: Validate VidaActiva
+on:
+  push:
+    branches: [feature/vidaactiva-supabase]
+  pull_request:
+    branches: [main]
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Check JavaScript syntax in static pages
+        run: |
+          python - <<'PY'
+          import pathlib, re, subprocess, tempfile
+          pages = [pathlib.Path("index.html"), pathlib.Path("admin/index.html"), pathlib.Path("pago.html")]
+          pages += list(pathlib.Path("producto").glob("*/index.html"))
+          count = 0
+          for page in pages:
+              source = page.read_text(encoding="utf-8")
+              for match in re.finditer(r"<script([^>]*)>(.*?)</script>", source, re.I | re.S):
+                  attrs, code = match.group(1), match.group(2)
+                  if "src=" in attrs.lower() or "application/ld+json" in attrs.lower() or not code.strip():
+                      continue
+                  with tempfile.NamedTemporaryFile("w", suffix=".js", encoding="utf-8") as tmp:
+                      tmp.write(code)
+                      tmp.flush()
+                      subprocess.run(["node", "--check", tmp.name], check=True)
+                      count += 1
+          subprocess.run(["node", "--check", "producto-live.js"], check=True)
+          print(f"Validated {count} inline JavaScript blocks and producto-live.js")
+          PY
+      - name: Validate sitemap XML
+        run: |
+          python - <<'PY'
+          import xml.etree.ElementTree as ET
+          root = ET.parse("sitemap.xml").getroot()
+          urls = [e.text for e in root if e.tag.endswith("loc")]
+          product_urls = [u for u in urls if "/producto/" in u]
+          assert len(product_urls) == 122, f"Expected 122 product URLs, found {len(product_urls)}"
+          print(f"Validated sitemap with {len(urls)} URLs and {len(product_urls)} product pages")
+          PY
