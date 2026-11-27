@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vida Activa | Tienda Online de Suplementos y Productos Naturales</title>
-    <meta name="description" content="Encuentra los mejores suplementos y productos naturales en VidaActiva.59, Calidad garantizada. ¡Mejora tu bienestar hoy!">
+    <meta name="description" content="Descubre el catálogo de suplementos y productos naturales de VidaActiva. Consulta presentaciones, precios y disponibilidad en nuestra tienda online.">
     <link rel="canonical" href="https://vidaactiva.click/">
     <link rel="shortcut icon" href="https://i.postimg.cc/pr5LzwP5/logo.png" type="image/x-icon">
 
@@ -12,7 +12,7 @@
     <meta property='og:type' content='website'>
     <meta property='og:title' content='Vida Activa | Tienda Online de Suplementos y Productos Naturales'>
     <meta property='og:image' content='https://i.postimg.cc/MTZmLsw7/portada.jpg'>
-    <meta property='og:description' content='Encuentra los mejores suplementos y productos naturales en VidaActiva.59, Calidad garantizada. ¡Mejora tu bienestar hoy!'>
+    <meta property='og:description' content='Descubre el catálogo de suplementos y productos naturales de VidaActiva. Consulta presentaciones, precios y disponibilidad en nuestra tienda online.'>
     <meta property='og:url' content='https://vidaactiva.click'>
 
     <!-- Font Awesome for Icons -->
@@ -620,6 +620,7 @@
     <script> 
         const CONFIG = { MARGIN: 2.0, BEFORE_MARGIN: 2.20, PER_PAGE: 12, DEFAULT_IMG: 'img/envase.jpg', IMG_PATH: 'img/productos/' };
         let store = { all: [], current: [], cart: JSON.parse(localStorage.getItem('natur_cart')) || [], page: 1, discount: 0, couponApplied: false, currentCoupon: null };
+        window.store = store; // Exposición controlada para la integración de inventario.
         
         // Cupones válidos con fechas de expiración
 // Formato de fecha: 'YYYY-MM-DD' (año-mes-día)
@@ -1422,6 +1423,11 @@ function getCouponDiscount(couponCode) {
         }
     })();
 </script>
+
+    <!-- Conexión de catálogo, stock y pedidos con Supabase -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.119.2"></script>
+    <script src="js/supabase-config.js"></script>
+    <script src="js/vidaactiva-integration.js"></script>
 
     <!-- Click  -->
     <script src="noclick.js"></script>

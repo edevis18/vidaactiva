@@ -1,0 +1,25 @@
+name: Validate VidaActiva changes
+on:
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Check JavaScript syntax
+        run: |
+          node --check js/vidaactiva-integration.js
+          node --check js/admin.js
+          node --check scripts/generate-product-pages.mjs
+      - name: Generate and validate product SEO pages
+        run: |
+          node scripts/generate-product-pages.mjs
+          test "$(find producto -name index.html | wc -l)" -eq 122
+          test "$(grep -c '<loc>' sitemap.xml)" -eq 127
