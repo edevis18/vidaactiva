@@ -34,10 +34,11 @@ La tienda conserva su interfaz estática en GitHub Pages y usa Supabase como fue
 El archivo de catálogo no contiene cantidades verificables. Por seguridad, los 122 productos comienzan con stock `0`. Carga las cantidades reales desde `/admin/` antes de abrir ventas.
 
 ## Base de datos y despliegue
-- Migración reproducible: `supabase/migrations/202611270001_vidaactiva_schema_security.sql`.
+- Migración reproducible: `supabase/migrations/20261127202600_vidaactiva_schema_security.sql`.
+- Catálogo reproducible: `supabase/seed.sql` (122 productos; stock inicial 0).
 - Las dos Edge Functions están desplegadas en el proyecto enlazado.
 - El archivo `index.html` utiliza la URL y publishable key del proyecto.
-- Para un entorno nuevo, aplica las migraciones y despliega las funciones con Supabase CLI. No subas secretos ni archivos `.env`.
+- Para un entorno nuevo, enlaza el proyecto con Supabase CLI, ejecuta `supabase db push` y despliega las funciones `supabase functions deploy create-order` y `supabase functions deploy submit-payment-proof`. No subas secretos ni archivos `.env`.
 
 ## SEO
 Se generaron 122 páginas estáticas de producto bajo `/producto/<slug>/`, con canonical, Open Graph, Twitter Cards y Product JSON-LD. El sitemap incluye el catálogo completo.
