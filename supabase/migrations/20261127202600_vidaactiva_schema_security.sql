@@ -113,6 +113,7 @@ create policy "Admins read admin users" on public.admin_users for select to auth
 drop policy if exists "Admins manage coupons" on public.coupons;
 create policy "Admins manage coupons" on public.coupons for all to authenticated using((select private.is_admin())) with check((select private.is_admin()));
 
+revoke all on public.orders,public.order_items,public.payments,public.stock_movements,public.admin_users,public.coupons from anon;
 grant select on public.products to anon,authenticated;
 grant select,insert,update,delete on public.products,public.orders,public.order_items,public.payments,public.coupons to authenticated;
 grant select,insert on public.stock_movements to authenticated;
