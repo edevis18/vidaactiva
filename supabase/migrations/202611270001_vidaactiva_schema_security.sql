@@ -220,3 +220,17 @@ begin
  return jsonb_build_object('order_id',p_order_id,'status','paid_confirmed');
 end; $$;
 grant execute on function public.confirm_store_payment(uuid,uuid) to authenticated;
+
+-- Disable legacy admin RPCs from earlier schema drafts; current admin actions use invoker functions.
+do $$
+begin
+ if to_regprocedure('public.admin_adjust_product_stock(text,integer,text)') is not null then
+  execute 'revoke all on function public.admin_adjust_product_stock(text,integer,text) from public,anon,authenticated';
+ end if;
+ if to_regprocedure('public.confirm_store_order_payment(uuid)') is not null then
+  execute 'revoke all on function public.confirm_store_order_payment(uuid) from public,anon,authenticated';
+ end if;
+ if to_regprocedure('public.reject_store_order_payment(uuid)') is not null then
+  execute 'revoke all on function public.reject_store_order_payment(uuid) from public,anon,authenticated';
+ end if;
+end $$;
