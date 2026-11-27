@@ -765,7 +765,7 @@ function getCouponDiscount(couponCode) {
             if(input) {
                 let value = parseInt(input.value);
                 if(isNaN(value)) value = 1;
-                input.value = value + 1;
+                input.value = Math.min(value + 1, Number(input.max) || value + 1);
             }
         };
         
@@ -1181,14 +1181,14 @@ function getCouponDiscount(couponCode) {
                 grouped[item.id].quantity += Number(item.quantity);
             });
             try {
-                const { data, error } = await sbClient.rpc('create_store_order', {
-                    p_customer_name: nombre + ' ' + apellido,
-                    p_customer_phone: telefono,
-                    p_customer_email: email || null,
-                    p_customer_address: direccion + ' | ' + ciudad + ', ' + estado,
-                    p_notes: 'Pedido creado desde vidaactiva.click',
-                    p_items: Object.values(grouped),
-                    p_idempotency_key: idempotencyKey
+                const { data, error } = await sbClient.functions.invoke('create-order', { body: {
+                    customer_name: nombre + ' ' + apellido,
+                    customer_phone: telefono,
+                    customer_email: email || null,
+                    customer_address: direccion + ' | ' + ciudad + ', ' + estado,
+                    notes: 'Pedido creado desde vidaactiva.click',
+                    items: Object.values(grouped),
+                    idempotency_key: idempotencyKey
                 });
                 if (error) throw error;
                 const order = data || {};
