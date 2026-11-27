@@ -4,13 +4,13 @@ import path from 'node:path';
 const ROOT = process.cwd();
 const SITE = 'https://vidaactiva.click';
 const raw = fs.readFileSync(path.join(ROOT, 'products.json'), 'utf8').trim();
-const products = JSON.parse('[' + raw.replace(/},\\s*{/g, '},{') + ']');
+const products = JSON.parse('[' + raw.replace(/},\s*{/g, '},{') + ']');
 const outRoot = path.join(ROOT, 'producto');
 const escapeHtml = value => String(value ?? '').replace(/[&<>"']/g, ch => ({
   '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'
 }[ch]));
 const safeSlug = value => String(value ?? '').normalize('NFD')
-  .replace(/[\\u0300-\\u036f]/g, '').toLowerCase()
+  .replace(/[\u0300-\u036f]/g, '').toLowerCase()
   .replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
 
 const urls = [];
