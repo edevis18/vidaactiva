@@ -723,6 +723,7 @@ function getCouponDiscount(couponCode) {
             <small class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">${product.category}</small>
             <h3 class="text-2xl font-bold mt-2 mb-3">${product.product_name}</h3>
             <p class="text-sm text-primary font-medium mb-2">${product.presentation_lab}</p>
+            <p class="text-sm font-bold">${product.stock > 0 ? "Disponible: " + product.stock + " unidades" : "Agotado"}</p>
             <p class="text-sm text-gray-600 leading-relaxed mb-4">${product.description || 'Producto natural de alta calidad para tu bienestar.'}</p>
             <div class="mb-4">
                 <span class="text-sm text-gray-600 line-through font-bold">$${product.priceBefore} Antes</span>
@@ -735,14 +736,14 @@ function getCouponDiscount(couponCode) {
                     <button type="button" class="quantity-btn" onclick="decrementDetailQuantity('${product.id}')">
                         <i data-lucide="minus" class="w-4 h-4"></i>
                     </button>
-                    <input type="number" id="detail-qty-${product.id}" value="1" min="1" class="quantity-value" readonly>
+                    <input type="number" id="detail-qty-${product.id}" value="1" min="1" max="${product.stock}" class="quantity-value" readonly ${product.stock <= 0 ? "disabled" : ""}>
                     <button type="button" class="quantity-btn" onclick="incrementDetailQuantity('${product.id}')">
                         <i data-lucide="plus" class="w-4 h-4"></i>
                     </button>
                 </div>
             </div>
             
-            <button onclick="addToCartFromDetail('${product.id}')" class="w-full mt-6 bg-primary text-white py-3 rounded-xl text-base font-bold flex items-center justify-center gap-2 hover:bg-secondary hover:text-dark transition-all active:scale-95">
+            <button onclick="addToCartFromDetail('${product.id}')" ${product.stock <= 0 ? "disabled" : ""} class="w-full mt-6 bg-primary text-white py-3 rounded-xl text-base font-bold flex items-center justify-center gap-2 hover:bg-secondary hover:text-dark transition-all active:scale-95">
                 <i data-lucide="plus-circle" class="w-5 h-5"></i> Añadir al Carrito
             </button>
         </div>
@@ -789,6 +790,8 @@ function getCouponDiscount(couponCode) {
                 return;
             }
             
+            const inCart = store.cart.filter(i => i.id === p.id).reduce((sum, i) => sum + Number(i.quantity), 0);
+            if (!p || p.stock <= 0 || inCart + quantity > p.stock) { showToast('No hay unidades suficientes en inventario', 'warning', 3000); return; }
             const cartItem = { 
                 ...p, 
                 cartId: Date.now(),
@@ -866,6 +869,7 @@ function getCouponDiscount(couponCode) {
                         <small class="text-[10px] font-bold text-gray-400 uppercase tracking-widest">${p.category}</small>
                         <h4 class="product-title text-sm font-bold mt-1 line-clamp-2 leading-snug h-10 cursor-pointer hover:text-primary transition-colors" onclick="openProductDetail('${p.id}')">${p.product_name}</h4>
                         <p class="text-xs text-primary font-medium mt-2">${p.presentation_lab}</p>
+                        <p class="mt-2 text-xs font-bold">${p.stock > 0 ? "Disponible: " + p.stock + " unidades" : "Agotado"}</p>
                     </div>
                     <div class="mt-3">
                         <span class="text-xs text-gray-600 line-through font-bold">$${p.priceBefore} Antes</span>
@@ -876,14 +880,14 @@ function getCouponDiscount(couponCode) {
                                 <button type="button" class="quantity-btn" onclick="decrementQuantity('${p.id}')">
                                     <i data-lucide="minus" class="w-4 h-4"></i>
                                 </button>
-                                <input type="number" id="qty-${p.id}" value="1" min="1" class="quantity-value" readonly>
+                                <input type="number" id="qty-${p.id}" value="1" min="1" max="${p.stock}" class="quantity-value" readonly ${p.stock <= 0 ? "disabled" : ""}>
                                 <button type="button" class="quantity-btn" onclick="incrementQuantity('${p.id}')">
                                     <i data-lucide="plus" class="w-4 h-4"></i>
                                 </button>
                             </div>
                         </div>
                         
-                        <button onclick="addToCart('${p.id}')" class="w-full mt-3 bg-primary text-white py-2.5 rounded-xl text-sm font-bold flex items-center justify-center gap-2 hover:bg-secondary hover:text-dark transition-all active:scale-95">
+                        <button onclick="addToCart('${p.id}')" ${p.stock <= 0 ? "disabled" : ""} class="w-full mt-3 bg-primary text-white py-2.5 rounded-xl text-sm font-bold flex items-center justify-center gap-2 hover:bg-secondary hover:text-dark transition-all active:scale-95">
                             <i data-lucide="plus-circle" class="w-4 h-4"></i> Añadir al Carrito
                         </button>
                         
@@ -1025,6 +1029,8 @@ function getCouponDiscount(couponCode) {
                 return;
             }
             
+            const inCart = store.cart.filter(i => i.id === p.id).reduce((sum, i) => sum + Number(i.quantity), 0);
+            if (!p || p.stock <= 0 || inCart + quantity > p.stock) { showToast('No hay unidades suficientes en inventario', 'warning', 3000); return; }
             const cartItem = { 
                 ...p, 
                 cartId: Date.now(),
