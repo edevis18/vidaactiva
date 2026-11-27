@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vida Activa | Tienda Online de Suplementos y Productos Naturales</title>
-    <meta name="description" content="Encuentra los mejores suplementos y productos naturales en VidaActiva.59, Calidad garantizada. ¡Mejora tu bienestar hoy!">
+    <meta name="description" content="Encuentra los mejores suplementos y productos naturales en VidaActiva, Calidad garantizada. ¡Mejora tu bienestar hoy!">
     <link rel="canonical" href="https://vidaactiva.click/">
     <link rel="shortcut icon" href="https://i.postimg.cc/pr5LzwP5/logo.png" type="image/x-icon">
 
@@ -12,7 +12,7 @@
     <meta property='og:type' content='website'>
     <meta property='og:title' content='Vida Activa | Tienda Online de Suplementos y Productos Naturales'>
     <meta property='og:image' content='https://i.postimg.cc/MTZmLsw7/portada.jpg'>
-    <meta property='og:description' content='Encuentra los mejores suplementos y productos naturales en VidaActiva.59, Calidad garantizada. ¡Mejora tu bienestar hoy!'>
+    <meta property='og:description' content='Encuentra los mejores suplementos y productos naturales en VidaActiva, Calidad garantizada. ¡Mejora tu bienestar hoy!'>
     <meta property='og:url' content='https://vidaactiva.click'>
 
     <!-- Font Awesome for Icons -->
@@ -460,7 +460,7 @@
             </div>
         </div>
         <div class="container mx-auto px-4 mt-12 pt-8 border-t border-gray-800 text-center text-gray-500 text-xs">
-            &copy; 2026 VidaActiva.59. Todos los derechos reservados. Desarrollado por <b><a href="https://edevisraga.com" target="_blank" style="color:orange;">Edevis Raga</a></b>
+            &copy; 2026 VidaActiva. Todos los derechos reservados. Desarrollado por <b><a href="https://edevisraga.com" target="_blank" style="color:orange;">Edevis Raga</a></b>
         </div>
     </footer>
 
@@ -1194,10 +1194,10 @@ function getCouponDiscount(couponCode) {
                 const order = data || {};
                 const orderNo = order.order_number || order.order_id;
                 const amount = Number(order.total || getCartTotalWithDiscount()).toFixed(2);
-                const msg = 'Hola, registré un pedido en VidaActiva.\\nPedido: #' + orderNo +
-                    '\\nCliente: ' + nombre + ' ' + apellido + '\\nTeléfono: ' + telefono +
-                    '\\nTotal: $' + amount + '\\nEstado: pendiente de pago.\\nComprobante: https://vidaactiva.click/pago.html?pedido=' + order.order_id +
-                    '\\nEl pedido se confirmará cuando el pago sea verificado.';
+                const msg = 'Hola, registré un pedido en VidaActiva.\nPedido: #' + orderNo +
+                    '\nCliente: ' + nombre + ' ' + apellido + '\nTeléfono: ' + telefono +
+                    '\nTotal: $' + amount + '\nEstado: pendiente de pago.\nComprobante: https://vidaactiva.click/pago.html?pedido=' + order.order_id +
+                    '\nEl pedido se confirmará cuando el pago sea verificado.';
                 const waUrl = 'https://wa.me/5804143688401?text=' + encodeURIComponent(msg);
                 if (waTab) waTab.location.href = waUrl; else window.location.href = waUrl;
                 store.cart = [];
