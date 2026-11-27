@@ -617,9 +617,11 @@
         </button>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.49.1/dist/umd/supabase.min.js"></script>
     <script> 
         const CONFIG = { MARGIN: 2.0, BEFORE_MARGIN: 2.20, PER_PAGE: 12, DEFAULT_IMG: 'img/envase.jpg', IMG_PATH: 'img/productos/' };
-        let store = { all: [], current: [], cart: JSON.parse(localStorage.getItem('natur_cart')) || [], page: 1, discount: 0, couponApplied: false, currentCoupon: null };
+        const sbClient = window.supabase.createClient('https://kyuexpenylndneekcsaj.supabase.co', 'sb_publishable_aGi8VYxdOSje8wBNjHf2UQ_pC9m1DO9');
+        let store = { all: [], current: [], cart: JSON.parse(localStorage.getItem('natur_cart')) || [], page: 1, discount: 0, couponApplied: false, currentCoupon: null, pendingOrderKey: localStorage.getItem('vida_pending_order_key') || null };
         
         // Cupones válidos con fechas de expiración
 // Formato de fecha: 'YYYY-MM-DD' (año-mes-día)
@@ -806,26 +808,22 @@ function getCouponDiscount(couponCode) {
 
         async function init() {
             try {
-                const res = await fetch('products.json');
-                const text = await res.text();
-                const sanitized = `[${text.replace(/\},(\s*)\{/g, '},{')}]`;
-                const raw = JSON.parse(sanitized);
-                
-                store.all = raw.map(i => {
-                    const price = (parseFloat(i.price) * CONFIG.MARGIN).toFixed(2);
-                    return { ...i, price, priceBefore: (price * CONFIG.BEFORE_MARGIN).toFixed(2) };
+                const { data, error } = await sbClient.from('products')
+                    .select('id,category,product_name,presentation_lab,base_price,description,image_file,slug,stock,active')
+                    .eq('active', true).order('product_name');
+                if (error) throw error;
+                store.all = (data || []).map(i => {
+                    const price = (Number(i.base_price) * CONFIG.MARGIN).toFixed(2);
+                    return { ...i, id: String(i.id), img_product: i.image_file, price, priceBefore: (Number(price) * CONFIG.BEFORE_MARGIN).toFixed(2) };
                 });
-
-                store.all.sort(() => Math.random() - 0.5);
                 store.categories = [...new Set(store.all.map(p => p.category))].sort();
                 store.current = [...store.all];
-                
                 setupUI();
                 updateCartUI();
-                showToast('✨ Tienda lista! Explora nuestros productos', 'success', 2500);
-            } catch (err) { 
-                console.error(err); 
-                showToast('Error al cargar los productos', 'error', 3000);
+                showToast('✨ Tienda conectada. Inventario actualizado', 'success', 2500);
+            } catch (err) {
+                console.error(err);
+                showToast('No se pudo conectar con el inventario. Intenta recargar.', 'error', 4500);
             }
         }
 
@@ -1155,60 +1153,61 @@ function getCouponDiscount(couponCode) {
             showToast('🗑️ Producto eliminado del carrito', 'info', 2000);
         };
 
-        window.checkoutWhatsApp = () => {
-            if(store.cart.length === 0) {
-                showToast('🛒 ¡Agrega productos al carrito primero!', 'warning', 3000);
-                return;
+        window.checkoutWhatsApp = async () => {
+            if (!store.cart.length) { showToast('🛒 ¡Agrega productos al carrito primero!', 'warning', 3000); return; }
+            const nombre = document.getElementById('form-nombre').value.trim();
+            const apellido = document.getElementById('form-apellido').value.trim();
+            const telefono = document.getElementById('form-tel').value.trim();
+            const email = document.getElementById('form-email').value.trim();
+            const ciudad = document.getElementById('form-ciudad').value.trim();
+            const estado = document.getElementById('form-estado').value.trim();
+            const direccion = document.getElementById('form-direccion').value.trim();
+            if (!nombre || !apellido || !telefono || !ciudad || !estado || !direccion) {
+                showToast('📝 Por favor completa todos los datos del pedido', 'warning', 3000); return;
             }
-            
-            const nombre = document.getElementById('form-nombre').value;
-            const apellido = document.getElementById('form-apellido').value;
-            const telefono = document.getElementById('form-tel').value;
-            const ciudad = document.getElementById('form-ciudad').value;
-            const estado = document.getElementById('form-estado').value;
-            const direccion = document.getElementById('form-direccion').value;
-            
-            if(!nombre || !apellido || !telefono || !ciudad || !estado || !direccion) {
-                showToast('📝 Por favor completa todos los datos del pedido', 'warning', 3000);
-                return;
-            }
-            
-            let msg = `🛍️ *PEDIDO VIDAACTIVA.CLICK*\n\n*Cliente:* ${nombre} ${apellido}\n*Teléfono:* ${telefono}\n*Ubicación:* ${ciudad}, ${estado}\n*Dirección:* ${direccion}\n\n*Productos:*\n`;
-            let total = 0;
-            store.cart.forEach(i => {
-                const itemTotal = parseFloat(i.price) * i.quantity;
-                total += itemTotal;
-                msg += `• ${i.product_name} x${i.quantity} ($${i.price} c/u) = $${itemTotal.toFixed(2)}\n`;
+            const waTab = window.open('about:blank', '_blank');
+            const idempotencyKey = store.pendingOrderKey || crypto.randomUUID();
+            store.pendingOrderKey = idempotencyKey;
+            localStorage.setItem('vida_pending_order_key', idempotencyKey);
+            const grouped = {};
+            store.cart.forEach(item => {
+                if (!grouped[item.id]) grouped[item.id] = { product_id: String(item.id), quantity: 0 };
+                grouped[item.id].quantity += Number(item.quantity);
             });
-            
-            let finalTotal = total;
-            if (store.couponApplied && store.discount > 0) {
-                finalTotal = total * (1 - store.discount);
-                msg += `\n*Subtotal: $${total.toFixed(2)}*`;
-                msg += `\n*Descuento (${store.discount * 100}%): -$${(total - finalTotal).toFixed(2)}*`;
+            try {
+                const { data, error } = await sbClient.rpc('create_store_order', {
+                    p_customer_name: nombre + ' ' + apellido,
+                    p_customer_phone: telefono,
+                    p_customer_email: email || null,
+                    p_customer_address: direccion + ' | ' + ciudad + ', ' + estado,
+                    p_notes: 'Pedido creado desde vidaactiva.click',
+                    p_items: Object.values(grouped),
+                    p_idempotency_key: idempotencyKey
+                });
+                if (error) throw error;
+                const order = data || {};
+                const orderNo = order.order_number || order.order_id;
+                const amount = Number(order.total || getCartTotalWithDiscount()).toFixed(2);
+                const msg = 'Hola, registré un pedido en VidaActiva.\nPedido: #' + orderNo +
+                    '\nCliente: ' + nombre + ' ' + apellido + '\nTeléfono: ' + telefono +
+                    '\nTotal: $' + amount + '\nEstado: pendiente de pago.\nQuiero continuar con las instrucciones de pago.';
+                const waUrl = 'https://wa.me/5804143688401?text=' + encodeURIComponent(msg);
+                if (waTab) waTab.location.href = waUrl; else window.location.href = waUrl;
+                store.cart = [];
+                store.discount = 0;
+                store.couponApplied = false;
+                store.currentCoupon = null;
+                store.pendingOrderKey = null;
+                localStorage.removeItem('vida_pending_order_key');
+                localStorage.setItem('natur_cart', JSON.stringify(store.cart));
+                updateCartUI();
+                closeCart();
+                showToast('✅ Pedido #' + orderNo + ' registrado. Falta confirmar el pago.', 'success', 5000);
+            } catch (err) {
+                if (waTab) waTab.close();
+                console.error(err);
+                showToast(err.message || 'No se pudo registrar el pedido. Revisa las existencias.', 'error', 5000);
             }
-            msg += `\n\n*TOTAL A PAGAR: $${finalTotal.toFixed(2)}*`;
-            
-            window.open(`https://wa.me/5804143688401?text=${encodeURIComponent(msg)}`, '_blank');
-            
-            document.getElementById('form-nombre').value = '';
-            document.getElementById('form-apellido').value = '';
-            document.getElementById('form-email').value = '';
-            document.getElementById('form-tel').value = '';
-            document.getElementById('form-estado').value = '';
-            document.getElementById('form-ciudad').value = '';
-            document.getElementById('form-direccion').value = '';
-            document.getElementById('coupon-code').value = '';
-            
-            store.cart = [];
-            store.discount = 0;
-            store.couponApplied = false;
-            store.currentCoupon = null;
-            localStorage.setItem('natur_cart', JSON.stringify(store.cart));
-            updateCartUI();
-            closeCart();
-            
-            showToast('✅ ¡Pedido enviado con éxito! El carrito ha sido vaciado', 'success', 4000);
         };
 
         window.selectProductById = (id) => { 
