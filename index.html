@@ -620,6 +620,7 @@
     <script> 
         const CONFIG = { MARGIN: 2.0, BEFORE_MARGIN: 2.20, PER_PAGE: 12, DEFAULT_IMG: 'img/envase.jpg', IMG_PATH: 'img/productos/' };
         let store = { all: [], current: [], cart: JSON.parse(localStorage.getItem('natur_cart')) || [], page: 1, discount: 0, couponApplied: false, currentCoupon: null };
+        window.store = store; // Exposición controlada para la integración de inventario.
         
         // Cupones válidos con fechas de expiración
 // Formato de fecha: 'YYYY-MM-DD' (año-mes-día)
@@ -1422,6 +1423,11 @@ function getCouponDiscount(couponCode) {
         }
     })();
 </script>
+
+    <!-- Conexión de catálogo, stock y pedidos con Supabase -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.119.2"></script>
+    <script src="js/supabase-config.js"></script>
+    <script src="js/vidaactiva-integration.js"></script>
 
     <!-- Click  -->
     <script src="noclick.js"></script>
