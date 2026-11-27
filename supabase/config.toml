@@ -1,0 +1,7 @@
+project_id = "kyuexpenylndneekcsaj"
+
+[functions.create-order]
+verify_jwt = false
+
+[functions.submit-payment-proof]
+verify_jwt = false
