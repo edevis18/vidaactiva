@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Enviar comprobante | VidaActiva</title><meta name="robots" content="noindex,nofollow"><link rel="canonical" href="https://vidaactiva.click/pago.html"><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.49.1/dist/umd/supabase.min.js"></script><style>body{font-family:Arial,sans-serif;background:#f4f7f6;margin:0;color:#1d1d1b}.wrap{max-width:560px;margin:6vh auto;padding:18px}.card{background:white;border-radius:22px;padding:26px;box-shadow:0 10px 35px #0000000c}label{display:block;font-weight:700;margin:16px 0 7px}input{width:100%;box-sizing:border-box;padding:13px;border:1px solid #d7dedb;border-radius:10px}button{width:100%;border:0;background:#189364;color:white;font-weight:800;padding:15px;border-radius:12px;margin-top:20px;cursor:pointer}button:disabled{opacity:.5}.muted{color:#66736d;font-size:14px}.status{margin-top:14px;padding:12px;border-radius:10px;background:#eef7f1}</style></head>
+<body><main class="wrap"><a href="/" style="color:#189364;font-weight:700">← VidaActiva</a><section class="card"><h1>Enviar comprobante de pago</h1><p class="muted">Adjunta el comprobante y escribe la referencia de la transferencia. El pedido seguirá pendiente hasta que VidaActiva verifique el pago.</p><form id="proofForm"><label for="reference">Referencia de pago</label><input id="reference" maxlength="100" required placeholder="Número de referencia"><label for="proof">Comprobante (JPG, PNG, WEBP o PDF · máximo 8 MB)</label><input id="proof" type="file" accept="image/jpeg,image/png,image/webp,application/pdf" required><button id="submitBtn" type="submit">Enviar comprobante</button></form><div id="status" class="status" hidden></div></section></main>
+<script>
+const client=window.supabase.createClient("https://kyuexpenylndneekcsaj.supabase.co","sb_publishable_aGi8VYxdOSje8wBNjHf2UQ_pC9m1DO9");
+const orderId=new URLSearchParams(location.search).get("pedido");
+const form=document.getElementById("proofForm"),statusBox=document.getElementById("status"),button=document.getElementById("submitBtn");
+if(!orderId){form.hidden=true;statusBox.hidden=false;statusBox.textContent="Falta el identificador del pedido. Abre el enlace que recibiste por WhatsApp.";}
+form.addEventListener("submit",async e=>{
+ e.preventDefault();if(!orderId)return;
+ const reference=document.getElementById("reference").value.trim();
+ const file=document.getElementById("proof").files[0];
+ if(!file||file.size>8*1024*1024){statusBox.hidden=false;statusBox.textContent="Selecciona un archivo válido de máximo 8 MB.";return;}
+ button.disabled=true;button.textContent="Enviando…";statusBox.hidden=true;
+ try{
+  const ext=(file.name.split(".").pop()||"bin").toLowerCase().replace(/[^a-z0-9]/g,"");
+  const path=orderId+"/"+crypto.randomUUID()+"."+ext;
+  const uploaded=await client.storage.from("payment-proofs").upload(path,file,{upsert:false,contentType:file.type});
+  if(uploaded.error)throw uploaded.error;
+  const result=await client.functions.invoke("submit-payment-proof",{body:{order_id:orderId,reference,proof_path:path}});
+  if(result.error)throw result.error;
+  form.hidden=true;statusBox.hidden=false;statusBox.textContent="Comprobante recibido. Tu pedido está en revisión; el inventario no se descontará hasta que el pago sea verificado.";
+ }catch(err){statusBox.hidden=false;statusBox.textContent=err.message||"No se pudo enviar el comprobante. Intenta nuevamente.";button.disabled=false;button.textContent="Enviar comprobante";}
+});
+</script></body></html>
