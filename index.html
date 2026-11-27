@@ -1189,14 +1189,15 @@ function getCouponDiscount(couponCode) {
                     notes: 'Pedido creado desde vidaactiva.click',
                     items: Object.values(grouped),
                     idempotency_key: idempotencyKey
-                });
+                } });
                 if (error) throw error;
                 const order = data || {};
                 const orderNo = order.order_number || order.order_id;
                 const amount = Number(order.total || getCartTotalWithDiscount()).toFixed(2);
-                const msg = 'Hola, registré un pedido en VidaActiva.\nPedido: #' + orderNo +
-                    '\nCliente: ' + nombre + ' ' + apellido + '\nTeléfono: ' + telefono +
-                    '\nTotal: 
+                const msg = 'Hola, registré un pedido en VidaActiva.\\nPedido: #' + orderNo +
+                    '\\nCliente: ' + nombre + ' ' + apellido + '\\nTeléfono: ' + telefono +
+                    '\\nTotal: $' + amount + '\\nEstado: pendiente de pago.\\nComprobante: https://vidaactiva.click/pago.html?pedido=' + order.order_id +
+                    '\\nEl pedido se confirmará cuando el pago sea verificado.';
                 const waUrl = 'https://wa.me/5804143688401?text=' + encodeURIComponent(msg);
                 if (waTab) waTab.location.href = waUrl; else window.location.href = waUrl;
                 store.cart = [];
