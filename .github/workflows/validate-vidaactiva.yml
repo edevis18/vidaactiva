@@ -38,7 +38,7 @@ jobs:
           python - <<'PY'
           import xml.etree.ElementTree as ET
           root = ET.parse("sitemap.xml").getroot()
-          urls = [e.text for e in root if e.tag.endswith("loc")]
+          urls = [e.text for e in root.findall(".//{*}loc")]
           product_urls = [u for u in urls if "/producto/" in u]
           assert len(product_urls) == 122, f"Expected 122 product URLs, found {len(product_urls)}"
           print(f"Validated sitemap with {len(urls)} URLs and {len(product_urls)} product pages")
