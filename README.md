@@ -40,5 +40,8 @@ El archivo de catálogo no contiene cantidades verificables. Por seguridad, los 
 - El archivo `index.html` utiliza la URL y publishable key del proyecto.
 - Para un entorno nuevo, enlaza el proyecto con Supabase CLI, ejecuta `supabase db push` y despliega las funciones `supabase functions deploy create-order` y `supabase functions deploy submit-payment-proof`. No subas secretos ni archivos `.env`.
 
+## Validación continua
+El workflow `.github/workflows/validate-vidaactiva.yml` comprueba la sintaxis de JavaScript y valida las 122 rutas de producto incluidas en el sitemap.
+
 ## SEO
 Se generaron 122 páginas estáticas de producto bajo `/producto/<slug>/`, con canonical, Open Graph, Twitter Cards y Product JSON-LD. El sitemap incluye el catálogo completo.
