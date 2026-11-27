@@ -1,20 +1,127 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset
-      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
-            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
-<!-- created with Free Online Sitemap Generator www.xml-sitemaps.com -->
-
-
-<url>
-  <loc>https://vidaactiva.click/</loc>
-  <lastmod>2026-03-31T17:31:59+00:00</lastmod>
-  <priority>1.00</priority>
-</url>
-<url>
-  <loc>https://vidaactiva.click/nosotros.html</loc>
-  <lastmod>2026-03-31T17:31:59+00:00</lastmod>
-  <priority>0.80</priority>
-</url>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<url><loc>https://vidaactiva.click/</loc><priority>1.0</priority></url>
+<url><loc>https://vidaactiva.click/nosotros.html</loc><priority>0.6</priority></url>
+<url><loc>https://vidaactiva.click/producto/arandano-rojo-x-60-tab-1/</loc><priority>0.7</priority></url>
+<url><loc>https://vidaactiva.click/producto/ashwangandha-x-60-tab-2/</loc><priority>0.7</priority></url>
+<url><loc>https://vidaactiva.click/producto/cardo-lechozo-x-60-tab-3/</loc><priority>0.7</priority></url>
+<url><loc>https://vidaactiva.click/producto/castano-de-indias-x-60-tab-4/</loc><priority>0.7</priority></url>
+<url><loc>https://vidaactiva.click/producto/centella-asiatica-x-60-tab-5/</loc><priority>0.7</priority></url>
+<url><loc>https://vidaactiva.click/producto/chanca-piedra-x-60-tab-6/</loc><priority>0.7</priority></url>
+<url><loc>https://vidaactiva.click/producto/espirulina-x-60-tab-7/</loc><priority>0.7</priority></url>
+<url><loc>https://vidaactiva.click/producto/ginkgo-biloba-x-60-tab-8/</loc><priority>0.7</priority></url>
+<url><loc>https://vidaactiva.click/producto/acido-folico-x-60-tab-9/</loc><priority>0.7</priority></url>
+<url><loc>https://vidaactiva.click/producto/biotina-x-60-tab-10/</loc><priority>0.7</priority></url>
+<url><loc>https://vidaactiva.click/producto/calostro-bovino-x-60-tab-11/</loc><priority>0.7</priority></url>
+<url><loc>https://vidaactiva.click/producto/centrunex-x-60-tab-12/</loc><priority>0.7</priority></url>
+<url><loc>https://vidaactiva.click/producto/centrunex-man-x-60-tab-13/</loc><priority>0.7</priority></url>
+<url><loc>https://vidaactiva.click/producto/centrunex-silver-x-60-tab-14/</loc><priority>0.7</priority></url>
+<url><loc>https://vidaactiva.click/producto/centrunex-woman-x-60-tab-15/</loc><priority>0.7</priority></url>
+<url><loc>https://vidaactiva.click/producto/citrato-magnesio-x-60-tab-16/</loc><priority>0.7</priority></url>
+<url><loc>https://vidaactiva.click/producto/citrato-magnesio-x-120-tab-17/</loc><priority>0.7</priority></url>
+<url><loc>https://vidaactiva.click/producto/citra-magnesio-zinc-x-60-tab-18/</loc><priority>0.7</priority></url>
+<url><loc>https://vidaactiva.click/producto/citra-magnesio-vit-c-x-60-tab-19/</loc><priority>0.7</priority></url>
+<url><loc>https://vidaactiva.click/producto/citra-magnesio-hierro-x-60-tab-20/</loc><priority>0.7</priority></url>
+<url><loc>https://vidaactiva.click/producto/citra-magne-potasio-x-60-tab-21/</loc><priority>0.7</priority></url>
+<url><loc>https://vidaactiva.click/producto/citra-magnesio-vit-b6-x-60-tab-22/</loc><priority>0.7</priority></url>
+<url><loc>https://vidaactiva.click/producto/citrato-de-potasio-x-60-tab-23/</loc><priority>0.7</priority></url>
+<url><loc>https://vidaactiva.click/producto/citrato-de-zinc-x-60-tab-24/</loc><priority>0.7</priority></url>
+<url><loc>https://vidaactiva.click/producto/colageno-hidrolizado-x-60-tab-25/</loc><priority>0.7</priority></url>
+<url><loc>https://vidaactiva.click/producto/colageno-c-elastina-x-60-tab-26/</loc><priority>0.7</priority></url>
+<url><loc>https://vidaactiva.click/producto/colageno-c-vit-c-x-60-tab-27/</loc><priority>0.7</priority></url>
+<url><loc>https://vidaactiva.click/producto/colageno-polvo-500-gr-28/</loc><priority>0.7</priority></url>
+<url><loc>https://vidaactiva.click/producto/complejo-b-vitaminas-x-60-tab-29/</loc><priority>0.7</priority></url>
+<url><loc>https://vidaactiva.click/producto/creatina-monohidrat-x-60-tab-30/</loc><priority>0.7</priority></url>
+<url><loc>https://vidaactiva.click/producto/creatina-monohidrat-500-gr-31/</loc><priority>0.7</priority></url>
+<url><loc>https://vidaactiva.click/producto/glutamina-creatina-x-60-tab-32/</loc><priority>0.7</priority></url>
+<url><loc>https://vidaactiva.click/producto/l-arginina-x-60-tab-33/</loc><priority>0.7</priority></url>
+<url><loc>https://vidaactiva.click/producto/l-carnitina-x-60-tab-34/</loc><priority>0.7</priority></url>
+<url><loc>https://vidaactiva.click/producto/levadura-de-cerveza-x-60-tab-35/</loc><priority>0.7</priority></url>
+<url><loc>https://vidaactiva.click/producto/nad-x-60-tab-36/</loc><priority>0.7</priority></url>
+<url><loc>https://vidaactiva.click/producto/niacina-x-60-tab-37/</loc><priority>0.7</priority></url>
+<url><loc>https://vidaactiva.click/producto/selenio-x-60-tab-38/</loc><priority>0.7</priority></url>
+<url><loc>https://vidaactiva.click/producto/vibaxina-x-60-tab-39/</loc><priority>0.7</priority></url>
+<url><loc>https://vidaactiva.click/producto/vinagre-manzana-x-60-tab-40/</loc><priority>0.7</priority></url>
+<url><loc>https://vidaactiva.click/producto/vitamina-c-x-60-tab-41/</loc><priority>0.7</priority></url>
+<url><loc>https://vidaactiva.click/producto/vitamina-d3-x-60-tab-42/</loc><priority>0.7</priority></url>
+<url><loc>https://vidaactiva.click/producto/vitaminas-d3-k2-x-60-tab-43/</loc><priority>0.7</priority></url>
+<url><loc>https://vidaactiva.click/producto/whey-huevo-vainilla-500-gr-44/</loc><priority>0.7</priority></url>
+<url><loc>https://vidaactiva.click/producto/whey-huevo-vainilla-907-gr-45/</loc><priority>0.7</priority></url>
+<url><loc>https://vidaactiva.click/producto/whey-huevo-chocolate-500-gr-46/</loc><priority>0.7</priority></url>
+<url><loc>https://vidaactiva.click/producto/whey-huevo-chocolate-907-gr-47/</loc><priority>0.7</priority></url>
+<url><loc>https://vidaactiva.click/producto/whey-nitro-vainilla-907-gr-48/</loc><priority>0.7</priority></url>
+<url><loc>https://vidaactiva.click/producto/whey-protein-vainilla-500-gr-49/</loc><priority>0.7</priority></url>
+<url><loc>https://vidaactiva.click/producto/whey-protein-vainilla-907-gr-50/</loc><priority>0.7</priority></url>
+<url><loc>https://vidaactiva.click/producto/whey-protein-chocolate-500-gr-51/</loc><priority>0.7</priority></url>
+<url><loc>https://vidaactiva.click/producto/whey-protein-chocolate-907-gr-52/</loc><priority>0.7</priority></url>
+<url><loc>https://vidaactiva.click/producto/arandano-negro-x-60-tab-53/</loc><priority>0.7</priority></url>
+<url><loc>https://vidaactiva.click/producto/berberina-x-60-tab-54/</loc><priority>0.7</priority></url>
+<url><loc>https://vidaactiva.click/producto/boldo-x-60-tab-55/</loc><priority>0.7</priority></url>
+<url><loc>https://vidaactiva.click/producto/carbon-activado-x-60-tab-56/</loc><priority>0.7</priority></url>
+<url><loc>https://vidaactiva.click/producto/caribe-omega-3-6-9-x-60-tab-57/</loc><priority>0.7</priority></url>
+<url><loc>https://vidaactiva.click/producto/cartilago-tiburon-x-60-tab-58/</loc><priority>0.7</priority></url>
+<url><loc>https://vidaactiva.click/producto/cartilago-una-de-gato-x-60-tab-59/</loc><priority>0.7</priority></url>
+<url><loc>https://vidaactiva.click/producto/cascara-sagrada-x-60-tab-60/</loc><priority>0.7</priority></url>
+<url><loc>https://vidaactiva.click/producto/circulacion-x-60-tab-61/</loc><priority>0.7</priority></url>
+<url><loc>https://vidaactiva.click/producto/citr-mag-melatonina-x-60-tab-62/</loc><priority>0.7</priority></url>
+<url><loc>https://vidaactiva.click/producto/citrato-calcio-x-60-tab-63/</loc><priority>0.7</priority></url>
+<url><loc>https://vidaactiva.click/producto/cola-de-caballo-x-60-tab-64/</loc><priority>0.7</priority></url>
+<url><loc>https://vidaactiva.click/producto/colon-clean-x-60-tab-65/</loc><priority>0.7</priority></url>
+<url><loc>https://vidaactiva.click/producto/curcuma-jengibre-x-60-tab-66/</loc><priority>0.7</priority></url>
+<url><loc>https://vidaactiva.click/producto/curcuma-jenjibre-pimienta-x-60-tab-67/</loc><priority>0.7</priority></url>
+<url><loc>https://vidaactiva.click/producto/dulces-suenos-x-60-tab-68/</loc><priority>0.7</priority></url>
+<url><loc>https://vidaactiva.click/producto/echinacea-x-60-tab-69/</loc><priority>0.7</priority></url>
+<url><loc>https://vidaactiva.click/producto/escoba-de-carnicero-x-60-tab-70/</loc><priority>0.7</priority></url>
+<url><loc>https://vidaactiva.click/producto/fenogreco-x-60-tab-71/</loc><priority>0.7</priority></url>
+<url><loc>https://vidaactiva.click/producto/ginseng-koreano-x-60-tab-72/</loc><priority>0.7</priority></url>
+<url><loc>https://vidaactiva.click/producto/glicinato-magnesio-x-60-tab-73/</loc><priority>0.7</priority></url>
+<url><loc>https://vidaactiva.click/producto/glucosamin-coindritin-x-60-tab-74/</loc><priority>0.7</priority></url>
+<url><loc>https://vidaactiva.click/producto/glucosamina-x-60-tab-75/</loc><priority>0.7</priority></url>
+<url><loc>https://vidaactiva.click/producto/glutamina-x-60-tab-76/</loc><priority>0.7</priority></url>
+<url><loc>https://vidaactiva.click/producto/graviola-x-60-tab-77/</loc><priority>0.7</priority></url>
+<url><loc>https://vidaactiva.click/producto/hierro-x-60-tab-78/</loc><priority>0.7</priority></url>
+<url><loc>https://vidaactiva.click/producto/inositol-x-60-tab-79/</loc><priority>0.7</priority></url>
+<url><loc>https://vidaactiva.click/producto/l-luteina-x-60-tab-80/</loc><priority>0.7</priority></url>
+<url><loc>https://vidaactiva.click/producto/lochita-x-60-tab-81/</loc><priority>0.7</priority></url>
+<url><loc>https://vidaactiva.click/producto/maca-x-60-tab-82/</loc><priority>0.7</priority></url>
+<url><loc>https://vidaactiva.click/producto/macho-viril-x-60-tab-83/</loc><priority>0.7</priority></url>
+<url><loc>https://vidaactiva.click/producto/mapurite-x-60-tab-84/</loc><priority>0.7</priority></url>
+<url><loc>https://vidaactiva.click/producto/moringa-x-60-tab-85/</loc><priority>0.7</priority></url>
+<url><loc>https://vidaactiva.click/producto/omega-3-x-30-softgels-86/</loc><priority>0.7</priority></url>
+<url><loc>https://vidaactiva.click/producto/nad-400-mg-x-30-softgels-87/</loc><priority>0.7</priority></url>
+<url><loc>https://vidaactiva.click/producto/nad-resveratrol-400-mg-x-30-softgels-88/</loc><priority>0.7</priority></url>
+<url><loc>https://vidaactiva.click/producto/resveratrol-400-mg-x-30-softgels-89/</loc><priority>0.7</priority></url>
+<url><loc>https://vidaactiva.click/producto/name-salvaje-x-60-tab-90/</loc><priority>0.7</priority></url>
+<url><loc>https://vidaactiva.click/producto/oregano-x-60-tab-91/</loc><priority>0.7</priority></url>
+<url><loc>https://vidaactiva.click/producto/palo-de-arco-x-60-tab-92/</loc><priority>0.7</priority></url>
+<url><loc>https://vidaactiva.click/producto/pina-linaza-sabila-x-60-tab-93/</loc><priority>0.7</priority></url>
+<url><loc>https://vidaactiva.click/producto/pira-x-60-tab-94/</loc><priority>0.7</priority></url>
+<url><loc>https://vidaactiva.click/producto/pira-con-ginkgo-x-60-tab-95/</loc><priority>0.7</priority></url>
+<url><loc>https://vidaactiva.click/producto/prostasana-x-60-tab-96/</loc><priority>0.7</priority></url>
+<url><loc>https://vidaactiva.click/producto/quinchoncho-x-60-tab-97/</loc><priority>0.7</priority></url>
+<url><loc>https://vidaactiva.click/producto/quiste-ginol-x-60-tab-98/</loc><priority>0.7</priority></url>
+<url><loc>https://vidaactiva.click/producto/resveratrol-x-60-tab-99/</loc><priority>0.7</priority></url>
+<url><loc>https://vidaactiva.click/producto/sabila-con-linaza-x-60-tab-100/</loc><priority>0.7</priority></url>
+<url><loc>https://vidaactiva.click/producto/saw-palmetto-x-60-tab-101/</loc><priority>0.7</priority></url>
+<url><loc>https://vidaactiva.click/producto/te-verde-x-60-tab-102/</loc><priority>0.7</priority></url>
+<url><loc>https://vidaactiva.click/producto/tumba-barriga-x-60-tab-103/</loc><priority>0.7</priority></url>
+<url><loc>https://vidaactiva.click/producto/una-de-gato-x-60-tab-104/</loc><priority>0.7</priority></url>
+<url><loc>https://vidaactiva.click/producto/valeriana-x-60-tab-105/</loc><priority>0.7</priority></url>
+<url><loc>https://vidaactiva.click/producto/biotina-soft-x-60-tab-106/</loc><priority>0.7</priority></url>
+<url><loc>https://vidaactiva.click/producto/omega-3-6-9-x-60-tab-107/</loc><priority>0.7</priority></url>
+<url><loc>https://vidaactiva.click/producto/vitamina-e-1000-ui-x-60-tab-108/</loc><priority>0.7</priority></url>
+<url><loc>https://vidaactiva.click/producto/vitamina-b1-tiamina-x-60-tab-109/</loc><priority>0.7</priority></url>
+<url><loc>https://vidaactiva.click/producto/vitamina-b12-cianocobalamina-x-60-tab-110/</loc><priority>0.7</priority></url>
+<url><loc>https://vidaactiva.click/producto/vitamina-b2-riboflavina-x-60-tab-111/</loc><priority>0.7</priority></url>
+<url><loc>https://vidaactiva.click/producto/adelgazante-4-en-1-x-60-tab-112/</loc><priority>0.7</priority></url>
+<url><loc>https://vidaactiva.click/producto/5-htp-x-60-tab-113/</loc><priority>0.7</priority></url>
+<url><loc>https://vidaactiva.click/producto/acido-philus-x-60-tab-114/</loc><priority>0.7</priority></url>
+<url><loc>https://vidaactiva.click/producto/aguaje-x-60-tab-115/</loc><priority>0.7</priority></url>
+<url><loc>https://vidaactiva.click/producto/ajo-x-60-tab-116/</loc><priority>0.7</priority></url>
+<url><loc>https://vidaactiva.click/producto/ajo-perejil-x-60-tab-117/</loc><priority>0.7</priority></url>
+<url><loc>https://vidaactiva.click/producto/aloe-vera-x-60-tab-118/</loc><priority>0.7</priority></url>
+<url><loc>https://vidaactiva.click/producto/vitamina-b5-acido-pantotenico-x-60-tab-119/</loc><priority>0.7</priority></url>
+<url><loc>https://vidaactiva.click/producto/vitaminas-hierro-x-60-tab-120/</loc><priority>0.7</priority></url>
+<url><loc>https://vidaactiva.click/producto/vitaminas-y-minerales-x-60-tab-121/</loc><priority>0.7</priority></url>
+<url><loc>https://vidaactiva.click/producto/calendula-x-60-tab-122/</loc><priority>0.7</priority></url>
 </urlset>
